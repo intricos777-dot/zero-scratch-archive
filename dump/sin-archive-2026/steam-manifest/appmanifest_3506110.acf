@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"3506110"
+	"Universe"		"1"
+	"name"		"Lunacid - Tears of the Moon"
+	"StateFlags"		"4"
+	"installdir"		"Lunacid - Tears of the Moon"
+	"LastUpdated"		"1789775991"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"367257037"
+	"StagingSize"		"0"
+	"buildid"		"18115226"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"244049440"
+	"BytesDownloaded"		"244049440"
+	"BytesToStage"		"367257037"
+	"BytesStaged"		"367257037"
+	"TargetBuildID"		"18115226"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"3506111"
+		{
+			"manifest"		"1177532938127755289"
+			"size"		"367257037"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

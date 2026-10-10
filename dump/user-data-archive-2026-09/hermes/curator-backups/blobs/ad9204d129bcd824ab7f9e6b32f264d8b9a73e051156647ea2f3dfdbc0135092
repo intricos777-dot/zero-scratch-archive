@@ -1,0 +1,196 @@
+---
+name: app-config-reverse-engineering
+description: "Use when a third-party app's setting must be found."
+version: 0.1.0
+author: Living_Sin (intricos777-dot), Hermes Agent
+license: MIT
+platforms: [linux, macos]
+metadata:
+  hermes:
+    tags: [reverse-engineering, config, binary-format, vdf, steam, verification]
+    related_skills: [workstation-toolchain-audit, systematic-debugging]
+---
+
+# Third-Party App Config Reverse-Engineering
+
+Find out how a closed-source app really stores something, and write its
+undocumented state files safely.
+
+**Core principle:** the shipped client is the authority. A setting's real
+mechanism is answerable from the app's own assets — its web UI bundle, its
+binaries, its config files — and guessing from the feature's name produces
+settings that silently do nothing.
+
+`workstation-toolchain-audit` covers the user's own repos. This covers
+third-party software where no source or man page is available.
+
+## When to Use
+
+- "make the console tab always show", "pin that panel open" — a UI feature
+  requested as persistent, with no documented config key
+- a suspected config key is absent from the man page, the config file, and
+  `strings` on the binary
+- adding or editing entries in a state file the app owns in an undocumented
+  binary format (library entries, shortcut lists, playlist/config caches)
+- a `.desktop` override or launch flag needs to apply to every launch path,
+  not just the menu
+
+**Don't use for:** the user's own repos and services
+(`workstation-toolchain-audit`), a crash with a stack trace
+(`systematic-debugging`), or a setting the app documents.
+
+## References
+
+- `scripts/find-in-bundle.sh` — extract context around a term in a minified JS
+  bundle or a binary, for tracing a minified identifier to its definition
+- `references/binary-state-file-writers.md` — the three silent-failure modes
+  in hand-rolled binary writers, and the test shape that catches them
+
+## Procedure
+
+### 1. Establish whether a persisted setting exists at all
+
+Before hunting for a key, find the code that decides whether the feature is
+available. In a web-UI client this is a conditional in the tab/menu builder:
+
+```bash
+# where does the shipped client keep its assets?
+ls ~/.local/share/<app>/steamui ~/.local/share/<app>/clientui 2>/dev/null
+./scripts/find-in-bundle.sh ~/.local/share/<app>/<assets> 'FeatureName' 400
+```
+
+Read the condition, then resolve the identifier it tests. For a minified
+bundle the gating variable has a mangled name, so search for the *property*
+rather than the variable:
+
+```bash
+./scripts/find-in-bundle.sh ~/.local/share/<app>/<assets> 'IsXEnabled' 500
+```
+
+That returns the predicate, typically a disjunction of flags:
+
+```js
+IsConsoleEnabled(){ return SHOW_CONSOLE || DEV_MODE || m_bConsoleEnabledByUser }
+```
+
+Now search for the setter of each term and ask **where the value is stored**:
+
+- If the setter assigns a field and nothing reads it back from disk, the flag
+  is **runtime-only and there is no config key to set.** Stop searching
+  config files. The answer is the launch flag, and the fix belongs in the
+  `.desktop` entry or wrapper script.
+- If the setter writes through a persistence call, that call names the store;
+  grep the config directory for the key it uses.
+
+**A mangled variable is not evidence of a hidden setting.** Check the setter
+before reporting a capability as unconfigurable *or* as configurable.
+
+### 2. Fix the launch path, not just the launcher
+
+If the answer is a launch flag, the flag must be on **every** path that starts
+the app, not just the menu entry. A user-level override survives package
+upgrades, which a system file does not:
+
+```bash
+cp /usr/share/applications/<app>.desktop ~/.local/share/applications/
+# edit ONLY the main Exec= line; leave the [Desktop Action] Exec= lines alone
+desktop-file-validate ~/.local/share/applications/<app>.desktop
+```
+
+Then enumerate the launchers that bypass it — terminal invocation, autostart
+entries, systemd user units, and per-item `.desktop` files the app itself
+generated (these commonly call the bare binary with a `steam://`-style URL):
+
+```bash
+for d in ~/.config/autostart /etc/xdg/autostart ~/.local/share/applications; do
+  grep -rn 'Exec=.*<app>' "$d" 2>/dev/null
+done
+grep -rl <app> ~/.config/systemd/user/ 2>/dev/null
+```
+
+Report the remaining gap explicitly rather than implying the flag is universal.
+
+### 3. Never write a state file while its app is running
+
+Desktop clients hold their state in memory and rewrite the whole file on exit.
+A write made underneath a live process looks like it succeeded and is then
+discarded. Make the tool refuse rather than warn:
+
+```python
+def refuse_if_running(self, marker_suffixes):
+    for pid in Path("/proc").iterdir():
+        if not pid.name.isdigit():
+            continue
+        try:
+            exe = (pid / "cmdline").read_bytes().split(b"\0")[0].decode("utf-8", "replace")
+        except OSError:
+            continue
+        if exe.endswith(marker_suffixes):
+            die("{} is running (pid {}). Quit it fully first -- it rewrites "
+                "this file from memory on exit and will discard this edit."
+                .format(exe, pid.name))
+```
+
+Scan `/proc` for the **main client executable** rather than matching a
+wrapper script, so the check is about the process that owns the file.
+
+Verify liveness with an unanchored pattern. An anchored one silently misses
+when the command line carries trailing arguments:
+
+```bash
+pgrep -af 'steam'        # correct
+pgrep -c -f 'steam$'     # returns 0 while steam runs as `steam -srt-logger-opened`
+```
+
+A false negative here is the dangerous direction: it reads as permission to
+write into a live client's state.
+
+### 4. Test a hand-rolled writer against values, not counts
+
+For an undocumented binary format, write a round-trip test **before** touching
+the real file, and assert on field *values*. A count-only assertion passes
+while every string field is empty. See
+`references/binary-state-file-writers.md` for the format and the three
+failure modes; the test shape is: single entry, N entries, empty string,
+empty collection, multi-byte/unicode, and the literal expected bytes.
+
+```bash
+python3 <script> --dry-run    # prints plan, writes nothing
+```
+
+### 5. State what round-tripping does and does not prove
+
+A passing round-trip proves the reader and writer agree **with each other**.
+It does not prove the application accepts the bytes — that needs a reference
+file the app itself wrote, or the app displaying the result.
+
+Say which one you have. If no app-written reference exists on the machine, say
+so and name the real confirmation (the app showing the entries), because a
+green test suite otherwise reads as end-to-end proof.
+
+## Pitfalls
+
+- **Reporting a setting as unconfigurable from a failed `strings` match** —
+  the string table is a stale subset, and a web-UI bundle is usually far
+  richer than the binary. Search the assets, and read the setter before
+  concluding anything about persistence.
+- **Guessing a config key from a feature's name** — the plausible key is
+  usually absent. Derive the key from the persistence call, or establish that
+  the flag is launch-only.
+- **Reading a mangled variable as an undocumented hidden setting** — trace the
+  setter. A field assigned at startup and never written to disk cannot be
+  configured, no matter what it is named.
+- **Editing a client's own generated `.desktop` files** — dozens of per-item
+  entries call the bare binary and bypass your flag. Fix the main entry, then
+  report the bypass paths instead of silently leaving them.
+- **A write helper that takes `bytes` and does `buf += chunk`** — that rebinds
+  the local only, so every chunk passed to it is discarded while the function
+  looks correct and the direct appends in the same function do land. Accumulate
+  on a list and `b"".join(parts)`.
+- **A dry-run that only counts entries** — it cannot see dropped string values.
+  Assert on every field's value.
+- **Writing a client's state file while it runs** — it is rewritten from
+  memory on exit. Refuse, and verify your liveness check does not produce a
+  false negative.
+- **Claiming a round-trip test as proof the app accepts the file** — it proves
+  self-consistency only. Name the missing external confirmation.

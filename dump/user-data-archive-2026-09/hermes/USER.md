@@ -1,0 +1,7 @@
+Wants an exact scope choice before bulk work: when offered options he answers with his own broader instruction rather than picking a listed one (e.g. 'rebuild everything that needs rebuilding and get my services back online'). He is comfortable with wide scope but expects unrun/partial work stated plainly at the end, not assumed done.
+§
+Chooses conservatively on destructive/irreversible actions: given the option to force-push a rewritten history, he chose 'rewrite locally only, show me the result, do not push'. Default to preparing and staging irreversible work, then stopping for explicit confirmation before it goes live.
+§
+Asks for security/secret work as 'report only, change nothing' unless he explicitly authorizes a change; prefers the full remediation (rotate + move to config + purge history) when he does authorize it, rather than a partial fix.
+§
+Prefers to be asked before irreversible/destructive actions (force-push, history rewrite, repo deletion) rather than told afterward; also expects corrections delivered in one line, not an apology tour. Offers the wrong privilege for a blocker more than once (e.g. a sudo password for a task needing no root) — name the actual missing capability instead of accepting it.

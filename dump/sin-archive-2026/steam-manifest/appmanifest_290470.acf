@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"290470"
+	"Universe"		"1"
+	"name"		"Onigiri"
+	"StateFlags"		"4"
+	"installdir"		"Onigiri"
+	"LastUpdated"		"1789776386"
+	"LastPlayed"		"1790201594"
+	"SizeOnDisk"		"8373062019"
+	"StagingSize"		"0"
+	"buildid"		"25363176"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"3"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"3133728"
+	"BytesDownloaded"		"3133728"
+	"BytesToStage"		"3515773"
+	"BytesStaged"		"3515773"
+	"TargetBuildID"		"0"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"290471"
+		{
+			"manifest"		"6355348411434189490"
+			"size"		"8373062019"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

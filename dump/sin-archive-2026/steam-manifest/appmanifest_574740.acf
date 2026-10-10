@@ -1,0 +1,44 @@
+"AppState"
+{
+	"appid"		"574740"
+	"Universe"		"1"
+	"name"		"Fausts Alptraum"
+	"StateFlags"		"4"
+	"installdir"		"Fausts Alptraum"
+	"LastUpdated"		"1789772705"
+	"LastPlayed"		"1789775746"
+	"SizeOnDisk"		"168540932"
+	"StagingSize"		"0"
+	"buildid"		"1748126"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"4"
+	"BytesToDownload"		"161975296"
+	"BytesDownloaded"		"161975296"
+	"BytesToStage"		"168540932"
+	"BytesStaged"		"168540932"
+	"TargetBuildID"		"1748126"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"574741"
+		{
+			"manifest"		"6807505909369149239"
+			"size"		"168540932"
+		}
+	}
+	"InstallScripts"
+	{
+		"574741"		"InstallScript.vdf"
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

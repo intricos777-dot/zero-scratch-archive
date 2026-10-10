@@ -1,0 +1,45 @@
+#!/bin/bash
+# author-sweep.sh — attribute every commit in a multi-repo fleet.
+#
+#   ./author-sweep.sh [extra-glob-root ...]
+#
+# Prints every distinct author/committer identity with a commit count, plus
+# (with -e) an email-domain rollup. Classify the result into operator /
+# local tooling / upstream OSS / third party before drawing conclusions.
+#
+# Run this as a script rather than as per-repo tool calls: a fleet-wide fan-out
+# issued one call at a time exhausts the call budget mid-sweep and returns a
+# truncated list that reads as complete.
+set -uo pipefail
+
+ROOTS=("$HOME/Projects" "$HOME/Projects/_inventory")
+[ "$#" -gt 0 ] && ROOTS=("$@")
+
+emit_identities() {
+  local root
+  for root in "${ROOTS[@]}"; do
+    [ -d "$root" ] || continue
+    for p in "$root"/*/.git "$root"/*/*/.git; do
+      [ -d "$p" ] || continue
+      git -C "$(dirname "$p")" log --all --format='%an|%ae|%cn|%ce' 2>/dev/null
+    done
+  done
+}
+
+echo "=== author/committer identities (count | author | email | committer | cemail) ==="
+emit_identities | sort | uniq -c | sort -rn
+
+echo
+echo "=== email-domain rollup ==="
+emit_identities | tr 'A-Z' 'a-z' | sed 's/^[[:space:]]*//' | grep '@' \
+  | awk -F@ 'NF>1{print "@"$2}' | sort | uniq -c | sort -rn
+
+echo
+echo "=== remotes pointing at any non-operator namespace (review these) ==="
+for root in "${ROOTS[@]}"; do
+  [ -d "$root" ] || continue
+  for p in "$root"/*/.git "$root"/*/*/.git; do
+    [ -d "$p" ] || continue
+    git -C "$(dirname "$p")" remote -v 2>/dev/null
+  done
+done | sort -u

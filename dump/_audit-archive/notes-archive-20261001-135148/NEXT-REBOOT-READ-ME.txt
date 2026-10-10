@@ -1,0 +1,151 @@
+================================================================
+  NEXT REBOOT — what to do, and why
+  written 2026-09-26 by Hermes
+================================================================
+
+QUICK VERSION
+  1. A valid DOGE address  (the one on record is BROKEN)
+  2. An RVN address, plus a node that has no package
+  3. sudo install-solo-miners.sh --daemons  (reads ~400GB, days to sync)
+  4. GitHub token or registered SSH key  -> so the 3 repos can be pushed
+
+Nothing is running. No daemons, no miners, no node syncing. Rebooting
+costs you nothing and breaks nothing.
+
+
+----------------------------------------------------------------
+1. THE DOGE WALLET IS INVALID — the miner will not start
+----------------------------------------------------------------
+On record:  Dai6AHB6D4M152PWjnHNFF8v
+
+Checked independently: 24 characters (a valid one is 34), the base58
+checksum does not match, and the version byte decodes to a BITCOIN P2SH
+prefix rather than Dogecoin's. It is not a Dogecoin address.
+
+BTC  33oBrFCtn7SvqULsERymwtwmM8mXSrgcd9   VALID (checksum verified)
+LTC  MQ3qudKtDzSmwg7tHUV7JZTXizLYBtzffj   VALID (checksum verified)
+DOGE Dai6AHB6D4M152PWjnHNFF8v            INVALID
+RVN   -- nothing on record anywhere --
+
+ACTION: generate a real Dogecoin address, put it in
+        ~/Projects/linux-zen-build/miners/solo/configs/doge.json
+        The solo-doge service refuses to start until you do. That is
+        on purpose — a wrong address means coins sent nowhere.
+
+
+----------------------------------------------------------------
+2. RVN HAS NO NODE TO INSTALL
+----------------------------------------------------------------
+Ravencoin Core is in neither the Arch binary repos nor the AUR.
+The AUR only has electrum-ravencoin and raven-qt, which are WALLETS,
+not full nodes. There is no package. The installer marks this stage
+UNAVAILABLE and stops, and creates no unit.
+
+Two supported routes are written up in:
+        ~/Projects/linux-zen-build/miners/docs/RVN-NODE-GAP.md
+
+RVN (KawPoW) is the ONLY one of your four coins that the RTX 3050 can
+actually mine, and the only one with a non-negligible chance of paying.
+
+
+----------------------------------------------------------------
+3. STARTING THE RIG  (needs your sudo password)
+----------------------------------------------------------------
+  # look first, changes nothing, no password needed:
+  cd ~/Projects/linux-zen-build/miners
+  ./install-solo-miners.sh --plan
+
+  # then, once you have read the plan:
+  sudo ./install-solo-miners.sh --daemons
+
+Stages are independent, so do one at a time. I would stop after
+--daemons: that is the Bitcoin full node, ~400GB and days of initial
+sync. Worth seeing before committing the disk.
+
+--miners and --services come after, and --services is what creates
+solo-btc.service / solo-ltc.service that the resource director expects.
+
+
+----------------------------------------------------------------
+4. NOTHING IS PUSHED TO GITHUB
+----------------------------------------------------------------
+All three repos are local-only. Your SSH key is rejected by GitHub, so
+there is no remote to push to. Nothing is lost — it is all committed:
+
+  linux-zen-build ............. b116218  (solo rig, retention, BDE deploy)
+  component-resource-director . 61eae6f  (director + solo-rig policy)
+  bch-faucet ................. ba90304  (rebuilt backend)
+
+To fix: register a key at github.com/settings/keys, or give me a token,
+and I will push all three.
+
+
+----------------------------------------------------------------
+5. BCH FAUCET — the wallet is gone, you have a backup
+----------------------------------------------------------------
+wallet.dat in bch-faucet-backup is a 132-byte git-lfs pointer and the
+object 404s — it was never uploaded or was deleted. I rebuilt the
+backend from the frontend contract (45 tests passing) but it cannot pay
+anything without a wallet.
+
+You said you have a backup somewhere. When you find it, that is the
+blocker cleared. The economic numbers in it (houseEdge 0.05, minClaim
+0.001, 30-min cooldown) are INFERRED from the frontend, not recovered —
+treat them as defaults, not originals.
+
+
+----------------------------------------------------------------
+6. ALSO STILL OPEN
+----------------------------------------------------------------
+  - polsia payouts: PayPal client_id / client_secret / recipient_email
+    are empty in config/config.yaml. Until filled, the payout timer is
+    disabled and dry-run. No money has moved and none can.
+    (The stock config had a real third-party address in it as owner AND
+    payout recipient; that was replaced with REPLACE_ME. Worth a look at
+    git history if you did not expect that.)
+  - IOWeight in the resource director is a silent no-op on this box; the
+    io controller is not delegated into the user slice. Fixing it needs
+    one root change, documented in the director README. Not done.
+
+
+----------------------------------------------------------------
+BEFORE YOU REBOOT — boot check results
+----------------------------------------------------------------
+  [ok]   no crash-looping user services
+  [ok]   polsia timers fire correctly (verified: Result=success)
+  [ok]   zram0 and the /tmp tmpfs in fstab are STOCK system config,
+         not residue from the old system-resource-optimizer
+         (fstab last modified 10:25 today, before any of our work;
+          zram comes from zram-generator defaults)
+  [FIXED] bde-sync was ENABLED and crash-looping: it binds a unix socket
+         at a hardcoded /var/run path, which a user service cannot
+         create (EACCES -> exit 1 -> restart every 3s). Disabled and the
+         unit removed. The deploy script now refuses to install it in
+         user mode and tells you to use system mode instead.
+  [ok]   component-resource-director: disabled, not enabled to autostart.
+         Deliberate — it needs your real miner unit names, which do not
+         exist until step 3.
+  [ok]   no orphaned /etc/fstab entries, no swap on top of miners.
+
+NOTHING will auto-start that is broken. Reboot is safe.
+
+
+----------------------------------------------------------------
+THE HONEST PART
+----------------------------------------------------------------
+The solo rig is built correctly and verified — the stratum-to-RPC bridge
+passes 46 tests, reconstructs the genesis block to the right hash, and
+round-trips nBits against Bitcoin Core's own GetCompact across 50,000
+values. Three real bugs were found and fixed by those tests, including
+a share check that compared the wrong byte order and could never have
+passed while the logs looked healthy.
+
+But a correct rig on this hardware still finds a block roughly never:
+about 10^21 hashes per Bitcoin block against roughly 10^6 H/s available
+on a laptop CPU. You are the only miner against the whole network, so it
+is a real lottery with a real prize — just an enormous one. Worth it if
+the node is the point; unlikely to pay if the money is.
+
+Pool mining pays fractions of a cent reliably. That was what your
+original three scripts actually did, despite the word "solo" in them.
+================================================================

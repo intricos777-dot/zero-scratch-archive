@@ -1,0 +1,96 @@
+# Stale copies and obsolete results
+
+Two ways a result outlives the thing that produced it, both of which look
+exactly like a fresh regression. Full detail and the verification commands for
+each are in the two sections below; the one-line rules are:
+
+1. A background process launched **before** a fix reports the **pre-fix**
+   result. Its output is a record of the old code, not of the current code.
+2. An aggregate/snapshot repo created earlier in the session becomes a
+   **second copy of every source repo**, and it silently keeps the old,
+   buggy version after you fix the original.
+
+## A late background process is evidence about the past, not the present
+
+When a fix lands while a long-running scan is still in flight, the scan
+completes against whatever the file was when it read it. The notification then
+arrives showing a number that contradicts the number you just measured, and it
+reads as "the fix broke something" or "the fix didn't take."
+
+Decide it with evidence, not with a re-run and an opinion:
+
+```sh
+# 1. When did that output file get written? Compare to when you fixed the code.
+stat -c '%y' /tmp/audit.out
+
+# 2. Does the offending code path still exist in the file at all?
+grep -c 'systemd will ignore this directive' audit.py   # -> 0 : path is gone
+
+# 3. What does the current code report?
+python3 audit.py | tail -1
+
+# 4. Is a process actually still running, or did pgrep match its own shell?
+pgrep -af 'audit.py'
+```
+
+Step 4 matters: `pgrep -f <pattern>` matches the wrapper shell whose command
+line *contains* the pattern, so a self-match looks like a live process and
+sends you chasing a job that already exited.
+
+**Rule:** before reporting a background completion as a regression, confirm
+the reported code path is still present. If the string, function, or check
+that produced the finding no longer exists in the file, the result is stale
+and the correct response is one line saying so — not a re-investigation, and
+not a fix.
+
+Corollary: **a process that exits 0 with an alarming number is not a clean
+result.** Exit status reflects "ran without crashing", which a scanner full
+of false positives satisfies perfectly. Judge the content.
+
+## An aggregate repo is a second copy of everything it contains
+
+Consolidating several source repos into one snapshot repo is convenient for
+publishing, and it introduces a drift problem that no amount of care at
+snapshot time solves: **the fixes you make afterwards land in the source repo
+only.** The snapshot keeps shipping the bug you just fixed, and it is the copy
+the user actually receives.
+
+Treat the snapshot as a build artifact of the source repos, and refresh it
+whenever you touch it:
+
+```sh
+cd ~/Projects/<aggregate>
+# Copy the files you changed from their real homes, component by component.
+cp ~/Projects/<component>/<path> <component>/<path>
+
+# Then detect anything you missed, rather than trusting your memory of the diff.
+python3 - <<'PY'
+import hashlib, pathlib
+suite = pathlib.Path("/home/livings/Projects/<aggregate>")
+src   = pathlib.Path("/home/livings/Projects")
+def md5(p): return hashlib.md5(p.read_bytes()).hexdigest()
+drift = 0
+for f in sorted(suite.rglob("*")):
+    if not f.is_file() or ".git" in f.parts: continue
+    s = src / f.relative_to(suite)
+    if s.exists() and md5(f) != md5(s):
+        print("  STALE", f.relative_to(suite)); drift += 1
+print(f"  {drift} drifted files" if drift else "  no drift")
+PY
+```
+
+Three things this catches that a per-file review misses:
+
+- **Files you forgot you had changed** — the drift sweep is mechanical, your
+  recollection of "which three files did I touch" is not.
+- **Untracked generated artifacts carried in by the copy.** A `cp -r` or a
+  `read-tree` from a working tree drags in `__pycache__/*.pyc`, which then
+  ships in the published repo. `.gitignore` does not retroactively untrack
+  them; `git rm -r --cached` does. Check `git ls-files | grep -c pycache`
+  on the aggregate, not just on the source.
+- **Peer-agent edits that landed after the snapshot was taken** — a component
+  another agent is still working on will differ every time you look.
+
+Record which upstream HEAD each component was imported from in the import
+commit message. Without that, a future session cannot tell a deliberate
+snapshot from a stale one, and will re-derive the drift sweep from scratch.

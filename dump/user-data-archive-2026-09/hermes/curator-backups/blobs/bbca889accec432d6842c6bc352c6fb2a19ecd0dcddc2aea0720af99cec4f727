@@ -1,0 +1,107 @@
+# Auditing a package removal before running it
+
+Worked example: a user asks for a desktop component to be removed entirely
+after its retention behaviour was identified and disabled. The component turns
+out to be shipped inside the desktop shell, and a *different* package with a
+similar name is the plausible real target.
+
+## Order of operations
+
+Removal is where "it was closed in the running session" (step 0 of the parent
+skill) becomes "it is gone from disk" (this file). The two are separate states
+and only the second is irreversible, so audit before it.
+
+1. **Establish a separable package exists.** A component with no owning
+   package is bundled into the shell, not independently installed.
+2. **Enumerate what references it**, in both directions: reverse dependencies
+   (`Required By:`) and forward references (a shell config that loads a widget
+   the package ships).
+3. **Clear forward references first.** A config entry pointing at files that
+   are about to disappear is the only breakage a careful user will actually
+   hit, and it is invisible until next login.
+4. **Back up config and user data**, then remove the package.
+5. **Report what is lost** in one line, and print rollback steps.
+
+## Bundled vs separable
+
+```bash
+pacman -Qo /usr/lib/<shell>/<shell>/plasmoids/<applet> 2>&1
+# error: No package owns ...   => bundled into <shell>-workspace
+```
+
+A negative `pacman -Qo` is the finding. It means the honest answer to "remove
+the application" is that the application *is* the desktop, and the offer
+becomes: disable the feature (done), remove an unrelated integration that
+ships a lookalike component, or accept losing the shell. Running the removal
+the user literally asked for would take their session, window manager, and
+launcher with it — refuse that action by name, do not quietly substitute a
+different one.
+
+## The forward-reference hazard
+
+```bash
+grep -n '^plugin=<applet-id>$' ~/.config/<shell>-org.<shell>.desktop-appletsrc
+```
+
+An applet listed as `plugin=` is **loaded**; the same identifier appearing in
+an `extraItems=`/`knownItems=` catalogue line means only "available to add".
+Remove the stanza; leave the catalogue alone. Treating the catalogue as a
+failed removal sends you chasing a phantom that is supposed to be there.
+
+Verify the immediate neighbour survived the edit:
+
+```bash
+grep -c '^plugin=' ~/.config/<shell>-org.<shell>.desktop-appletsrc
+sed -n '<lo>,<hi>p' ~/.config/<shell>-org.<shell>.desktop-appletsrc
+```
+
+A stanza boundary is a blank line, so a regex must consume the whole
+`[Containments]...[Applets][NN]` block. Prove the strip on copies both ways
+before shipping it in a root script: idempotent on an already-clean file, and
+actually removing the stanza from a file that still has it — with the
+neighbour and the shell's core tray plugin asserted present in both cases.
+
+## Abort-gated removal script
+
+The hand-over is one script with preflight, not a bare `pacman -R`:
+
+```bash
+set -euo pipefail
+STAMP="$(date +%Y%m%d%H%M%S)"
+
+# 1. preflight: abort rather than proceed on a changed precondition
+pacman -Q <pkg> >/dev/null 2>&1 || { echo "not installed"; exit 0; }
+REVERSE="$(pacman -Qi <pkg> | awk '/^Required By/{print $0}')"
+[ "${REVERSE#Required By : }" = "None" ] || { echo "ABORT: depended on"; exit 1; }
+
+# 2. strip a stale config reference, and prove the strip worked
+if grep -q '^plugin=<applet-id>$' "$CFG"; then
+  cp -a "$CFG" "$CFG.bak-$STAMP"
+  <strip stanza>
+  grep -q '^plugin=<applet-id>$' "$CFG" && { echo "ABORT: strip failed"; exit 1; }
+fi
+grep -q 'plugin=<core-tray-plugin>' "$CFG" || { echo "ABORT: config damaged"; exit 1; }
+
+# 3. back up user data before the package goes
+[ -e "$DATA" ] && cp -a "$DATA" "$DATA.bak-$STAMP"
+
+# 4. one call the user can answer 'n' to
+sudo pacman -Rns <pkg>
+
+# 5. verify, and print rollback
+pacman -Q <pkg> >/dev/null 2>&1 && { echo "removal incomplete"; exit 1; }
+```
+
+Each abort leaves the system in its prior state, so a surprise causes a skip
+rather than a second bad edit. `-Rns` is the conservative flag set: remove,
+skip initramfs regeneration, drop now-unneeded deps. Tell the user to read the
+dependency list pacman prints and answer `n` if it names anything they
+recognise as unrelated.
+
+## Verify what you claimed
+
+`Required By: None` plus no match in the shell packages is what makes removal
+safe, and both were checked — state that rather than asserting safety. Then
+confirm the reverse after the fact: no process, no autostart entry, no stored
+data, package gone. A component whose files are gone but whose config entry
+remains is the state that produces a bug report at next login.

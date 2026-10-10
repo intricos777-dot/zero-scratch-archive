@@ -1,0 +1,45 @@
+"AppState"
+{
+	"appid"		"2169140"
+	"Universe"		"1"
+	"name"		"CantEscapeTheBackrooms"
+	"StateFlags"		"4"
+	"installdir"		"CantEscapeTheBackrooms"
+	"LastUpdated"		"1789773331"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"3698288831"
+	"StagingSize"		"0"
+	"buildid"		"10320354"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"3540250464"
+	"BytesDownloaded"		"3540250464"
+	"BytesToStage"		"3698288831"
+	"BytesStaged"		"3698288831"
+	"TargetBuildID"		"10320354"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2169141"
+		{
+			"manifest"		"8747321298947957984"
+			"size"		"3698288831"
+		}
+	}
+	"SharedDepots"
+	{
+		"228989"		"228980"
+		"228990"		"228980"
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

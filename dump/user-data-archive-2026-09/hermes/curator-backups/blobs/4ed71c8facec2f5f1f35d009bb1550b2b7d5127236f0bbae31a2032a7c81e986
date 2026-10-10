@@ -1,0 +1,136 @@
+# Verifying a push, and reading a push failure
+
+Reporting "pushed" is the one claim in an audit that the user acts on without
+re-checking, so it is the one claim most worth proving. Two failure modes
+account for nearly all of it: a stale cache reported as proof, and a failure
+whose message names the wrong cause.
+
+## A remote-tracking ref is a cache, not proof
+
+`git log @{u}..HEAD`, `git rev-parse origin/main`, and `git status` all read
+the **local** remote-tracking ref, last updated by the last fetch or push. None
+of them contact the server. After a push attempt fails, every one of them
+keeps reporting the pre-push state — including the cheerful `0 unpushed`.
+
+```sh
+git log --oneline @{u}..HEAD | wc -l    # -> 0   NOT proof of anything
+```
+
+In one session this produced a confident "pushed and verified", read off a
+cached ref, for a push that had in fact not been confirmed. The correction is
+one line, but the user had already been told the work was delivered.
+
+**Always ask the server, never the cache:**
+
+```sh
+git ls-remote origin                       # ref actually on the remote
+git fetch origin && git log --oneline @{u}..HEAD | wc -l
+```
+
+`git ls-remote` is the only one of these that authenticates. If it cannot
+reach the remote, you have no evidence either way — say "unconfirmed", not
+"pushed" and not "failed".
+
+After a successful push, confirm the fix is *on the remote*, not just locally:
+
+```sh
+git show origin/master:<file> | grep -c '<the marker you just added>'
+```
+
+## Push failures name the wrong cause; match on the message
+
+The error text points at a symptom, so the remedy is not always what the text
+suggests. Distinguish these four before acting:
+
+| Message | Actual cause | What it is not |
+|---|---|---|
+| `src refspec main does not match any` | the branch is not named `main` | a remote problem |
+| `Repository not found` | the remote repo does not exist / is not visible to this key | a bad path or a failed auth |
+| `Permission denied (publickey)` | the server rejected the key | anything local |
+| `could not read Username for 'https://…'` | no credential for the HTTPS transport | a broken remote |
+
+`src refspec … does not match any` is purely local and is fixed by reading the
+branch:
+
+```sh
+git branch --show-current
+git branch -r | head            # what the remote actually has
+git remote -v                   # and which URL, since it may be ssh vs https
+```
+
+Never assume a branch name. Repositories that coexisted with peers, or that
+were created by a tool, are on `master` while newer ones default to `main`.
+
+`Repository not found` is the ambiguous one: it reads like an auth failure but
+is usually just "this repository has never been created." git-over-SSH
+**cannot create a repository** — only push to an existing one — so no amount of
+retrying, and no second agent on the same box, will clear it. The user has to
+create an empty repo (or supply a correctly-scoped token). Say that in one
+sentence, with the exact command to run afterwards, and prepare everything
+else so the push is a single step when they do.
+
+## When a credential that worked minutes ago stops working
+
+Auth that succeeds and then fails mid-session is remote-side revocation, not
+something you changed. Do not re-verify local setup you already verified —
+diff the evidence:
+
+```sh
+ssh -o BatchMode=yes -T git@github.com          # the error
+timeout 10 bash -c 'cat </dev/null >/dev/tcp/github.com/22' && echo reachable
+ssh -v -o BatchMode=yes -T git@github.com 2>&1 | grep -E 'identity file|Authentications'
+```
+
+`identity file … type 2` means the key was **found and offered** — so the
+server saw it and refused it. That is a remote-side answer, and no local
+reconfiguration will change it. Reassuring the user that their setup is fine is
+only correct *after* this check; before it, it is a guess.
+
+Hand the user something they can act on directly: the key fingerprint to
+compare against their account's key list.
+
+```sh
+ssh-keygen -lf ~/.ssh/id_ed25519.pub
+# 256 SHA256:…  user@host (ED25519)
+```
+
+Do not retry a rejected credential repeatedly — see the lockout rule in
+SKILL.md. One confirmation, then the fingerprint, then stop.
+
+## Check for a remote before promising anything about one
+
+A commit request is not a push request, and a repo may have no remote at all.
+`git remote -v` printing nothing is a legitimate state, not a broken one — do
+not add a remote on your own initiative just so a push becomes possible. That
+publishes work the user may not have intended to publish, and for a hardening
+toolset the contents describe the machine's exact posture.
+
+Survey all repos under audit in one pass, before writing any commit message
+that implies delivery:
+
+```sh
+for d in ~/Projects/*/; do
+  [ -d "$d/.git" ] || continue
+  printf '%-26s %s\n' "$(basename "$d")" \
+    "$(git -C "$d" remote -v | head -1 || echo 'NO REMOTE (local only)')"
+done
+```
+
+`git rev-parse --abbrev-ref '@{u}'` failing with *no upstream configured* is
+the same fact seen from the other side: local-only, nothing to push, nothing
+unpushed. Report it as its own state rather than letting "committed" imply a
+delivery step that does not exist. Offer to add a remote and push, and let the
+user choose which repos — for a security toolchain that is a real decision, and
+for a public repo it is a publication decision.
+
+## Report the tri-state honestly
+
+Per repo, one of three — and never collapse the middle one into the first:
+
+- **pushed and confirmed** — `git ls-remote` shows the ref
+- **committed locally, push unconfirmed** — auth broken, or remote absent
+- **never created on the remote** — needs the user to create it
+
+A user who believes an un-pushed change is delivered has been misled in the one
+direction that matters most. When you walk back an earlier "verified" claim,
+say so in one line and move on — no apology tour.

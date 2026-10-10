@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"360620"
+	"Universe"		"1"
+	"name"		"Spellsworn"
+	"StateFlags"		"4"
+	"installdir"		"Spellsworn"
+	"LastUpdated"		"1790034177"
+	"LastPlayed"		"1790200156"
+	"SizeOnDisk"		"2076377550"
+	"StagingSize"		"0"
+	"buildid"		"4569412"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"730408112"
+	"BytesDownloaded"		"730408112"
+	"BytesToStage"		"2076377550"
+	"BytesStaged"		"2076377550"
+	"TargetBuildID"		"4569412"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"360622"
+		{
+			"manifest"		"4998618209452420805"
+			"size"		"2076377550"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

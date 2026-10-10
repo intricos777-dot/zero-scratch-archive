@@ -1,0 +1,152 @@
+# Rebuilding integrity monitors and watchdogs
+
+For building a monitoring/anchor/supervisor tool when the previous one is
+unrecoverable. The class-level lesson: **a monitor that cannot tell the
+difference between "verified" and "could not check" is worse than no monitor**,
+because its green output is indistinguishable from a real all-clear.
+
+## 1. Prove the tool did not exist before rebuilding it
+
+A request to "reinstall" or "rebuild X" frequently names something that was
+never in version control. Search working trees, then *deleted* history, before
+writing a replacement:
+
+```bash
+find <repos> -path '*/.git' -prune -o -iname '*<name>*' -print
+grep -rIl --exclude-dir=.git --exclude-dir=node_modules -i '<name>' <repos>
+# deleted files, across all branches
+for d in <repos>/*/; do
+  git -C "$d" log --all --diff-filter=D --name-only --format="" | grep -i '<name>'
+done
+```
+
+Expect noise: git's own `fsmonitor-watchman.sample` hook matches any `watchman`
+search, and game code matches `sentinel` constantly. Filter to real candidates
+and say plainly what you found. If the only hit is a prose mention in a ledger,
+the correct answer is "this was never committed" — a rebuild, not a reinstall.
+
+## 2. Unverified is a distinct state, never a pass
+
+The core defect of every hand-rolled anchor checker: an anchor that cannot be
+evaluated (needs root, file unreadable, binary absent) returns a sentinel like
+`unreadable` or `unknown`. If that value is captured as the baseline and
+compared for equality, it **matches itself forever** and the check reports
+`ok` for a control nobody has ever read.
+
+```python
+if expected == actual:
+    if name in ROOT_ONLY and str(actual).startswith(("unreadable", "unknown", "error")):
+        status = "unverified"          # excluded from the intact count
+    else:
+        status = "ok"
+```
+
+Corollaries that all matter:
+
+- Exclude unverifiable anchors from the pass/fail numerator. Report
+  `15/15 verified intact, 1 unverified` — never `16/16`.
+- Give the checker a **distinct exit code** for "cannot verify" (e.g. `3`)
+  separate from clean (`0`) and drift (`1`), so a monitoring loop cannot treat
+  "I could not check" as "all good".
+- Record which anchors are root-only as configuration, not as a comment, so
+  adding a new one forces the same decision.
+
+## 3. A monitor never repairs; a supervisor repairs narrowly
+
+Keep the decision boundary explicit:
+
+- **The checker** decides whether the system matches its baseline. It must
+  never fix anything. A monitor that silently repairs what it monitors cannot
+  be trusted as evidence.
+- **The supervisor** decides when to run the checker and when to tell someone.
+
+Auto-repair, when offered at all, is limited to restarting a service the tool
+itself owns. **Never** auto-repair anything touching authentication, sudoers,
+firewall policy, faillock, or sshd. A process that rewrites security policy on
+its own is an attacker with write access. Encode that as an executable
+assertion in the self-test — enumerate the forbidden anchors and fail if any
+appears in the repair table — so a later "helpful" addition trips it.
+
+## 4. Every entry point must alert, not just the loop
+
+A tool typically grows a long-running loop plus a one-shot CLI for cron/manual
+use. They share the summarise-and-notify logic in your head but not in the
+code, and the one-shot path drifts: it prints the drift and returns non-zero,
+while only the loop notifies. Anyone using the one-shot as their check gets
+silence.
+
+Self-test by **real drift, not by reading the code**:
+
+```bash
+systemctl --user stop <service>; sleep 1
+<tool> once                      # must notify
+wc -l <notifications.log>        # must have grown
+systemctl --user start <service>
+```
+
+Assert against a counter of delivered notifications, not against the printed
+summary. A passing exit code is not proof of delivery.
+
+## 5. Severity must track actual risk
+
+The first draft of a monitor usually maps every mismatch to the worst
+severity. That trains the user to ignore it. Sort each finding by what it
+actually means:
+
+| Finding | Severity | Why |
+|---|---|---|
+| Service stopped (outage) | warn | availability, not exposure |
+| Service bound to a non-loopback address | critical | remote reachability |
+| Control cannot be read | unverified | unknown, not fine |
+| Baseline differs from recorded state | per-anchor | depends on the anchor |
+
+A stopped collector and an exposed collector are opposite findings; collapsing
+them into "critical" makes the critical tier meaningless.
+
+## 6. Verify drift detection both ways
+
+The self-test must prove the checker *can* fail, or a green run means nothing:
+
+- Plant a sentinel value that differs from every baseline entry → require
+  drift on **all** anchors.
+- Write a baseline equal to freshly-collected state → require **zero** drift.
+
+```python
+# planted drift
+BASELINE.write_text(json.dumps({"values": {n: "PLANTED" for n, *_ in ANCHORS}}))
+assert run_check()["drift"] == len(ANCHORS)
+# no false positives
+BASELINE.write_text(json.dumps({"values": collect()}))
+assert run_check()["drift"] == 0
+```
+
+The false-positive half is the one people skip, and it is the one that decides
+whether anyone keeps the tool running.
+
+## 7. Then verify against real system state
+
+Unit fixtures prove logic. Only a real induced fault proves integration:
+
+```bash
+systemctl --user stop <service>; sleep 2
+<tool> check                     # must name that anchor, notify, log
+systemctl --user start <service>; sleep 2
+<tool> check                     # must return to intact
+```
+
+Capture the service's `NRestarts` before and after to prove your *test harness*
+did not disturb the thing it monitors (see the test-isolation rules in
+SKILL.md — the same `pkill`/port-collision traps apply to a self-test that
+stops and restarts real units).
+
+## 8. Report a missing asset as critical, not as nothing-to-do
+
+When the old system preserved something that this machine does not have, a
+monitor that finds "nothing present" and stays quiet has inverted the point.
+The absence of the one asset the ledger says was retained and never uploaded
+anywhere is the highest-severity finding available — surface it with the
+consequence spelled out, and make it the first line of the report.
+
+Corollary: report credential *presence*, never credential *values*. A monitor
+that prints an RPC password to a log has created the leak it was built to
+detect.

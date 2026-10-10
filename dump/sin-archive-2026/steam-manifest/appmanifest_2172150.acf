@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"2172150"
+	"Universe"		"1"
+	"name"		"ANGEL DROID"
+	"StateFlags"		"4"
+	"installdir"		"AngelDroid"
+	"LastUpdated"		"1789773141"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"2686812276"
+	"StagingSize"		"0"
+	"buildid"		"13190273"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"1417286032"
+	"BytesDownloaded"		"1417286032"
+	"BytesToStage"		"2686812276"
+	"BytesStaged"		"2686812276"
+	"TargetBuildID"		"13190273"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2172151"
+		{
+			"manifest"		"7094359378546520734"
+			"size"		"2686812276"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

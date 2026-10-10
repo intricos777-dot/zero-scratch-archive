@@ -1,0 +1,45 @@
+"AppState"
+{
+	"appid"		"2293410"
+	"Universe"		"1"
+	"name"		"Drift Experience Japan"
+	"StateFlags"		"4"
+	"installdir"		"Drift Experience Japan"
+	"LastUpdated"		"1789776093"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"2212768912"
+	"StagingSize"		"0"
+	"buildid"		"10532967"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"4"
+	"BytesToDownload"		"1852630416"
+	"BytesDownloaded"		"1852630416"
+	"BytesToStage"		"2212768912"
+	"BytesStaged"		"2212768912"
+	"TargetBuildID"		"10532967"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2293411"
+		{
+			"manifest"		"3114854445187558282"
+			"size"		"2212768912"
+		}
+	}
+	"SharedDepots"
+	{
+		"228989"		"228980"
+		"228990"		"228980"
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

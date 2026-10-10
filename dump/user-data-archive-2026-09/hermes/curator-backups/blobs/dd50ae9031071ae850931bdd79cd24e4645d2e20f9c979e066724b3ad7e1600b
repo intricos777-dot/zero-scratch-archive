@@ -1,0 +1,78 @@
+# Hand-rolled binary state-file writers
+
+Notes for writing an undocumented binary state file that a desktop client
+owns. The worked example is a key/value tree format (Steam's binary VDF), but
+the failure modes are generic to any format assembled by hand.
+
+## The failure mode that hides best
+
+A helper that appends to an immutable value does not mutate it:
+
+```python
+def _w_str(buf, s):
+    buf += b"\0" + s.encode() + b"\0"   # rebinds the LOCAL name only
+```
+
+Every caller's chunk is discarded, with no error. It is survivable only
+because the same function usually *also* has direct `buf += ...` lines (for
+fixed-width integers) that do land — so the output is a plausible-looking file
+containing some fields and silently missing all the string ones.
+
+```python
+def _w_str(parts, s):
+    parts.append(b"\0")
+    parts.append(s.encode("utf-8") if isinstance(s, str) else s)
+    parts.append(b"\0")
+
+def serialise(entries):
+    parts = [b"\0shortcuts\0"]
+    ...
+    return b"".join(parts)
+```
+
+Pass a **list**, never `bytes`, and never use `+=` on the accumulator.
+The same trap exists in shell: `s="a"; f(){ s="$s$b"; }` writes nothing to the
+caller. Use `printf -v`, an array, or a temp file.
+
+## Object terminators
+
+A key/value tree needs an explicit end-of-object marker per object. Omit the
+per-entry terminator and write only the outer one, and a reader runs off the
+end of entry N into entry N+1's header — producing a phantom extra entry,
+which reads as a parser bug rather than a writer bug. Check the entry count
+at several sizes (1, 2, 3, 5); a phantom appears only once there is a
+following entry to run into.
+
+## NUL-prefixed values on read
+
+A value written as `\0<data>\0` must have its leading NUL skipped before
+scanning for the terminator. Read without skipping and the scan finds the
+terminator immediately, so every string field round-trips as `""` while the
+file is perfectly correct:
+
+```python
+if buf[i] != 0x00:
+    break
+i += 1
+v, i = _rd_bytes(buf, i)
+```
+
+## Test shape
+
+Assert on **values**, never only on counts — a count assertion passes while
+every string field is empty. Cover:
+
+| Case | Catches |
+|---|---|
+| single entry, all fields asserted | dropped appends, leading-NUL bug |
+| N entries for N in 1,2,3,5 | missing per-object terminator |
+| empty string value | falsy-vs-absent confusion |
+| empty collection (zero-count + terminator) | unterminated count |
+| multi-byte / unicode string and tag | char-vs-byte length assumptions |
+| literal expected bytes for one entry | field order and width |
+| garbage input rejected | a parser that accepts anything |
+
+Round-trip proves the reader and writer agree **with each other**. It does not
+prove the application accepts the bytes. Without a file the app itself wrote,
+name the real confirmation — the app rendering the result — rather than
+letting a green suite stand in for it.

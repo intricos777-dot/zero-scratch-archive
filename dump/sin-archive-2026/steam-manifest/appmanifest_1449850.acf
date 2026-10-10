@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"1449850"
+	"Universe"		"1"
+	"name"		"Yu-Gi-Oh!  Master Duel"
+	"StateFlags"		"4"
+	"installdir"		"Yu-Gi-Oh!  Master Duel"
+	"LastUpdated"		"1789775903"
+	"LastPlayed"		"1789781314"
+	"SizeOnDisk"		"445932121"
+	"StagingSize"		"0"
+	"buildid"		"24462996"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"3"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"63289264"
+	"BytesDownloaded"		"63289264"
+	"BytesToStage"		"70839100"
+	"BytesStaged"		"70839100"
+	"TargetBuildID"		"0"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"1449853"
+		{
+			"manifest"		"2715508757752444219"
+			"size"		"445932121"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

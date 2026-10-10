@@ -1,0 +1,238 @@
+=== shutdown diagnostic @ SIGTERM ===
+--- date ---
+2026-09-26T22:41:22Z
+--- ps (top 60 by cpu, comm only) ---
+    PID    PPID USER     %CPU %MEM STAT COMMAND
+   1246    1241 livings  13.2  2.9 Sl   kwin_wayland
+ 365954       1 root      9.8  0.2 Ss   fail2ban-client
+ 366068    1185 livings   1.2  0.3 S    kioworker
+   1372    1185 livings   1.0  4.5 Ssl  plasmashell
+    118       2 root      0.6  0.0 S    kswapd0
+ 179029    1185 livings   0.5  2.7 Rsl  hermes
+    327       2 root      0.3  0.0 S    nvidia-modeset/kthread_q
+    100       2 root      0.2  0.0 S    kcompactd0
+ 338103       1 root      0.1  0.3 Ssl  fail2ban-server
+     99       2 root      0.0  0.0 I<   kworker/R-writeback
+    972       1 root      0.0  0.0 Ss   wpa_supplicant
+     96       2 root      0.0  0.0 S    oom_reaper
+     95       2 root      0.0  0.0 S    khungtaskd
+     94       2 root      0.0  0.0 S    kauditd
+     93       2 root      0.0  0.0 I    rcu_tasks_rude_kthread
+     92       2 root      0.0  0.0 I    rcu_tasks_kthread
+     91       2 root      0.0  0.0 I<   kworker/R-inet_frag_wq
+     90       2 root      0.0  0.0 S    kdevtmpfs
+    900       1 root      0.0  0.0 Ss   systemd-logind
+     89       2 root      0.0  0.0 I<   kworker/7:0H-kblockd
+    892       1 root      0.0  0.1 Ssl  NetworkManager
+    891     890 dbus      0.0  0.0 S    dbus-broker
+    890       1 dbus      0.0  0.0 Ss   dbus-broker-lau
+     87       2 root      0.0  0.0 S    ksoftirqd/7
+     86       2 root      0.0  0.0 S    migration/7
+     85       2 root      0.0  0.0 S    idle_inject/7
+     84       2 root      0.0  0.0 S    cpuhp/7
+    842       2 root      0.0  0.0 I<   kworker/R-led_workqueue
+    840       2 root      0.0  0.0 S    irq/207-iwlwifi:exception
+    839       2 root      0.0  0.0 S    irq/206-iwlwifi:queue_12
+    838       2 root      0.0  0.0 S    irq/205-iwlwifi:queue_11
+    837       2 root      0.0  0.0 S    irq/204-iwlwifi:queue_10
+    836       2 root      0.0  0.0 S    irq/203-iwlwifi:queue_9
+    835       2 root      0.0  0.0 S    irq/202-iwlwifi:queue_8
+    834       2 root      0.0  0.0 S    irq/201-iwlwifi:queue_7
+    833       2 root      0.0  0.0 S    irq/200-iwlwifi:queue_6
+     83       2 root      0.0  0.0 I<   kworker/5:0H-kblockd
+    832       2 root      0.0  0.0 S    irq/199-iwlwifi:queue_5
+    831       2 root      0.0  0.0 S    irq/198-iwlwifi:queue_4
+    830       2 root      0.0  0.0 S    irq/197-iwlwifi:queue_3
+      8       2 root      0.0  0.0 I<   kworker/R-netns
+    829       2 root      0.0  0.0 S    irq/196-iwlwifi:queue_2
+    828       2 root      0.0  0.0 S    irq/195-iwlwifi:queue_1
+    827       2 root      0.0  0.0 S    irq/194-iwlwifi:default_queue
+    824       2 root      0.0  0.0 S    irq/16-processor_thermal_device_pci
+    817       2 root      0.0  0.0 I<   kworker/R-cfg80211
+    816       2 root      0.0  0.0 S    card0-crtc3
+    815       2 root      0.0  0.0 S    card0-crtc2
+    814       2 root      0.0  0.0 S    card0-crtc1
+    813       2 root      0.0  0.0 S    card0-crtc0
+     81       2 root      0.0  0.0 S    ksoftirqd/5
+    812       2 root      0.0  0.0 I<   kworker/R-ttm
+     80       2 root      0.0  0.0 S    migration/5
+     79       2 root      0.0  0.0 S    idle_inject/5
+    787       1 systemd+  0.0  0.0 Ss   systemd-oomd
+    786       2 root      0.0  0.0 S    UVM Tools Event Queue
+    785       2 root      0.0  0.0 S    UVM deferred release queue
+    784       2 root      0.0  0.0 S    UVM global queue
+     78       2 root      0.0  0.0 S    cpuhp/5
+--- pstree of self ---
+hermes(179029)-+-timeout(366095)---bash(366097)-+-head(366104)
+               |                                `-pstree(366103)
+               |-{hermes}(179161)
+               |-{hermes}(179162)
+               |-{hermes}(179165)
+               |-{hermes}(179174)
+               |-{hermes}(179181)
+               |-{hermes}(179185)
+               |-{hermes}(189117)
+               |-{hermes}(327526)
+               `-{hermes}(366096)
+--- loadavg ---
+0.54 0.65 0.87 1/485 366105
+--- recent dmesg (oom/killed) ---
+=== end ===
+=== shutdown diagnostic @ SIGTERM ===
+--- date ---
+2026-09-27T00:18:10Z
+--- ps (top 60 by cpu, comm only) ---
+    PID    PPID USER     %CPU %MEM STAT COMMAND
+  62290       1 root     10.0  0.2 Ss   fail2ban-client
+  62377       2 root      1.1  0.0 I    kworker/u48:6-kcryptd-253:0-1
+   1079    1040 livings   0.7  3.1 Rsl  hermes
+  62184       2 root      0.4  0.0 I    kworker/u48:1-kcryptd-253:0-1
+    330       2 root      0.4  0.0 S    nvidia-modeset/kthread_q
+   5892       2 root      0.2  0.0 I    kworker/u48:15-kcryptd-253:0-1
+   5891       2 root      0.2  0.0 I    kworker/u48:14-kcryptd-253:0-1
+  21424       2 root      0.2  0.0 I    kworker/u48:24-btrfs-endio
+  19259       2 root      0.2  0.0 I    kworker/u48:18-btrfs-endio
+    119       2 root      0.2  0.0 S    kswapd0
+    793       1 systemd+  0.1  0.0 Ss   systemd-oomd
+   4847       2 root      0.1  0.0 I    kworker/u48:3-btrfs-endio
+  20371       2 root      0.1  0.0 I    kworker/u48:19-btrfs-endio
+  12667       2 root      0.1  0.0 I    kworker/u48:8-kcryptd-253:0-1
+     12       2 root      0.1  0.0 I    kworker/u48:0-iou_exit
+   1040       1 livings   0.1  0.1 Ss   systemd
+    100       2 root      0.1  0.0 S    kcompactd0
+     99       2 root      0.0  0.0 I<   kworker/R-writeback
+    964       2 root      0.0  0.0 S    psimon
+     96       2 root      0.0  0.0 S    oom_reaper
+     95       2 root      0.0  0.0 S    khungtaskd
+     94       2 root      0.0  0.0 S    kauditd
+     93       2 root      0.0  0.0 I    rcu_tasks_rude_kthread
+     92       2 root      0.0  0.0 I    rcu_tasks_kthread
+     91       2 root      0.0  0.0 I<   kworker/R-inet_frag_wq
+    912       1 root      0.0  0.0 Ss   systemd-logind
+    908       1 root      0.0  0.2 Ssl  NetworkManager
+    906       1 root      0.0  0.2 Ssl  firewalld
+     90       2 root      0.0  0.0 S    kdevtmpfs
+    902     901 dbus      0.0  0.0 S    dbus-broker
+    901       1 dbus      0.0  0.0 Ss   dbus-broker-lau
+     89       2 root      0.0  0.0 I<   kworker/7:0H-kblockd
+     87       2 root      0.0  0.0 S    ksoftirqd/7
+     86       2 root      0.0  0.0 S    migration/7
+     85       2 root      0.0  0.0 S    idle_inject/7
+    852       2 root      0.0  0.0 I<   kworker/R-led_workqueue
+    843       2 root      0.0  0.0 S    irq/16-processor_thermal_device_pci
+     84       2 root      0.0  0.0 S    cpuhp/7
+    840       2 root      0.0  0.0 S    irq/206-iwlwifi:exception
+    839       2 root      0.0  0.0 S    irq/205-iwlwifi:queue_12
+    838       2 root      0.0  0.0 S    irq/204-iwlwifi:queue_11
+    837       2 root      0.0  0.0 S    irq/203-iwlwifi:queue_10
+    836       2 root      0.0  0.0 S    irq/202-iwlwifi:queue_9
+    835       2 root      0.0  0.0 S    irq/201-iwlwifi:queue_8
+    834       2 root      0.0  0.0 S    irq/200-iwlwifi:queue_7
+    833       2 root      0.0  0.0 S    irq/199-iwlwifi:queue_6
+     83       2 root      0.0  0.0 I<   kworker/5:0H-kblockd
+    832       2 root      0.0  0.0 S    card0-crtc3
+    831       2 root      0.0  0.0 S    irq/198-iwlwifi:queue_5
+    830       2 root      0.0  0.0 S    card0-crtc2
+      8       2 root      0.0  0.0 I<   kworker/R-netns
+    829       2 root      0.0  0.0 S    card0-crtc1
+    828       2 root      0.0  0.0 S    irq/197-iwlwifi:queue_4
+    827       2 root      0.0  0.0 S    irq/196-iwlwifi:queue_3
+    826       2 root      0.0  0.0 S    card0-crtc0
+    825       2 root      0.0  0.0 S    irq/195-iwlwifi:queue_2
+    824       2 root      0.0  0.0 I<   kworker/R-ttm
+    823       2 root      0.0  0.0 S    irq/194-iwlwifi:queue_1
+    822       2 root      0.0  0.0 S    irq/193-iwlwifi:default_queue
+--- pstree of self ---
+hermes(1079)-+-timeout(62402)---bash(62404)-+-head(62411)
+             |                              `-pstree(62410)
+             |-{hermes}(1397)
+             |-{hermes}(1398)
+             |-{hermes}(1399)
+             |-{hermes}(1401)
+             |-{hermes}(1404)
+             |-{hermes}(1406)
+             |-{hermes}(2283)
+             `-{hermes}(62403)
+--- loadavg ---
+0.22 0.24 0.67 1/321 62412
+--- recent dmesg (oom/killed) ---
+=== end ===
+=== shutdown diagnostic @ SIGTERM ===
+--- date ---
+2026-09-28T19:34:38Z
+--- ps (top 60 by cpu, comm only) ---
+    PID    PPID USER     %CPU %MEM STAT COMMAND
+  10654   10621 livings   102  2.9 S<l  steamwebhelper
+  10677   10658 livings  58.1  2.3 S<l  steamwebhelper
+   8359    1020 livings  50.0  3.7 Sl   steam
+   4604    4597 livings  36.9  5.1 Sl   kwin_wayland
+  10691   10654 livings  33.3  1.5 Sl   steamwebhelper
+  10533    8359 livings  24.4  0.0 Ss   srt-bwrap
+   4742    1020 livings   9.8  6.2 Ssl  plasmashell
+   1059    1020 livings   5.6  3.1 Rsl  hermes
+  10400       2 root      4.8  0.0 I    kworker/u48:19-kcryptd-253:0-1
+  10659   10654 livings   4.4  1.1 S    steamwebhelper
+  10658   10654 livings   4.4  1.1 S    steamwebhelper
+  10692   10661 livings   4.3  0.8 Sl   steamwebhelper
+  10621   10533 livings   3.7  0.0 Ss   pv-adverb
+   4679    4604 livings   2.9  1.9 S    Xwayland
+      1       0 root      1.5  0.2 Ss   systemd
+  10527    1020 livings   1.3  0.3 S    kioworker
+   6610       2 root      1.2  0.0 I    kworker/u48:16-btrfs-endio
+    412       2 root      1.1  0.0 I    kworker/u48:5-btrfs-endio-meta
+    122       2 root      1.1  0.0 I    kworker/u48:3-kcryptd-253:0-1
+   1049       2 root      1.1  0.0 I    kworker/u48:13-btrfs-endio-meta
+    629       2 root      1.0  0.0 I    kworker/u48:9-btrfs-endio
+    628       2 root      1.0  0.0 I    kworker/u48:8-btrfs-endio-meta
+    627       2 root      1.0  0.0 I    kworker/u48:7-kcryptd-253:0-1
+    133       2 root      1.0  0.0 I    kworker/u48:4-i915
+     12       2 root      1.0  0.0 I    kworker/u48:0-kcryptd-253:0-1
+    626       2 root      0.9  0.0 I    kworker/u48:6-kcryptd-253:0-1
+     14       2 root      0.9  0.0 I    kworker/u48:1-kcryptd-253:0-1
+    630       2 root      0.8  0.0 I    kworker/u48:10-kcryptd-253:0-1
+   1050       2 root      0.8  0.0 I    kworker/u48:14-kcryptd-253:0-1
+   4730    1020 livings   0.7  1.2 Ssl  kded6
+    332       2 root      0.7  0.0 S    nvidia-modeset/kthread_q
+    118       2 root      0.7  0.0 S    kswapd0
+   1020       1 livings   0.7  0.1 Ss   systemd
+   4794    1020 livings   0.6  2.5 Ssl  polkit-kde-auth
+     97       2 root      0.5  0.0 I    kworker/u48:2-btrfs-endio-meta
+    676       1 root      0.5  0.1 Ss   systemd-journal
+    631       2 root      0.5  0.0 I    kworker/u48:11-kcryptd-253:0-1
+    903     902 dbus      0.4  0.0 S    dbus-broker
+   4603    1020 livings   0.4  0.4 SNsl baloo_file
+   1051       2 root      0.4  0.0 I    kworker/u48:15-kcryptd-253:0-1
+   9992       2 root      0.3  0.0 I    kworker/u48:17-btrfs-endio
+    908       1 root      0.3  0.3 Ssl  NetworkManager
+   4795    1020 livings   0.3  0.7 Ssl  org_kde_powerde
+   1393    1376 livings   0.3  0.0 S    dbus-broker
+  10507     714 root      0.3  0.1 S    (udev-worker)
+  10501     714 root      0.3  0.1 S    (udev-worker)
+    913       1 root      0.2  0.1 Ss   systemd-logind
+    714       1 root      0.2  0.1 Ss   systemd-udevd
+    632       2 root      0.2  0.0 I    kworker/u48:12-kcryptd-253:0-1
+     44       2 root      0.2  0.0 S    migration/8
+  10274     696 root      0.2  0.0 S    systemd-userwor
+    100       2 root      0.2  0.0 S    kcompactd0
+    907       1 root      0.1  0.6 Ssl  firewalld
+    852       2 root      0.1  0.0 I<   kworker/u49:1-rb_allocator
+    797       1 systemd+  0.1  0.0 Ss   systemd-oomd
+   5178    4742 livings   0.1  0.3 S    python3
+   5045    4742 livings   0.1  0.3 S    python3
+     50       2 root      0.1  0.0 S    migration/9
+   4793    1020 livings   0.1  0.8 Ssl  kaccess
+--- pstree of self ---
+hermes(1059)-+-timeout(10711)---bash(10712)-+-head(10724)
+             |                              `-pstree(10723)
+             |-{hermes}(4463)
+             |-{hermes}(4464)
+             |-{hermes}(4465)
+             |-{hermes}(4467)
+             |-{hermes}(4470)
+             |-{hermes}(4472)
+             |-{hermes}(4490)
+             `-{hermes}(10713)
+--- loadavg ---
+5.01 1.80 0.66 2/582 10727
+--- recent dmesg (oom/killed) ---
+=== end ===

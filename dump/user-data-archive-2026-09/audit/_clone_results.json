@@ -1,0 +1,482 @@
+[
+ {
+  "name": "sword-tale-controller",
+  "status": "cloned"
+ },
+ {
+  "name": "himalaya-bot",
+  "status": "cloned"
+ },
+ {
+  "name": "sword-tale-bugfix",
+  "status": "cloned"
+ },
+ {
+  "name": "sin-archive-2026",
+  "status": "cloned"
+ },
+ {
+  "name": "aerovora",
+  "status": "cloned"
+ },
+ {
+  "name": "sword-tale-crash-report",
+  "status": "cloned"
+ },
+ {
+  "name": "voynich-occult-corpus",
+  "status": "cloned"
+ },
+ {
+  "name": "work-automation",
+  "status": "cloned"
+ },
+ {
+  "name": "lia-cli",
+  "status": "cloned"
+ },
+ {
+  "name": "non-steam-games",
+  "status": "cloned"
+ },
+ {
+  "name": "business-health-monitor",
+  "status": "cloned"
+ },
+ {
+  "name": "twilight-elysium",
+  "status": "cloned"
+ },
+ {
+  "name": "black-ops-2-elysium",
+  "status": "cloned"
+ },
+ {
+  "name": "tf2-elysium",
+  "status": "cloned"
+ },
+ {
+  "name": "dot-hack-remake",
+  "status": "cloned"
+ },
+ {
+  "name": "half-life-elysium",
+  "status": "cloned"
+ },
+ {
+  "name": "half-life-2-elysium",
+  "status": "cloned"
+ },
+ {
+  "name": "gaming-portfolio",
+  "status": "cloned"
+ },
+ {
+  "name": "gaming-engineer-kb",
+  "status": "cloned"
+ },
+ {
+  "name": "bch-faucet-web",
+  "status": "cloned"
+ },
+ {
+  "name": "garuda-tools-fresh",
+  "status": "cloned"
+ },
+ {
+  "name": "web-bug-reports",
+  "status": "cloned"
+ },
+ {
+  "name": "waydroid-issues",
+  "status": "cloned"
+ },
+ {
+  "name": "wildhearts-linux-fixes",
+  "status": "cloned"
+ },
+ {
+  "name": "once-human-linux-fixes",
+  "status": "cloned"
+ },
+ {
+  "name": "steam-linux-optimizations",
+  "status": "cloned"
+ },
+ {
+  "name": "living-sin-search",
+  "status": "cloned"
+ },
+ {
+  "name": "living-sin-ui",
+  "status": "cloned"
+ },
+ {
+  "name": "living-sin-models",
+  "status": "cloned"
+ },
+ {
+  "name": "helldivers2-bugfixes",
+  "status": "cloned"
+ },
+ {
+  "name": "living-sin-assets",
+  "status": "cloned"
+ },
+ {
+  "name": "living-sin-merch",
+  "status": "cloned"
+ },
+ {
+  "name": "helldivers2-patched",
+  "status": "cloned"
+ },
+ {
+  "name": "faucet-logins",
+  "status": "cloned"
+ },
+ {
+  "name": "loz-majoras-mask",
+  "status": "cloned"
+ },
+ {
+  "name": "kingdom-hearts-zero",
+  "status": "cloned"
+ },
+ {
+  "name": "te-bonfire",
+  "status": "cloned"
+ },
+ {
+  "name": "bch-faucet-backup",
+  "status": "cloned"
+ },
+ {
+  "name": "linux-zen-suite",
+  "status": "cloned"
+ },
+ {
+  "name": "business-debug-wrappers",
+  "status": "cloned"
+ },
+ {
+  "name": "lin-antimalware",
+  "status": "cloned"
+ },
+ {
+  "name": "polsia-global-trade",
+  "status": "cloned"
+ },
+ {
+  "name": "linkedin-outreach",
+  "status": "cloned"
+ },
+ {
+  "name": "linkedin-cli",
+  "status": "cloned"
+ },
+ {
+  "name": "lead-gen-system",
+  "status": "cloned"
+ },
+ {
+  "name": "dental-ai-agent",
+  "status": "cloned"
+ },
+ {
+  "name": "linux-zen-build",
+  "status": "cloned"
+ },
+ {
+  "name": "crypto-dashboard",
+  "status": "cloned"
+ },
+ {
+  "name": "polsia-lawsuit",
+  "status": "cloned"
+ },
+ {
+  "name": "later-work",
+  "status": "cloned"
+ },
+ {
+  "name": "The-Elder-Scrolls-Elsweyr",
+  "status": "cloned"
+ },
+ {
+  "name": "skyrim-ai-overhaul",
+  "status": "cloned"
+ },
+ {
+  "name": "loz-ocarina-mq",
+  "status": "cloned"
+ },
+ {
+  "name": "zeigiest-economy-sim",
+  "status": "cloned"
+ },
+ {
+  "name": "solar-well-infrastructure",
+  "status": "cloned"
+ },
+ {
+  "name": "simulation-policy-sandbox",
+  "status": "cloned"
+ },
+ {
+  "name": "phone-computers",
+  "status": "cloned"
+ },
+ {
+  "name": "clean-plastics-sim",
+  "status": "cloned"
+ },
+ {
+  "name": "ai-teacher-robot-pairing",
+  "status": "cloned"
+ },
+ {
+  "name": "aerospace-simulation-foundation",
+  "status": "cloned"
+ },
+ {
+  "name": "A.I.-bridge-skills",
+  "status": "cloned"
+ },
+ {
+  "name": "zen-healer",
+  "status": "cloned"
+ },
+ {
+  "name": "space-edge-network",
+  "status": "cloned"
+ },
+ {
+  "name": "te-halo-inspired",
+  "status": "cloned"
+ },
+ {
+  "name": "neuromorphic-handoff",
+  "status": "cloned"
+ },
+ {
+  "name": "firedragon-flatpak-fresh",
+  "status": "cloned"
+ },
+ {
+  "name": "lin-antimalware-tools",
+  "status": "cloned"
+ },
+ {
+  "name": "gaming-unified",
+  "status": "cloned"
+ },
+ {
+  "name": "polsia",
+  "status": "cloned"
+ },
+ {
+  "name": "ringworld-redux",
+  "status": "cloned"
+ },
+ {
+  "name": "ai-autonomy-framework",
+  "status": "cloned"
+ },
+ {
+  "name": "polsia-cli",
+  "status": "cloned"
+ },
+ {
+  "name": "coordination-server",
+  "status": "cloned"
+ },
+ {
+  "name": "hermes-cli",
+  "status": "cloned"
+ },
+ {
+  "name": "aerovora-industries",
+  "status": "cloned"
+ },
+ {
+  "name": "hermes-blood",
+  "status": "cloned"
+ },
+ {
+  "name": "hermes-self-evolve",
+  "status": "cloned"
+ },
+ {
+  "name": "money-automation",
+  "status": "cloned"
+ },
+ {
+  "name": "local-emergency-patrol",
+  "status": "cloned"
+ },
+ {
+  "name": "void-bridge",
+  "status": "cloned"
+ },
+ {
+  "name": "firedragon",
+  "status": "cloned"
+ },
+ {
+  "name": "security-audit-2026",
+  "status": "cloned"
+ },
+ {
+  "name": "lia-groq-bridge",
+  "status": "cloned"
+ },
+ {
+  "name": "zen-suite",
+  "status": "cloned"
+ },
+ {
+  "name": "crypto-bot",
+  "status": "cloned"
+ },
+ {
+  "name": "q-debug-vm",
+  "status": "cloned"
+ },
+ {
+  "name": "spacecraft-blueprint-simulator",
+  "status": "cloned"
+ },
+ {
+  "name": "offline-agents",
+  "status": "cloned"
+ },
+ {
+  "name": "mp3-video-virtualizer",
+  "status": "cloned"
+ },
+ {
+  "name": "japanese-imports-llc",
+  "status": "cloned"
+ },
+ {
+  "name": "market-library",
+  "status": "cloned"
+ },
+ {
+  "name": "vm-bootstrap",
+  "status": "cloned"
+ },
+ {
+  "name": "beverage-company",
+  "status": "cloned"
+ },
+ {
+  "name": "profit-widget",
+  "status": "cloned"
+ },
+ {
+  "name": "coinbase-agent-tools",
+  "status": "cloned"
+ },
+ {
+  "name": "secure-tactical-systems",
+  "status": "cloned"
+ },
+ {
+  "name": "himalaya-exchange",
+  "status": "cloned"
+ },
+ {
+  "name": "landbridge",
+  "status": "cloned"
+ },
+ {
+  "name": "quantum-loop",
+  "status": "cloned"
+ },
+ {
+  "name": "fate-engine",
+  "status": "cloned"
+ },
+ {
+  "name": "hermes-security-scripts",
+  "status": "cloned"
+ },
+ {
+  "name": "metals-alloy-engineering",
+  "status": "cloned"
+ },
+ {
+  "name": "design-miner",
+  "status": "cloned"
+ },
+ {
+  "name": "zen-suite-iso",
+  "status": "cloned"
+ },
+ {
+  "name": "zen-suite-release",
+  "status": "cloned"
+ },
+ {
+  "name": "kali-zen-suite",
+  "status": "cloned"
+ },
+ {
+  "name": "aeronautical-programming",
+  "status": "cloned"
+ },
+ {
+  "name": "cold-fusion-mini",
+  "status": "cloned"
+ },
+ {
+  "name": "DivineDirector",
+  "status": "cloned"
+ },
+ {
+  "name": "rocket-build-system",
+  "status": "cloned"
+ },
+ {
+  "name": "The-Elder-Scrolls-Elsewhyr",
+  "status": "cloned"
+ },
+ {
+  "name": "skyrim-mod-packages",
+  "status": "cloned"
+ },
+ {
+  "name": "bde-security-biometrics",
+  "status": "cloned"
+ },
+ {
+  "name": "nanite-systems",
+  "status": "cloned"
+ },
+ {
+  "name": "vessel-logistics",
+  "status": "cloned"
+ },
+ {
+  "name": "sen-isp-pygeofetch",
+  "status": "cloned"
+ },
+ {
+  "name": "sen-isp-business",
+  "status": "cloned"
+ },
+ {
+  "name": "system-resource-optimizer",
+  "status": "cloned"
+ },
+ {
+  "name": "code-theft-evidence",
+  "status": "cloned"
+ },
+ {
+  "name": "soh-masterquest-build",
+  "status": "cloned"
+ }
+]

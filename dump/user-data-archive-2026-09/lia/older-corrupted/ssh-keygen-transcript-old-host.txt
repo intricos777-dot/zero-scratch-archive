@@ -1,0 +1,21 @@
+ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/sin/.ssh/id_rsa):
+Enter passphrase for "/home/sin/.ssh/id_rsa" (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/sin/.ssh/id_rsa
+Your public key has been saved in /home/sin/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:Dp9PL+xdiuffFIKfJJQNelBL0FmlBOupsf46GmgqxA0 sin@sin-asustufdashf15fx517zcfx517zc
+The key's randomart image is:
++---[RSA 3072]----+
+|         o+=+o.. |
+|          +oB .  |
+|         . * o   |
+| E        + o    |
+|. o   . S. = o . |
+| o .  .+ .+ + o .|
+|.    o .++.  o. .|
+| .  o   o+o+.o o |
+|  ..   ..+B==.. .|
++----[SHA256]-----+

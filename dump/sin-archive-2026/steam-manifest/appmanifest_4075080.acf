@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"4075080"
+	"Universe"		"1"
+	"name"		"The Roach Hotel"
+	"StateFlags"		"4"
+	"installdir"		"The Roach Hotel"
+	"LastUpdated"		"1789775981"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"966094462"
+	"StagingSize"		"0"
+	"buildid"		"25094565"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"392247296"
+	"BytesDownloaded"		"392247296"
+	"BytesToStage"		"966094462"
+	"BytesStaged"		"966094462"
+	"TargetBuildID"		"25094565"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"4075081"
+		{
+			"manifest"		"5578152313681082146"
+			"size"		"966094462"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

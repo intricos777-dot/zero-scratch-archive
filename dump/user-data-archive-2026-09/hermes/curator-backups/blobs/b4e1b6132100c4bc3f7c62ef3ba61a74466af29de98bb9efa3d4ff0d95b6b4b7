@@ -1,0 +1,179 @@
+# Reconstructing lost state when session history is gone
+
+For "what did we build that needs rebuilding / what was lost in the rebuild?"
+when the agent's own session logs cannot answer it. The class-level lesson:
+**session logs are local, per-machine, and expire with the disk — the durable
+record is git history plus any self-describing ledger the previous operator
+committed.** Find the ledger before you start guessing.
+
+## 1. Establish what session history actually survives, first
+
+Before promising a session-log sweep, inventory the stores and their date
+range. Do not assume the logs span the period being asked about.
+
+```bash
+sqlite3 ~/.hermes/state.db "select name from sqlite_master where type='table'"
+sqlite3 ~/.hermes/state.db "select count(*) from sessions"
+sqlite3 ~/.local/share/opencode/opencode.db "select count(*) from session"
+find / -name 'state.db' -o -name 'opencode.db*' 2>/dev/null
+ls -d ~/.hermes/profiles/ /home/* 2>/dev/null   # other profiles = other machines
+```
+
+Hermes: `sessions` / `messages` / `messages_fts`. OpenCode: `session` /
+`message` / `part` (text lives in `part.data`, not `message`).
+
+Then check the *range*, not just the count — one session is a different story
+from three hundred spanning months:
+
+```bash
+sqlite3 ~/.local/share/opencode/opencode.db \
+  "select min(time_created), max(time_created) from message"
+```
+
+If the range starts on the rebuild date, say so plainly and pivot. Do not
+imply you found a history you did not find. Column names differ per table
+(`sessions.started_at` exists, `messages.started_at` does not) — read the
+schema rather than guessing and eating parse errors.
+
+## 2. Mine the git history instead
+
+Commit messages and diffs outlive every local database. Useful sweeps:
+
+```bash
+# did any repo ever reference the old host?
+git -C "$d" log --all --format='%B' | grep -i '<old-hostname>'
+
+# path drift, quantified per repo
+git -C "$d" grep -Il '/home/<olduser>' | wc -l
+```
+
+Quantify the total ("72 of 120 repos hardcode the dead account") — a count
+turns an unbounded cleanup into a plannable list, and the per-repo counts
+give an honest priority order.
+
+## 3. Find the self-describing ledger
+
+The highest-value artifact is a repo whose content *describes the old system
+in prose*: a cleanup manifest, an inventory, a deletion ledger, a posture
+report. Search for one before reconstructing from scratch:
+
+```bash
+ls -d ~/Projects/*archive* ~/Projects/*inventory* 2>/dev/null
+find ~/Projects -maxdepth 2 -iname 'MANIFEST*' -o -iname '*ledger*' 2>/dev/null
+```
+
+A good ledger gives you, for free: the old hostname and kernel (so you can
+prove whether the current box is the same machine), what was deliberately
+deleted, what was deliberately *kept*, and a claimed end-state ("15/15
+anchors intact, 34 listeners baselined") that becomes the acceptance criteria
+for the rebuild.
+
+## 4. Separate three categories, never two
+
+The user's question collapses into "lost", but the answer has three buckets and
+conflating them produces a wrong to-do list:
+
+| Category | Meaning | Action |
+|---|---|---|
+| **Never ported** | code in git, never deployed on this box | check out, re-point, deploy |
+| **Broken by drift** | deployed, but encodes a dead assumption (`/home/sin`) | fix by category (step 3 of SKILL.md) |
+| **Deleted on purpose** | prior operator removed it deliberately | *ask* — restoring may undo a decision |
+
+Category three is the one worth flagging hardest. A ledger's "Kept, not
+archived, not deleted — never uploaded anywhere" section names assets with
+**no copy anywhere**. If the current machine lacks them, no amount of
+rebuilding recovers them, and that must be the first thing the user reads.
+
+## 5. Check-out status is a finding
+
+A repo existing in git but absent as a working checkout means its whole
+subsystem is unbuilt here. Report that explicitly:
+
+```bash
+for r in <security-relevant repos>; do
+  printf '%-28s %s\n' "$r" \
+    "$([ -d ~/Projects/$r/.git ] && echo 'checked out' || echo 'NOT CHECKED OUT')"
+done
+```
+
+## 6. Bound what you can prove
+
+You can enumerate what the old system *referenced to* and what is missing now.
+You cannot prove a component ever ran. Say which one you are doing. An
+acceptance criterion that is itself undocumented ("15/15 anchors") cannot be
+reconstructed from artifacts — flag it as needing the user's recollection
+rather than inventing an approximation.
+
+## 7. "Rebuild X" means check whether X ever existed first
+
+A request to rebuild named tools is a request to rebuild *something*, and the
+named tools may have existed only as a prose mention in a ledger. Search before
+building, and search history as well as the tree:
+
+```bash
+for d in */; do n=$(basename "$d"); [ -d "$d/.git" ] || continue
+  find "$d" -path "$d/.git" -prune -o -iname "*<name>*" -print
+  git -C "$d" log --all --diff-filter=D --name-only --format="" | grep -i "<name>"
+done
+grep -rIl --exclude-dir=.git --exclude-dir=node_modules -i "<name>" .
+```
+
+Expect false hits: git ships `fsmonitor-watchman.sample` in every repo's
+`hooks/`, and a game codebase will match a security word in a dozen engine
+files. Judge by whether the hits are *your* tooling.
+
+When the search comes back empty, say so in one line and pivot to a fresh
+implementation against the current machine — then be explicit that the
+acceptance criteria are yours, not recovered. Where a ledger states a claimed
+end-state ("15/15 anchors"), treat it as a target to match in spirit and
+report the new count honestly (it may differ, and the difference is
+information, not failure).
+
+Deriving the new anchor set from the *current* verified state is the difference
+between a monitor that reflects this machine and one that asserts a number
+copied from a description of another one.
+
+## 8. When the audit source is the shell's own history
+
+For "did my recent commands actually run / is any of it working?", the durable
+record is the login shell's history file, not the terminal emulator. Emulators
+(gnome-terminal, konsole, kitty) keep only in-memory scrollback that dies with
+the window; **they write no log at all**, so a request to "check my terminal
+logs" must be answered by locating the shell history instead of reporting a
+missing log. Find it from the shell, not by guessing a path:
+
+```bash
+echo "$SHELL"; getent passwd "$USER" | cut -d: -f7   # fish → ~/.local/share/fish/fish_history
+ls -la ~/.local/share/fish/ ~/.bash_history ~/.zsh_history 2>/dev/null
+```
+
+Fish history is YAML-ish and pairs each command with an epoch `when:`; the
+`paths:` sub-keys record every file the command mentioned, which is a free map
+of what the session was editing. Entries also include commands that were typed
+into a **nested** `sudo bash -c '...'` block as one `cmd:` with embedded
+`\n` — flatten before reasoning about it, or you will misattribute which line
+of a multi-line block actually ran.
+
+Two hard rules for using it:
+
+- **The history is a claim, not evidence.** It proves a command was *typed*,
+  never that it succeeded — `sudo` after a failed prompt, a `cp` onto a stale
+  path, and a `reboot` mid-sequence all look identical. Re-derive every outcome
+  from live state, exactly as step 4/5 of SKILL.md requires. The history's only
+  job is to tell you *which* commands to go verify.
+- **History is written even when the shell is not the one you think.** Entries
+  carrying `added_when` alongside a much later `when` are a re-executed or
+  recalled command, not a second session; they are worth a re-verify rather
+  than a second finding.
+
+Mine it by cluster, not chronologically: `grep -oE '^[a-z_]+- cmd: sudo [a-z-]+'` /
+`awk '/^- cmd:/{print}'` to get the command inventory, then group by the
+subsystem each touches (pact/sudoers, firewall, daemon units, evidence seals)
+and verify one group at a time. Reading 350 lines of mixed history linearly
+buries the four things that matter.
+
+**Cross-check the history against the system clock and the boot time.** A
+`reboot` line followed by verification commands means everything after it is
+attested by the *current* boot only — units started before the reboot are not
+evidence for anything now, and `uptime -s` bounds the claim. Check the timeline
+before writing "all commands ran".

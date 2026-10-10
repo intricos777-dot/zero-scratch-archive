@@ -1,0 +1,15 @@
+{
+  "id": "proc_6ee5cd9dee23",
+  "command": "cd ~/Projects/_inventory && timeout 3000 python3 scan_secrets.py > /tmp/secretscan.log 2>&1; echo \"exit=$?\"; tail -3 /tmp/secretscan.log",
+  "cwd": "/home/livings/Projects/_inventory",
+  "task_id": "default",
+  "owner_task_id": "20260926_121135_408774",
+  "session_key": "20260926_121135_408774",
+  "parent_session_id": "20260926_121135_408774",
+  "started_at": 1790455250.5561783,
+  "exit_code": 0,
+  "completion_reason": "exited",
+  "termination_source": "",
+  "notify_on_complete": true,
+  "output": "exit=0\n  ...100/120\n  ...120/120\nDONE: 16 worktree findings, 38 history findings -> /home/livings/Projects/_inventory/_secrets.json\n"
+}

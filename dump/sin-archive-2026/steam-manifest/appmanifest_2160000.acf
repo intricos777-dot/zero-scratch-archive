@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"2160000"
+	"Universe"		"1"
+	"name"		"Trapped with Jester"
+	"StateFlags"		"4"
+	"installdir"		"Trapped with Jester"
+	"LastUpdated"		"1789772824"
+	"LastPlayed"		"1790030400"
+	"SizeOnDisk"		"223650023"
+	"StagingSize"		"0"
+	"buildid"		"22500971"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"87328192"
+	"BytesDownloaded"		"87328192"
+	"BytesToStage"		"223650023"
+	"BytesStaged"		"223650023"
+	"TargetBuildID"		"22500971"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2160001"
+		{
+			"manifest"		"4409603024023109929"
+			"size"		"223650023"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

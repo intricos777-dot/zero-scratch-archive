@@ -1,0 +1,7 @@
+systemctl --user show shield-kitty-watch.service -p MainPID --value
+cat /proc/<that PID>/cgroup
+1081
+warning: An error occurred while redirecting file 'that'
+warning: Path 'that' does not exist
+warning: An error occurred while redirecting file '/cgroup'
+open: Permission denied

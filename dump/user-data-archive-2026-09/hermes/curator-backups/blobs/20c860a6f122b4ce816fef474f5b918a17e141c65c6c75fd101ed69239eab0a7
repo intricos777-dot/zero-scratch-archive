@@ -1,0 +1,543 @@
+---
+name: workstation-toolchain-audit
+description: "Audit and repair a personal multi-repo toolchain."
+version: 0.2.0
+author: Living_Sin (intricos777-dot), Hermes Agent
+license: MIT
+platforms: [linux]
+metadata:
+  hermes:
+    tags: [audit, toolchain, systemd, security, repair, multi-repo]
+    related_skills: [requesting-code-review, systematic-debugging]
+---
+
+# Workstation Toolchain Audit
+
+Verify a personal fleet of self-built tools, daemons, and configs is actually
+runnable — not merely present — and repair what is not. Built for the case where
+a set of repos must be re-verified after a machine rebuild, an account change,
+or a long gap: the code survived in git while the machine-specific assumptions
+it encodes did not.
+
+**Core principle:** a tool that exists, parses, and is wired up is not a working
+tool. Every claim of "works" needs an executed command behind it.
+
+`requesting-code-review` covers one repo's uncommitted diff. This covers a
+fleet: installability, runtime, and whether the repo matches the live system.
+
+## References
+
+- `references/linux-static-checks.md` — the full static command battery
+- `references/security-tool-pitfalls.md` — detector, lockout, device-policy,
+  and tamper-evident-log defect classes
+- `references/fleet-clone-and-secret-purge.md` — auditing a whole account
+  (dozens+ of repos), secret scanning of tree *and* history, and purging a
+  leaked secret from git history
+- `references/lost-state-reconstruction.md` — answering "what was lost in the
+  rebuild" when session logs no longer exist; reading the old system's ledger
+  and git history instead
+- `references/integrity-monitor-rebuild.md` — building an anchor/supervisor
+  tool when the old one is unrecoverable: verified-vs-unverifiable accounting,
+  repair boundaries, and alerting from every entry point
+- `references/auditor-validity.md` — making a self-written scanner trustworthy:
+  scoping checks by file type, self-testing against planted defects, and
+  delegating validation to the real parser
+- `references/stale-copies-and-obsolete-results.md` — telling a pre-fix
+  background result from a fresh regression, and refreshing an aggregate repo
+  so it stops shipping code you already fixed
+- `references/push-verification.md` — proving a push reached the server
+  (a remote-tracking ref is a cache), reading the four push-failure messages,
+  and diagnosing auth that worked minutes ago and stopped
+
+## When to Use
+
+- "check the fleet", "are the toolsets complete", "audit everything we built"
+- After a machine rebuild, OS reinstall, or move to a new account
+- Before installing a udev/systemd/PAM- touching toolset on a fresh machine
+- When a repo's scripts and the live system config have drifted apart
+
+**Don't use for:** reviewing a single PR or diff (`requesting-code-review`),
+or debugging one specific crash (`systematic-debugging`).
+
+## Procedure
+
+### 1. Inventory every repo before touching anything
+
+```bash
+for d in ~/Projects/*/; do
+  n=$(basename "$d")
+  if [ -d "$d/.git" ]; then
+    printf '%-24s branch=%s dirty=%s files=%s last=%s\n' "$n" \
+      "$(git -C "$d" rev-parse --abbrev-ref HEAD)" \
+      "$(git -C "$d" status --porcelain | wc -l)" \
+      "$(git -C "$d" ls-files | wc -l)" \
+      "$(git -C "$d" log -1 --format='%h %ad %s' --date=short)"
+  else
+    echo "$n | NOT A GIT REPO"
+  fi
+done
+```
+
+Completion criterion: every directory is either a repo with a listed head or
+explicitly flagged. Untracked-but-present files are the usual source of "it was
+never committed" — that is a finding, not noise.
+
+Also record, for every repo, whether it is a **working checkout** or exists
+only in a scratch audit area. A security-relevant repo present in git but
+never checked out means its entire subsystem is unbuilt on this machine, which
+is invisible to a syntax audit and must be reported as its own finding.
+
+### 2. Run the static battery before reading any code
+
+Full command set in `references/linux-static-checks.md`. Minimum:
+
+```bash
+find . -name '*.sh' -not -path '*/.git/*' -not -path '*/venv/*' \
+  -exec bash -n {} \; -print
+find . -name '*.service' -not -path '*/.git/*' \
+  -exec systemd-analyze verify {} \;
+```
+
+`bash -n` catches parse errors that make a script unable to run at all — a
+duplicated `then` on an `if` reads fine to a human and has never once executed.
+Excluding `venv/` and `.git/` matters; without it the output is thousands of
+lines of vendored code.
+
+Completion criterion: every script and unit either parses or has a recorded
+failure with file and line.
+
+### 3. Sweep for stale machine-specific paths
+
+The dominant rebuild damage. Grep every repo for the *previous* home
+directory, not just the current one:
+
+```bash
+grep -rn '/home/<olduser>' ~/Projects --include='*' \
+  2>/dev/null | grep -v '/.git/' | grep -v '/venv/'
+```
+
+Then fix by category, not file-by-file:
+
+| Kind | Broken form | Correct form |
+|---|---|---|
+| Script working dir | `REPO="/home/x/Projects/y"` | `REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"` |
+| Log/state dir | `LOG_DIR="/home/x/.local/share/w"` | `LOG_DIR="$HOME/.local/share/w"` |
+| Unit `ExecStart` | `/home/x/Projects/y/s.sh` | `%h/Projects/y/s.sh` **+ `User=`** |
+| Sibling repo | `PROJ="/home/x/Projects/z"` | `PROJ="$HOME/Projects/z"` |
+
+**`%h` in a system unit expands to `/root`, not the invoking user.** A unit
+using `%h` without `User=` still points at a dead path. Add `User=<name>`
+alongside every `%h`, and say why in a comment so nobody strips it later.
+
+Completion criterion: zero hits outside `.git`, `venv`, and historical report
+files that are data rather than config.
+
+### 4. Execute each tool, do not infer it works
+
+For every CLI, daemon, and dashboard: run the real entrypoint. A file that only
+imports cleanly is not a tool that runs.
+
+```bash
+./cli/main.py --help          # documented invocation from its own README/start.sh
+./watchdog.sh --once          # every daemon needs a single-run mode
+systemctl --user start <unit> # then confirm Active: (running)
+curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:<port>/
+```
+
+**Reproduce the documented invocation, not one you invented.** Running
+`python3 pkg/main.py` puts `pkg/` on `sys.path`, not the repo root, so every
+sibling import fails with `ModuleNotFoundError` while the file itself compiles
+fine. If the README or `start.sh` says `python3 cli/main.py`, that exact command
+must work — insert the repo root on `sys.path` at the top of the entrypoint.
+
+Run the test suite too. A suite that cannot be *collected* was never run:
+tests importing `pytest` with no `pytest` in `requirements.txt` fails at import,
+not at assertion, and reports nothing useful.
+
+Completion criterion: each tool produced real output from its real entrypoint.
+
+### 5. Diff the repo against the live system
+
+```bash
+diff -q ~/Projects/x/theme.conf ~/.config/x/theme.conf && echo IN SYNC
+grep -vE '^\s*#|^\s*$' /etc/security/faillock.conf
+```
+
+Drift is the highest-value finding class here: the repo is the thing that
+survives a rebuild, so if it disagrees with the live system, the next rebuild
+reinstalls the wrong state. Report drift in both directions — live settings
+missing from the repo, and repo settings never applied.
+
+Completion criterion: every config that has a repo copy is classified in-sync
+or drift, and drift is reported rather than silently reconciled.
+
+### 6. Verify config keys against the real man page, not a guess
+
+Before writing a directive into a system config, confirm it exists and means
+what you assume:
+
+```bash
+zcat /usr/share/man/man5/<name>.5.gz | col -b > /tmp/doc.txt
+grep -A4 '<directive>' /tmp/doc.txt
+strings /usr/lib/<path>/<module>.so | grep -x '<directive>'   # secondary
+```
+
+`strings` on a shared object is a useful cross-check but is not authoritative —
+a directive can be valid while absent from the string table. **Check semantics,
+not just existence**: a directive that takes a *group* when you assumed a
+*user* silently exempts a far larger set than intended.
+
+### 7. Test security tooling in both directions
+
+A detector that never fires and a detector that always fires are equally
+useless. See `references/security-tool-pitfalls.md` for the full set.
+
+- Prove the false-positive path is clean (legitimate activity produces no alert)
+- Prove the true-positive path fires (inject a synthetic event, confirm detection)
+- Prove enforcement actually happens (mutation, deletion, truncation — each caught)
+- Prove a failure is *visible*: a security path that swallows a subprocess return
+  code looks identical to success until the moment the proof is needed
+
+### 8. When a client exists but its server does not, read the client's wire format first
+
+A very common post-rebuild casualty: one half of a client/server pair is
+missing. A browser userscript, cron job, or integration script posts to a
+local port, and nothing ever listened there. The client believes it is
+working, so the loss is silent and unbounded.
+
+**Before writing the server, read the client's actual `fetch`/request call and
+take the contract from it verbatim.** Do not infer the contract from the
+project's name or from what the endpoint would sensibly accept. In one audit
+the documented pair disagreed in three ways at once: payload shape
+(`{lines: [...]}` vs `{idea: "..."}`), success status (the client advanced its
+ack pointer only on `200`, not `202`), and a health-check field the client
+logged (`j.inbox`) that the obvious response shape omits. A server built to
+the inferred contract would have rejected every real client payload while
+returning errors the client swallowed.
+
+Then:
+
+```bash
+ss -ltnp | grep <port>                       # confirm nothing listens
+grep -rn '<endpoint>' <client-repo>         # the real URL, method, payload
+grep -n 'fetch(\|GM_xmlhttpRequest\|\.post(' <client>   # the real call site
+grep -n '@grant' <client>                   # userscripts: token storage needs a grant
+```
+
+Replay the client's **exact** payload in a test — copy the real `data:`
+expression out of the client, not a hand-written equivalent. The bridge suite
+in that audit asserted the literal JSON the userscript sends, which is what
+caught all three mismatches.
+
+Checklist before declaring the pair whole:
+
+- [ ] The client's success status is what the server returns (not merely "2xx")
+- [ ] Every field the client *reads* from the response exists in the response
+- [ ] Every client-side field the server requires is optional or supplied
+- [ ] The client can obtain its credential without a code change (see below)
+
+**Never leave a shared secret in a committed file when the client can hold it
+in its own storage.** For a userscript, read the bearer token from
+`GM_getValue` and add the matching `@grant` lines, so rotating the token is a
+local edit rather than a commit. Generate the token server-side into a `0600`
+file, and reject the old value in tests so a leak is provably closed.
+
+### 9. Isolate tests from the live service they exercise
+
+A test for a running service collides with that service in two ways, and both
+produce *plausible, wrong* results rather than an obvious failure.
+
+```bash
+PORT=47314                                   # NOT the production port
+export LIA_INBOX_PORT=$PORT
+ss -ltn | grep -q ":$PORT " && { echo "port busy"; exit 1; }
+```
+
+- **Hardcode-a-port:** if the test's own server fails to bind, the production
+  service answers instead. The test then sends its throwaway token to the live
+  service and every case reports `401` — a wall of failures that looks like an
+  auth bug in the code under test. Assert the launcher bound: poll
+  `GET /health` for *your* token, and abort if the port is already occupied.
+- **Broad `pkill -f '<script>.ts'`:** pattern-matches the systemd unit's
+  `ExecStart` and kills the live service on every test run. Never kill by name.
+- **`$!` is not necessarily the server.** If the launcher forks — `setsid`,
+  `nohup`, any wrapper — `$!` is the *wrapper's* PID, so `kill $SRV` kills
+  nothing and the real server survives holding its port. A suite that never
+  assigned `SRV` at all leaks on every single run. Resolve the listener by
+  port instead, which is also what makes the kill provably test-scoped:
+
+```bash
+SRV=$(for _ in $(seq 1 20); do
+  p=$(ss -tlnp 2>/dev/null | grep -oE "127.0.0.1:$PORT.*pid=[0-9]+" | grep -oE '[0-9]+$' | head -1)
+  [ -n "$p" ] && { echo "$p"; break; }; sleep 0.3
+done)
+```
+
+  If `SRV` comes back empty, say so loudly rather than continuing — a silent
+  empty PID reads as a clean shutdown.
+
+Verify the isolation held rather than assuming it. Both halves matter:
+
+- capture the production service's restart counter before and after the
+  suite, and require it unchanged
+- require the *test* port to be free afterwards (`ss -ltn | grep -c ":$PORT "`
+  == 0); a suite that passes while leaking is not isolated
+- run the suite **twice in a row** — a leak shows up as the second run
+  aborting on "port already in use", which is the only reliable symptom
+- confirm production is still serving after the runs
+
+### 10. When another agent is working the same repos, wait
+
+A parallel agent (OpenCode, Claude Code) editing the fleet shows up as: a live
+process, a log file whose mtime advances, and — the reliable signal —
+`git status` showing **uncommitted** changes and untracked files you did not
+create. Do not commit, revert, or "clean up" around them; an uncommitted
+deletion may be a deliberate mid-refactor rename.
+
+Establish liveness from the log mtime, not from process existence (an idle TUI
+keeps running). Then wait event-driven rather than by polling in-turn:
+
+```bash
+LOG=~/.local/share/opencode/log/opencode.log
+IDLE_START=$(stat -c %Y "$LOG")
+while [ $(( $(date +%s) - IDLE_START )) -lt 150 ]; do
+  sleep 15
+  [ "$(stat -c %Y "$LOG")" != "$IDLE_START" ] && IDLE_START=$(stat -c %Y "$LOG")
+done
+```
+
+Run the independent work while waiting — inventory and secret scans touch
+scratch clones and do not conflict. When the other agent does finish, verify
+its result rather than duplicating it, and read its new files before reporting
+on them: in one session it was mid-way through replacing a firewalld zone and
+had found a real `PartOf=` systemd packaging bug worth acknowledging.
+
+**Do not audit only your own code.** The highest-yield review target is
+whatever the peer agent just wrote, because it arrived without passing through
+your own checks. Two classes are worth checking first because they pass review
+by construction:
+
+- A `--selftest` that prints case names instead of invoking the decision path —
+  it cannot fail, so it certifies nothing. Rewriting it is how the one real
+  defect in a peer's work was found (see the stub-self-test and empty-exclusion
+  entries in `references/security-tool-pitfalls.md`).
+- Config read only from environment variables the peer's own unit never sets —
+  correct in isolation, permanently empty in production.
+
+Run the peer's own selftests, and re-run **yours**, before reporting. A peer
+editing the same repo is not evidence your earlier fixes survived; confirm it
+with `git diff <your-commit>..HEAD -- <your files>` and by re-running the
+selftests. Report both halves: what the peer got right (its installer dry-run,
+its `SUDO_USER` path handling, its syntax) and the defect you found, so the
+user can weigh the output rather than take a verdict.
+
+Stale `pkill`-style handoff processes from earlier in the session can linger
+and match by name — identify the live interactive process specifically instead
+of treating any matching PID as current work.
+
+### 11. Report honestly, and split applied from unapplied
+
+Pushing is where "done locally" and "done" diverge. State per repo which of
+the three it is: pushed, committed locally only, or never created on the
+remote. A user who believes an un-pushed purge is a completed purge has been
+misled in the one direction that matters most.
+
+Lead with what is broken and what you fixed. Then state plainly what still
+needs root, with the exact command — do not install PAM/udev/systemd changes
+the user has not authorized, and never ask for a password.
+
+Flag security tradeoffs **once**, concretely, with the mechanism, then proceed
+with the requested behavior. Repeating a caveat on every later message is noise;
+never stating it is negligence.
+
+When you catch yourself having reported something wrong earlier in the session,
+correct it in one line and move on — no apology tour, no re-litigating. Same
+for the user's own wrong premise: state the discrepancy once, with the evidence,
+and proceed on the corrected footing.
+
+### 12. Validate the auditor before believing it
+
+A self-written scanner is the most likely thing in the session to be wrong,
+and its output the most likely to be believed. In one audit it reported
+4,537 findings of which **4,535 were its own defects**.
+
+Two always-on rules; the mechanism and worked examples are in
+`references/auditor-validity.md`:
+
+- **Scope every check to its file type and return early otherwise.** A
+  language-specific parser handed another language's file reports a
+  confident *wrong* error, not silence. Running `ast.parse` over systemd
+  units and parsing shell as INI accounted for nearly all the noise.
+- **Self-test the scanner against a scratch file with planted defects before
+  running it on the fleet**, and require a clean file to report nothing.
+  Without this you cannot tell a working scanner from a confidently wrong one.
+
+**Ask the authority rather than keeping your own list.** A hand-maintained
+allowlist of valid systemd keys produced 70 false positives on real
+directives; a hardcoded list is only ever a stale subset of what the tool
+accepts. Use `systemd-analyze --user verify`, and the man page.
+
+Report the residue as "N findings, M reviewed and benign". A scanner finding
+thousands of errors in a codebase that mostly runs is telling you about
+itself. Expect some findings to be the *test's* fault — a fixture with the
+wrong column count, a hardcoded address, a misremembered flag name. Correct
+the test, not working code, and say so.
+
+**A scan launched before your fix reports the pre-fix world.** When a
+background process you started earlier completes after the fix, its number
+will contradict the number you just measured, and that reads as a regression.
+Decide it by checking whether the code path that produced the finding still
+exists in the file, plus the output file's mtime. If the offending string or
+function is gone, the result is stale — say so in one line and move on. See
+`references/stale-copies-and-obsolete-results.md`. Note that `pgrep -f <pat>`
+matches the wrapper shell whose own command line contains the pattern, so a
+self-match looks like a live job.
+
+**An aggregate repo is a second copy of everything it contains.** Consolidating
+repos into one snapshot is a build artifact, not a source of truth: fixes made
+afterwards land in the original only, and the snapshot keeps shipping the bug
+you just fixed — to the user, who reads the published copy. Refresh it and run
+a mechanical md5 drift sweep when you touch it, rather than relying on your
+memory of which files changed. The sweep also catches untracked `__pycache__`
+dragged in by the copy, which `.gitignore` does not retroactively untrack.
+
+## Pitfalls
+
+- **Believing a self-written scanner's output before testing the scanner** —
+  a check applied to the wrong file type reports a confident wrong answer.
+  Scope by extension, self-test against planted defects, then run it.
+- **Validating config against a hand-maintained allowlist instead of the real
+  parser** — the list can only be a stale subset, so it invents false
+  positives. Ask `systemd-analyze verify` / the man page.
+- **Flagging a broad `except Exception` without checking whether the body
+  handles it** — one that logs or re-raises is not a defect; reporting it
+  drowns the handlers that genuinely swallow.
+- **Untracking generated artifacts in only the repo you happened to be in** —
+  committed `.pyc`, `venv/`, or `node_modules` clusters across sibling repos;
+  one audit found 1,370 tracked `.pyc` in a repo where the identical defect
+  had just been fixed elsewhere that session. Sweep every repo for the
+  pattern. Use `git rm -r --cached` so the working tree copy survives.
+- **Inferring a client/server contract instead of reading the call site** — the
+  documented pair can disagree on payload, status code, *and* response field
+  at once, and a plausible server then rejects every real client.
+- **Trusting "it imports" as "it runs"** — the CLI must be invoked the way its
+  own docs invoke it, from its own working directory.
+- **Grepping venv/ and .git/** — swamps real findings in vendored code.
+- **Assuming `%h` means the user** — in a system unit it is `/root` unless
+  `User=` is set.
+- **A config key assumed invalid from a failed `strings` match** — verify against
+  the man page before telling a user a feature does not exist.
+- **Enabling a guard but never triggering it** — an uninstalled rule and a
+  working one look identical from the journal.
+- **Reconciling repo-vs-live silently** — the user must know which state wins.
+- **Fixing the alert without fixing the cause** — a debounce that suppresses
+  sustained attacks is a quieter failure, not a fix.
+- **Committing untracked files without reading them** — they may be half-written
+  or contain a bug that was never run because it was never tracked.
+- **Skipping the execution step for "simple" repos** — the parse error that
+  mattered most was in the repo with the fewest files.
+- **A security scanner whose failures are swallowed** — `except Exception: pass`
+  around each feed makes an HTTP 401 and a 404 indistinguishable from "no
+  threats found". A tool reporting `indicators=0` while every feed is dead is
+  worse than no tool, because zero findings reads as an all-clear. Log each
+  fetcher's failure, and make a required-but-unconfigured source say
+  `skipped: no API key` instead of returning an empty list.
+- **A test named for a condition it never creates** — `test_..._without_network`
+  that never blocked the network passes *because the code is broken*, and keeps
+  passing right up until you fix the underlying bug. Then it fails and looks
+  like a regression. Actually stub the network; make the suite hermetic.
+- **A placeholder check that eats real findings** — filtering
+  `AKIA...EXAMPLE` is correct, but the same filter applied to a live-shaped key
+  is a silent miss. Self-test the scanner against known-positive and
+  known-negative strings before trusting its report. Note that a real-looking
+  value may legitimately be a documented vendor example.
+- **Calling a protection "enforced" without checking the mechanism applies to
+  the case** — a jail whose filter requires `rhost=<IP>` can never fire for a
+  console or local-tty failure, because there is no remote IP to extract. Prove
+  each rule against a synthetic event *of that shape*; matching nothing is a
+  configured-but-dead rule that reads identical to a working one.
+- **Accepting the user's premise about what exists without checking** — a
+  request to rebuild "the bridge we recently created" can name a component
+  that predates the session, or a project that does not exist at all. Search
+  for the artifact first, then state plainly what is actually there before
+  building on the description. Users misremember provenance and purpose under
+  exactly the pressure of a rebuild; the cost of a wrong assumption compounds
+  into the wrong server contract.
+- **Declaring a detector broken from a self-test you did not build carefully** —
+  a sample that violates the pattern's own minimum length proves nothing about
+  the pattern. When a self-test fails, first check the fixture against the real
+  format, then re-verify; report "the detector is fine, my sample was
+  malformed" rather than shipping a fix to working code. Building a positive
+  and negative self-test is what makes the difference cheap to spot.
+- **A monitor that reports "unverifiable" as "ok"** — an anchor needing root
+  captures `unreadable` as its baseline and then matches itself forever, so a
+  control nobody has read shows green. Give unverifiable its own status and
+  exit code, and exclude it from the pass count.
+- **A self-test fixture that fails and gets read as a product bug** — a fixture
+  missing a dict key, or asserting on the title when the value is in the body,
+  reports exactly like a real defect. Before patching working code to satisfy
+  a failing assertion, check the assertion actually describes the contract.
+- **Repairing only in the long-running loop** — a one-shot CLI that summarizes
+  drift without notifying is a silent check for anyone using it from cron.
+  Test alerting by induced real drift and an actual growth in the delivered
+  notification count, not by the exit code.
+- **Collapsing every mismatch into the worst severity** — a stopped service is
+  an outage; a service bound to a non-loopback address is an exposure. Merging
+  them makes the critical tier meaningless and trains the user to ignore it.
+- **Treating "committed locally" as "pushed"** — survey upstream state per repo
+  before reporting done, and note that a repo which has never existed on the
+  remote needs creating, not pushing. Confirm the rewrite and the force-push
+  as two separate decisions, and verify the purge on the re-fetched remote.
+- **Accepting an offered credential that cannot address the blocker** — a sudo
+  password offered for a task needing no root wastes the user's effort and
+  leaves the real blocker standing. Name the missing capability, then the
+  concrete fixes.
+- **Delegating a blocked task to a peer agent without checking its credentials
+  first** — a second agent on the same box shares the same missing token, so
+  handing off a push that needs repo scope just moves the failure. Check the
+  peer's environment (`which gh`, `GITHUB_TOKEN`, credential store, its own
+  auth.json) before offering it as a path; if it has no more access than you,
+  say so and do the part you *can* do.
+- **Reporting a task as finished on the strength of a process being alive** —
+  `is-active` plus a health endpoint proves liveness, not function. Prove
+  behaviour with an induced fault: stop the thing, confirm the monitor both
+  detects it and delivers the alert (a growth in delivered-notification count,
+  not just a non-zero exit), then restore and confirm clean.
+- **Retrying a rejected credential into a lockout** — after a refusal, verify
+  the form actually submitted (empty field is your bug, wrong password is
+  theirs), make at most one careful re-attempt, then stop and say which it
+  was.
+- **Accepting a self-test that prints its cases instead of running them** — a
+  `--selftest` that echoes "case X -> should ALERT" and exits 0 cannot fail,
+  so its green output reads as coverage it never provided. Check whether the
+  test *calls* the decision path. In shell that also means the decision logic
+  must be a function (bare top-level code with `exit` kills the run on the
+  first case) and the dispatch must come *after* the definitions it calls.
+- **Defaulting a safety exclusion to a caller-supplied env var** — a var the
+  service unit never sets is empty in production, so the guard is a no-op and
+  the thing it was meant to spare trips the alert. Compute own-addresses and
+  the default route inline, let the var override, and grep the unit for every
+  variable the script reads.
+- **Auditing only your own code when a peer agent shares the repo** — code that
+  arrived from a peer bypassed your checks entirely, and its self-tests are the
+  least trustworthy thing in the tree. Re-run your own selftests and diff your
+  files against your last commit before reporting that your fixes survived.
+- **Treating a late background result as a fresh regression** — a scan started
+  before the fix reports the old code, and its alarming number then contradicts
+  the number you just measured. Check whether the producing code path still
+  exists before investigating; `pgrep -f` also self-matches its own wrapper.
+- **Publishing a snapshot that predates your own fixes** — an aggregate repo is a
+  second copy of each source, so it keeps shipping the bug you just fixed.
+  Refresh it and run a mechanical md5 drift sweep, which also catches
+  `__pycache__` the copy dragged in and `.gitignore` cannot untrack.
+
+## Verification
+
+The audit is done when, for every repo: it parses, it runs, its live config
+matches its repo, and any finding has a commit or a stated blocker. State the
+count of repos audited, verified, and still requiring root — do not summarize
+the session back.
+
+Scope claims to their evidence. If you bounded the sweep ("structure only, no
+installs") or could only prove part of a claim ("this code exists; I cannot
+show it ever ran"), say which — an unstated bound reads as full coverage.

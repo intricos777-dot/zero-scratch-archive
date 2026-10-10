@@ -1,0 +1,15 @@
+{
+  "id": "proc_3de728bba4a0",
+  "command": "cd ~/Projects/_inventory && python3 verify_all.py 2>&1 | tail -20",
+  "cwd": "/home/livings/Projects",
+  "task_id": "default",
+  "owner_task_id": "20260926_121135_408774",
+  "session_key": "20260926_121135_408774",
+  "parent_session_id": "20260926_130813_326367",
+  "started_at": 1790453536.1172485,
+  "exit_code": 0,
+  "completion_reason": "exited",
+  "termination_source": "",
+  "notify_on_complete": true,
+  "output": "verifying 120 repos\n  ...20/120\n  ...40/120\n  ...60/120\n  ...80/120\n  ...100/120\n  ...120/120\nwrote /home/livings/Projects/_inventory/_verify.json\n"
+}

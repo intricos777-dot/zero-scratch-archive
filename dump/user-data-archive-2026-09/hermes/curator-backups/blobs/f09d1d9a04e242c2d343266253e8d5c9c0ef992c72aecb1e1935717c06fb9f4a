@@ -1,0 +1,206 @@
+---
+name: workstation-toolchain-audit
+description: "Audit and repair a personal multi-repo toolchain."
+version: 0.1.0
+author: Living_Sin (intricos777-dot), Hermes Agent
+license: MIT
+platforms: [linux]
+metadata:
+  hermes:
+    tags: [audit, toolchain, systemd, security, repair, multi-repo]
+    related_skills: [requesting-code-review, systematic-debugging]
+---
+
+# Workstation Toolchain Audit
+
+Verify a personal fleet of self-built tools, daemons, and configs is actually
+runnable — not merely present — and repair what is not. Built for the case where
+a set of repos must be re-verified after a machine rebuild, an account change,
+or a long gap: the code survived in git while the machine-specific assumptions
+it encodes did not.
+
+**Core principle:** a tool that exists, parses, and is wired up is not a working
+tool. Every claim of "works" needs an executed command behind it.
+
+`requesting-code-review` covers one repo's uncommitted diff. This covers a
+fleet: installability, runtime, and whether the repo matches the live system.
+
+## When to Use
+
+- "check the fleet", "are the toolsets complete", "audit everything we built"
+- After a machine rebuild, OS reinstall, or move to a new account
+- Before installing a udev/systemd/PAM- touching toolset on a fresh machine
+- When a repo's scripts and the live system config have drifted apart
+
+**Don't use for:** reviewing a single PR or diff (`requesting-code-review`),
+or debugging one specific crash (`systematic-debugging`).
+
+## Procedure
+
+### 1. Inventory every repo before touching anything
+
+```bash
+for d in ~/Projects/*/; do
+  n=$(basename "$d")
+  if [ -d "$d/.git" ]; then
+    printf '%-24s branch=%s dirty=%s files=%s last=%s\n' "$n" \
+      "$(git -C "$d" rev-parse --abbrev-ref HEAD)" \
+      "$(git -C "$d" status --porcelain | wc -l)" \
+      "$(git -C "$d" ls-files | wc -l)" \
+      "$(git -C "$d" log -1 --format='%h %ad %s' --date=short)"
+  else
+    echo "$n | NOT A GIT REPO"
+  fi
+done
+```
+
+Completion criterion: every directory is either a repo with a listed head or
+explicitly flagged. Untracked-but-present files are the usual source of "it was
+never committed" — that is a finding, not noise.
+
+### 2. Run the static battery before reading any code
+
+Full command set in `references/linux-static-checks.md`. Minimum:
+
+```bash
+find . -name '*.sh' -not -path '*/.git/*' -not -path '*/venv/*' \
+  -exec bash -n {} \; -print
+find . -name '*.service' -not -path '*/.git/*' \
+  -exec systemd-analyze verify {} \;
+```
+
+`bash -n` catches parse errors that make a script unable to run at all — a
+duplicated `then` on an `if` reads fine to a human and has never once executed.
+Excluding `venv/` and `.git/` matters; without it the output is thousands of
+lines of vendored code.
+
+Completion criterion: every script and unit either parses or has a recorded
+failure with file and line.
+
+### 3. Sweep for stale machine-specific paths
+
+The dominant rebuild damage. Grep every repo for the *previous* home
+directory, not just the current one:
+
+```bash
+grep -rn '/home/<olduser>' ~/Projects --include='*' \
+  2>/dev/null | grep -v '/.git/' | grep -v '/venv/'
+```
+
+Then fix by category, not file-by-file:
+
+| Kind | Broken form | Correct form |
+|---|---|---|
+| Script working dir | `REPO="/home/x/Projects/y"` | `REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"` |
+| Log/state dir | `LOG_DIR="/home/x/.local/share/w"` | `LOG_DIR="$HOME/.local/share/w"` |
+| Unit `ExecStart` | `/home/x/Projects/y/s.sh` | `%h/Projects/y/s.sh` **+ `User=`** |
+| Sibling repo | `PROJ="/home/x/Projects/z"` | `PROJ="$HOME/Projects/z"` |
+
+**`%h` in a system unit expands to `/root`, not the invoking user.** A unit
+using `%h` without `User=` still points at a dead path. Add `User=<name>`
+alongside every `%h`, and say why in a comment so nobody strips it later.
+
+Completion criterion: zero hits outside `.git`, `venv`, and historical report
+files that are data rather than config.
+
+### 4. Execute each tool, do not infer it works
+
+For every CLI, daemon, and dashboard: run the real entrypoint. A file that only
+imports cleanly is not a tool that runs.
+
+```bash
+./cli/main.py --help          # documented invocation from its own README/start.sh
+./watchdog.sh --once          # every daemon needs a single-run mode
+systemctl --user start <unit> # then confirm Active: (running)
+curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:<port>/
+```
+
+**Reproduce the documented invocation, not one you invented.** Running
+`python3 pkg/main.py` puts `pkg/` on `sys.path`, not the repo root, so every
+sibling import fails with `ModuleNotFoundError` while the file itself compiles
+fine. If the README or `start.sh` says `python3 cli/main.py`, that exact command
+must work — insert the repo root on `sys.path` at the top of the entrypoint.
+
+Run the test suite too. A suite that cannot be *collected* was never run:
+tests importing `pytest` with no `pytest` in `requirements.txt` fails at import,
+not at assertion, and reports nothing useful.
+
+Completion criterion: each tool produced real output from its real entrypoint.
+
+### 5. Diff the repo against the live system
+
+```bash
+diff -q ~/Projects/x/theme.conf ~/.config/x/theme.conf && echo IN SYNC
+grep -vE '^\s*#|^\s*$' /etc/security/faillock.conf
+```
+
+Drift is the highest-value finding class here: the repo is the thing that
+survives a rebuild, so if it disagrees with the live system, the next rebuild
+reinstalls the wrong state. Report drift in both directions — live settings
+missing from the repo, and repo settings never applied.
+
+Completion criterion: every config that has a repo copy is classified in-sync
+or drift, and drift is reported rather than silently reconciled.
+
+### 6. Verify config keys against the real man page, not a guess
+
+Before writing a directive into a system config, confirm it exists and means
+what you assume:
+
+```bash
+zcat /usr/share/man/man5/<name>.5.gz | col -b > /tmp/doc.txt
+grep -A4 '<directive>' /tmp/doc.txt
+strings /usr/lib/<path>/<module>.so | grep -x '<directive>'   # secondary
+```
+
+`strings` on a shared object is a useful cross-check but is not authoritative —
+a directive can be valid while absent from the string table. **Check semantics,
+not just existence**: a directive that takes a *group* when you assumed a
+*user* silently exempts a far larger set than intended.
+
+### 7. Test security tooling in both directions
+
+A detector that never fires and a detector that always fires are equally
+useless. See `references/security-tool-pitfalls.md` for the full set.
+
+- Prove the false-positive path is clean (legitimate activity produces no alert)
+- Prove the true-positive path fires (inject a synthetic event, confirm detection)
+- Prove enforcement actually happens (mutation, deletion, truncation — each caught)
+- Prove a failure is *visible*: a security path that swallows a subprocess return
+  code looks identical to success until the moment the proof is needed
+
+### 8. Report honestly, and split applied from unapplied
+
+Lead with what is broken and what you fixed. Then state plainly what still
+needs root, with the exact command — do not install PAM/udev/systemd changes
+the user has not authorized, and never ask for a password.
+
+Flag security tradeoffs **once**, concretely, with the mechanism, then proceed
+with the requested behavior. Repeating a caveat on every later message is noise;
+never stating it is negligence.
+
+## Pitfalls
+
+- **Trusting "it imports" as "it runs"** — the CLI must be invoked the way its
+  own docs invoke it, from its own working directory.
+- **Grepping venv/ and .git/** — swamps real findings in vendored code.
+- **Assuming `%h` means the user** — in a system unit it is `/root` unless
+  `User=` is set.
+- **A config key assumed invalid from a failed `strings` match** — verify against
+  the man page before telling a user a feature does not exist.
+- **Enabling a guard but never triggering it** — an uninstalled rule and a
+  working one look identical from the journal.
+- **Reconciling repo-vs-live silently** — the user must know which state wins.
+- **Fixing the alert without fixing the cause** — a debounce that suppresses
+  sustained attacks is a quieter failure, not a fix.
+- **Committing untracked files without reading them** — they may be half-written
+  or contain a bug that was never run because it was never tracked.
+- **Skipping the execution step for "simple" repos** — the parse error that
+  mattered most was in the repo with the fewest files.
+
+## Verification
+
+The audit is done when, for every repo: it parses, it runs, its live config
+matches its repo, and any finding has a commit or a stated blocker. State the
+count of repos audited, verified, and still requiring root — do not summarize
+the session back.

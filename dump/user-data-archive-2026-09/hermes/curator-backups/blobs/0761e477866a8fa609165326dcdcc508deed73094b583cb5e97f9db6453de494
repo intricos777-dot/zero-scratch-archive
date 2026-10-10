@@ -1,0 +1,94 @@
+# Validating a self-written auditor
+
+When you write a scanner to audit the fleet, the scanner is the most likely
+thing in the session to be wrong, and its output is the most likely thing to
+be believed. In one audit a hand-rolled scanner reported 4,537 findings, of
+which **4,535 were its own defects**.
+
+## The dominant root cause: a check applied to files it does not apply to
+
+- Running `ast.parse` over *every* file regardless of extension made systemd
+  units and JavaScript come back as Python syntax errors (105 bogus).
+- Parsing arbitrary shell as INI made every line a bogus "unknown directive"
+  (4,479 bogus).
+
+**Scope every check to its file type and return early otherwise.** A
+language-specific parser handed a file of another language does not report
+nothing; it reports a confident, wrong error. That is worse than silence,
+because it is indistinguishable from a real finding at a glance.
+
+```python
+def check_python(f):
+    out = []
+    if f.suffix != ".py":          # <- the guard that was missing
+        return out
+    ...
+```
+
+## Check the polarity of a detector, not just its trigger
+
+A detector testing `ast.Is` against `None` flags the *correct* `is None`
+comparison while missing real `== None` bugs. When a check is suspicious,
+confirm it fires on the bad construct and not the good one before believing
+either its hits or its misses.
+
+## Self-test the scanner before pointing it at the fleet
+
+Plant known defects in a scratch file and require the expected findings, plus
+a clean file that reports nothing:
+
+```
+BAD file findings:  py-mutable-default, py-swallowed-except, py-equality-none
+GOOD file findings: none (correct)
+```
+
+Without this you cannot distinguish a scanner that works from one that is
+confidently wrong. Cheap to write, and it is the only thing that tells you
+whether a large finding count means anything.
+
+## Prefer asking the authority over maintaining your own list
+
+Validating systemd units by comparing keys against a hand-maintained
+allowlist produced 70 false positives on perfectly valid directives
+(`StartLimitIntervalSec`, `KillSignal`, `RestartForceExitStatus`,
+`RestrictSUIDSGID`, ...). A hardcoded list is only ever a stale subset of
+what the tool accepts, so it manufactures false positives indefinitely:
+
+```bash
+systemd-analyze --user verify <unit>     # the parser is the ground truth
+```
+
+The same reasoning applies to man pages, linters, and schema validators
+generally: if a real authority exists, delegate to it.
+
+## Make exception-handler detection look at the body
+
+Flagging every `except Exception` buries the real finding. Only fire when the
+handler body actually *discards* the error — a body that logs, re-raises,
+returns a fallback, or assigns is handling it.
+
+```python
+discards = True
+for h in handles:
+    if isinstance(h, ast.Raise): discards = False
+    elif isinstance(h, ast.Call) and name in ("log", "print", "write", ...):
+        discards = False
+    elif isinstance(h, (ast.Assign, ast.Return, ast.If, ast.Try)):
+        discards = False
+```
+
+## Report the ratio, and triage the residue by hand
+
+A scanner finding thousands of "errors" in a codebase that mostly runs is
+telling you about itself. State the counts as "N findings, M reviewed and
+benign" rather than implying the number is a defect count. In one fleet the
+honest residue was 29 `set -e` style notes and 27 swallowed excepts that
+were all best-effort cursor writes or history parsing.
+
+## Also expect to be wrong about the code
+
+Some "findings" in a new test suite are the test's fault. Observed in one
+audit: a CSV fixture with four columns against a five-column parser, a
+hardcoded `192.168.1.1` gateway on a `10.128.128.128` network, and
+`--selftest` when the flag is `selftest`. Correct the test, not the working
+code — and say so, because "my test was wrong" is a finding worth reporting.

@@ -1,0 +1,115 @@
+# Linux static check battery
+
+Run from the parent directory of the repos under audit. Adjust `~/Projects` to
+wherever the fleet lives. Every command is read-only.
+
+## Syntax: does it parse at all
+
+```bash
+# bash
+find . -name '*.sh' -not -path '*/.git/*' -not -path '*/venv/*' \
+  -exec bash -n {} \; -print
+
+# python
+find . -name '*.py' -not -path '*/.git/*' -not -path '*/venv/*' \
+  -not -path '*__pycache__*' -exec python3 -m py_compile {} \; -print
+
+# systemd units
+find . -name '*.service' -not -path '*/.git/*' \
+  -exec systemd-analyze verify {} \;
+
+# node
+find . -name '*.js' -not -path '*/.git/*' -not -path '*/node_modules/*' \
+  -exec node --check {} \; -print
+```
+
+`bash -n` is the highest-yield check in the set. A duplicated keyword or an
+unclosed construct reads as plausible to a human reviewer and has never
+executed; the script is dead code that looks alive.
+
+`systemd-analyze verify` reports `Command ... is not executable: No such file
+or directory` for every unit whose `ExecStart` points at a stale path. That one
+message is a whole-repo path-drift audit in a single pass.
+
+## Stale machine-specific paths
+
+```bash
+# the previous home directory — substitute the real old username
+grep -rn '/home/<olduser>' ~/Projects --include='*' \
+  2>/dev/null | grep -v '/.git/' | grep -v '/venv/'
+
+# any absolute home path, to catch variants
+grep -rnE '/home/[a-z0-9_-]+/' ~/Projects --include='*.sh' --include='*.service' \
+  --include='*.py' --include='*.js' 2>/dev/null \
+  | grep -v '/.git/' | grep -v '/venv/'
+```
+
+Distinguish config from data: a `reports/*.json` containing an old path is a
+historical record, not a bug. A script constant is a bug.
+
+## Tracked-vs-ignored
+
+```bash
+git -C <repo> status --porcelain
+git -C <repo> ls-files | grep -c '^venv/'   # a committed venv is a finding
+ls -a <repo> | grep gitignore
+du -sh <repo>/.git                          # vs working tree
+```
+
+Untracked files mean the tool was built but never saved. Read them before
+committing: they may be the only copy of working code, and they have never
+been through a review or a test run.
+
+## Repo vs live system
+
+```bash
+# config files with a repo copy
+diff -q ~/Projects/x/theme.conf ~/.config/x/theme.conf && echo IN SYNC
+
+# live security config, comments stripped
+grep -vE '^\s*#|^\s*$' /etc/security/faillock.conf
+
+# enabled units and their timers
+systemctl --user list-unit-files | grep -vE '^UNIT|not-found'
+systemctl --user list-timers --all
+systemctl --user is-active <unit>
+```
+
+## Unit path resolution
+
+`%h` is the home of the user the unit runs **as**:
+
+- user unit (`~/.config/systemd/user/`) → the user
+- system unit (`/etc/systemd/system/`) → `/root` unless `User=` is set
+
+A system unit using `%h` without `User=` resolves to `/root/...`, which is a
+dead path for every real account. Verify the pairing exists:
+
+```bash
+grep -E '^(User=|ExecStart=)' <unit>
+```
+
+## Dependency sanity
+
+```bash
+# test deps must be declared, or the suite cannot even be collected
+cat requirements.txt
+grep -l '^import pytest\|^import pytest' tests/*.py
+<venv>/bin/python -m pytest tests/ -q
+```
+
+A suite whose test modules import a package absent from `requirements.txt`
+fails at import time and reports nothing about the code under test.
+
+## Exec, don't infer
+
+```bash
+<cli> --help
+<daemon>.sh --once            # every daemon should support single-run
+systemctl --user start <unit> && systemctl --user is-active <unit>
+curl -s -o /dev/null -w 'HTTP %{http_code}\n' http://127.0.0.1:<port>/
+```
+
+Use the invocation from the project's own README or `start.sh`. A file run
+directly puts its own directory on `sys.path`, not the repo root, so sibling
+package imports fail while the file compiles cleanly.

@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "created": "2026-07-17T06:36:01.610Z",
+  "lastModified": "2026-07-17T06:38:13.553Z",
+  "entries": {
+    "302e8abe3711f845": {
+      "id": "302e8abe3711f845",
+      "timestamp": "2026-07-17T06:36:01.611Z",
+      "content": "Test memory --tags test",
+      "tags": [
+        "test"
+      ],
+      "visibility": "public"
+    },
+    "e5032bab4b13f0e8": {
+      "id": "e5032bab4b13f0e8",
+      "timestamp": "2026-07-17T06:37:49.813Z",
+      "content": "Hidden secret --hidden",
+      "tags": [],
+      "visibility": "hidden"
+    },
+    "5d85e07a4a3ff9b1": {
+      "id": "5d85e07a4a3ff9b1",
+      "timestamp": "2026-07-17T06:38:13.552Z",
+      "content": "{\"iv\":\"45e0bb4ee49bc69c06fe9606\",\"authTag\":\"c7930f11bee397bae16ed8bda38684cb\",\"data\":\"e6577a4db672f5cf64faecedaac3bcd5d66fc1d28ee8d7268a53becf\"}",
+      "tags": [],
+      "visibility": "encrypted",
+      "signature": "77897f6d8d1bdd68"
+    },
+    "bio-aug-bone_lattice": {
+      "id": "bio-aug-bone_lattice",
+      "timestamp": "2026-08-05T19:46:27.858803",
+      "content": "{\"pattern_id\": \"bio-aug-001\", \"name\": \"Bone Lattice Augmentation\", \"biological_system\": \"osseous\", \"structure_type\": \"cellular_honeycomb\", \"material_analogs\": [\"Ti-6Al-4V ELI porous\", \"Porous CoCrMo\", \"Hafnium carbide foam\"], \"processing_route\": \"Selective laser melting with graded porosity control\", \"augmentation_effect\": \"+40% strength-to-weight, +osteointegration, +self-repair signaling\", \"strength_weight\": 9.4, \"healing_capability\": true, \"compatibility_metals\": [\"titanium\", \"cobalt-chrome\", \"hafnium\"], \"risk_factors\": [\"stress shielding\", \"creep at 600C+\", \"fatigue notch sensitivity\"]}",
+      "tags": [
+        "biological-augmentation",
+        "lia-cli",
+        "metals-alloy"
+      ],
+      "visibility": "encrypted",
+      "signature": "c25ee0b219999edf"
+    },
+    "bio-aug-nacre_laminate": {
+      "id": "bio-aug-nacre_laminate",
+      "timestamp": "2026-08-05T19:46:27.869535",
+      "content": "{\"pattern_id\": \"bio-aug-002\", \"name\": \"Nacre Brick-Mortar Laminate\", \"biological_system\": \"mollusk shell\", \"structure_type\": \"brick_mortar\", \"material_analogs\": [\"Al/SiC laminate\", \"Ti/Al3Ti MMC\", \"Woven carbon-SiC\"], \"processing_route\": \"Alternating foil deposition + diffusion bonding\", \"augmentation_effect\": \"+35% fracture toughness, -8% density, flaw-tolerant\", \"strength_weight\": 8.7, \"healing_capability\": false, \"compatibility_metals\": [\"aluminum\", \"titanium\", \"silicon_carbide\"], \"risk_factors\": [\"interfacial delamination\", \"thermal mismatch\", \"bonding pressure sensitivity\"]}",
+      "tags": [
+        "biological-augmentation",
+        "lia-cli",
+        "metals-alloy"
+      ],
+      "visibility": "encrypted",
+      "signature": "f88dff5eb5a7514e"
+    },
+    "bio-aug-spider_silk_reinforced": {
+      "id": "bio-aug-spider_silk_reinforced",
+      "timestamp": "2026-08-05T19:46:27.870639",
+      "content": "{\"pattern_id\": \"bio-aug-003\", \"name\": \"Spider Silk Fiber Reinforcement\", \"biological_system\": \"araneae\", \"structure_type\": \"protein_chain_aligned\", \"material_analogs\": [\"CNT-reinforced Al\", \"Graphene-Al laminate\", \"Nanowire Mg alloy\"], \"processing_route\": \"Extrusion with aligned nanotube/wire deposition\", \"augmentation_effect\": \"+55% tensile strength, +30% energy absorption, self-healing matrix\", \"strength_weight\": 8.1, \"healing_capability\": true, \"compatibility_metals\": [\"aluminum\", \"magnesium\", \"copper\"], \"risk_factors\": [\"CNT agglomeration\", \"interface debonding\", \"cost scaling\"]}",
+      "tags": [
+        "biological-augmentation",
+        "lia-cli",
+        "metals-alloy"
+      ],
+      "visibility": "encrypted",
+      "signature": "c349db869357faf4"
+    },
+    "bio-aug-conch_cross_laminate": {
+      "id": "bio-aug-conch_cross_laminate",
+      "timestamp": "2026-08-05T19:46:27.872798",
+      "content": "{\"pattern_id\": \"bio-aug-004\", \"name\": \"Conch Cross-Laminated Structure\", \"biological_system\": \"strombidae\", \"structure_type\": \"cross_laminated\", \"material_analogs\": [\"Ti-6Al-4V cross-ply\", \"Mg alloy roll-bonded laminate\", \"Bamboo-inspired steel\"], \"processing_route\": \"Roll bonding + 90-degree cross-lamination sequence\", \"augmentation_effect\": \"+28% damage tolerance, +crack deflection, +impact resistance\", \"strength_weight\": 8.3, \"healing_capability\": false, \"compatibility_metals\": [\"titanium\", \"magnesium\", \"steel\"], \"risk_factors\": [\"through-thickness weakness\", \"anisotropic fatigue\", \"bonding contamination\"]}",
+      "tags": [
+        "biological-augmentation",
+        "lia-cli",
+        "metals-alloy"
+      ],
+      "visibility": "encrypted",
+      "signature": "1e95f33ae5a649e1"
+    },
+    "bio-aug-cartilage_hydrogel_composite": {
+      "id": "bio-aug-cartilage_hydrogel_composite",
+      "timestamp": "2026-08-05T19:46:27.876879",
+      "content": "{\"pattern_id\": \"bio-aug-005\", \"name\": \"Cartilage Hydrogel-Metal Composite\", \"biological_system\": \"connective\", \"structure_type\": \"hydrogel_composite\", \"material_analogs\": [\"Mg-Zn-Ca + PCL matrix\", \"Zn-Cu biodegradable alloy\", \"Polymer-infiltrated Ti foam\"], \"processing_route\": \"Powder metallurgy + polymer infiltration + crosslinking\", \"augmentation_effect\": \"+shock absorption, +biodegradability, +lubricious surface\", \"strength_weight\": 6.8, \"healing_capability\": true, \"compatibility_metals\": [\"magnesium\", \"zinc\", \"iron\"], \"risk_factors\": [\"corrosion rate control\", \"hydrogel aging\", \"load-bearing limits\"]}",
+      "tags": [
+        "biological-augmentation",
+        "lia-cli",
+        "metals-alloy"
+      ],
+      "visibility": "encrypted",
+      "signature": "adb6d55920e8f7bc"
+    },
+    "bio-aug-diatom_photonic_porous": {
+      "id": "bio-aug-diatom_photonic_porous",
+      "timestamp": "2026-08-05T19:46:27.877734",
+      "content": "{\"pattern_id\": \"bio-aug-006\", \"name\": \"Diatom Photonic Porous Structure\", \"biological_system\": \"bacillariophyta\", \"structure_type\": \"photonic_porous_silica\", \"material_analogs\": [\"Porous Si-infiltrated alumina\", \"Mesoporous TiSiO4\", \"Nanoporous Au\"], \"processing_route\": \"Sintering with sacrificial polymer templates + infiltration\", \"augmentation_effect\": \"+25% thermal insulation, +optical filtering, +surface area catalysis\", \"strength_weight\": 7.5, \"healing_capability\": false, \"compatibility_metals\": [\"titanium\", \"aluminum\", \"gold\"], \"risk_factors\": [\"porosity control variance\", \"infiltration defects\", \"thermal shock\"]}",
+      "tags": [
+        "biological-augmentation",
+        "lia-cli",
+        "metals-alloy"
+      ],
+      "visibility": "encrypted",
+      "signature": "45dd3c9d0ff4e8aa"
+    },
+    "bio-aug-keratin_phase_transform": {
+      "id": "bio-aug-keratin_phase_transform",
+      "timestamp": "2026-08-05T19:46:27.879989",
+      "content": "{\"pattern_id\": \"bio-aug-007\", \"name\": \"Keratin Phase-Transform Steel\", \"biological_system\": \"epidermal\", \"structure_type\": \"alpha_helix_bundle\", \"material_analogs\": [\"Austempered ductile iron\", \"TRIP steel\", \"Nanostructured bainite\"], \"processing_route\": \"Austempering for retained austenite toughness\", \"augmentation_effect\": \"+45% impact toughness, +wear resistance, strain-hardening\", \"strength_weight\": 7.6, \"healing_capability\": false, \"compatibility_metals\": [\"steel\", \"iron\", \"high-strength alloys\"], \"risk_factors\": [\"heat treatment precision\", \"alloying element segregation\", \"quench cracking\"]}",
+      "tags": [
+        "biological-augmentation",
+        "lia-cli",
+        "metals-alloy"
+      ],
+      "visibility": "encrypted",
+      "signature": "7b5b2eda7b25ed2b"
+    },
+    "bio-aug-spongin_interpenetrating": {
+      "id": "bio-aug-spongin_interpenetrating",
+      "timestamp": "2026-08-05T19:46:27.885130",
+      "content": "{\"pattern_id\": \"bio-aug-008\", \"name\": \"Spongin Interpenetrating Network\", \"biological_system\": \"porifera\", \"structure_type\": \"interpenetrating_network\", \"material_analogs\": [\"NiTi shape memory foam\", \"Interpenetrating polymer-metal\", \"CoCrMo scaffold\"], \"processing_route\": \"Replication casting + interpenetrating phase sintering\", \"augmentation_effect\": \"+superelasticity, +multi-axial compliance, +vascular integration\", \"strength_weight\": 7.0, \"healing_capability\": true, \"compatibility_metals\": [\"nitinol\", \"titanium\", \"cobalt-chrome\"], \"risk_factors\": [\"fatigue limit reduction\", \"corrosion crevices\", \"cost\"]}",
+      "tags": [
+        "biological-augmentation",
+        "lia-cli",
+        "metals-alloy"
+      ],
+      "visibility": "encrypted",
+      "signature": "c577ec33002d1381"
+    }
+  },
+  "hiddenIndex": {
+    "e5032bab4b13f0e8": "2026-07-17T06:37:49.813Z"
+  },
+  "masterKeyHash": "52f4a336f88502e1956e8901b8ebb01ccc22ba2e90cb5bdc5ff8a2b3deae8c29"
+}

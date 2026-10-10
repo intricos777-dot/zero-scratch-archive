@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+# Print context around every occurrence of a term in a minified JS bundle or a
+# binary. Use it to trace a mangled identifier back to its definition or to the
+# conditional that gates a feature.
+#
+#   ./find-in-bundle.sh <path-or-glob> <term> [context-chars]
+#
+# Handles files, directories (searched recursively for *.js), and raw binaries
+# (strings-extracted first). Output is truncated per hit and capped overall so
+# a common term cannot flood the terminal.
+set -uo pipefail
+
+TARGET="${1:-}"
+TERM="${2:-}"
+CTX="${3:-400}"
+MAX_HITS="${MAX_HITS:-12}"
+
+if [ -z "$TARGET" ] || [ -z "$TERM" ]; then
+  echo "usage: $0 <path-or-glob> <term> [context-chars]" >&2
+  exit 2
+fi
+
+python3 - "$TARGET" "$TERM" "$CTX" "$MAX_HITS" <<'PY'
+import glob as _glob
+import os
+import re
+import sys
+
+target, term = sys.argv[1], sys.argv[2]
+ctx, max_hits = int(sys.argv[3]), int(sys.argv[4])
+
+files = []
+for part in target.split(":"):
+    if os.path.isdir(part):
+        for root, _dirs, names in os.walk(part):
+            files += [os.path.join(root, n) for n in names if n.endswith(".js")]
+    elif os.path.isfile(part):
+        files.append(part)
+    else:
+        files += _glob.glob(part)
+
+if not files:
+    sys.exit("no files matched: " + target)
+
+# Raw binaries rarely contain the term in one contiguous readable run; pull
+# printable strings out first so identifiers become searchable.
+BINARY_SUFFIXES = (".so", ".bin", ".a", ".o")
+
+
+def load(path):
+    try:
+        raw = open(path, "rb").read()
+    except OSError:
+        return None
+    if not (b"\0" in raw[:4096] and path.endswith(BINARY_SUFFIXES)):
+        return raw.decode("utf-8", "replace")
+    out, cur = [], bytearray()
+    for b in raw:
+        if 32 <= b < 127:
+            cur.append(b)
+        else:
+            if len(cur) >= 6:
+                out.append(cur.decode("ascii"))
+            cur = bytearray()
+    if len(cur) >= 6:
+        out.append(cur.decode("ascii"))
+    return "\n".join(out)
+
+
+hits = 0
+seen = set()
+for path in sorted(set(files)):
+    text = load(path)
+    if text is None or term not in text:
+        continue
+    for m in re.finditer(re.escape(term), text):
+        if hits >= max_hits:
+            print("\n[stopped at %d hits; raise MAX_HITS for more]" % max_hits)
+            sys.exit(0)
+        window = text[max(0, m.start() - ctx):m.start() + ctx]
+        if window in seen:
+            continue
+        seen.add(window)
+        print("### %s @%d" % (os.path.basename(path), m.start()))
+        print(repr(window))
+        print()
+        hits += 1
+
+if hits == 0:
+    print("\n[no match for %r in %d file(s)]" % (term, len(set(files))))
+else:
+    print("[%d hit(s)]" % hits)
+PY

@@ -1,0 +1,8 @@
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+
+fish: Unknown command: '[multilib]'
+fish: Unknown command: Include
+fish:
+Include = /etc/pacman.d/mirrorlist
+^~~~

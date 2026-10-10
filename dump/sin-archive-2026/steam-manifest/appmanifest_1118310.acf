@@ -1,0 +1,172 @@
+"AppState"
+{
+	"appid"		"1118310"
+	"Universe"		"1"
+	"name"		"RetroArch"
+	"StateFlags"		"4"
+	"installdir"		"RetroArch"
+	"LastUpdated"		"1788050595"
+	"LastPlayed"		"1789775045"
+	"SizeOnDisk"		"709830542"
+	"StagingSize"		"0"
+	"buildid"		"20833747"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"580632416"
+	"BytesDownloaded"		"580632416"
+	"BytesToStage"		"1513800638"
+	"BytesStaged"		"1513800638"
+	"TargetBuildID"		"20833747"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"1118314"
+		{
+			"manifest"		"4017220407193194640"
+			"size"		"425566061"
+		}
+		"1829871"
+		{
+			"manifest"		"6361711558870444866"
+			"size"		"21352515"
+			"dlcappid"		"1829870"
+		}
+		"1843611"
+		{
+			"manifest"		"5413925855937713400"
+			"size"		"13441220"
+			"dlcappid"		"1843610"
+		}
+		"1843661"
+		{
+			"manifest"		"499588821807412135"
+			"size"		"1152211"
+			"dlcappid"		"1843660"
+		}
+		"1844871"
+		{
+			"manifest"		"974030909045788479"
+			"size"		"207898"
+			"dlcappid"		"1844870"
+		}
+		"1844931"
+		{
+			"manifest"		"1594429407087125265"
+			"size"		"60371"
+			"dlcappid"		"1844930"
+		}
+		"1876451"
+		{
+			"manifest"		"3569166490829091600"
+			"size"		"163873"
+			"dlcappid"		"1876450"
+		}
+		"1905201"
+		{
+			"manifest"		"6014578323339745947"
+			"size"		"7382892"
+			"dlcappid"		"1905200"
+		}
+		"1985101"
+		{
+			"manifest"		"8724569245047263752"
+			"size"		"4163673"
+			"dlcappid"		"1985100"
+		}
+		"2004071"
+		{
+			"manifest"		"2687667990223580947"
+			"size"		"4642207"
+			"dlcappid"		"2004070"
+		}
+		"2004141"
+		{
+			"manifest"		"191820576607132546"
+			"size"		"2334614"
+			"dlcappid"		"2004140"
+		}
+		"2008301"
+		{
+			"manifest"		"7803954591388574593"
+			"size"		"244327"
+			"dlcappid"		"2008300"
+		}
+		"2010122"
+		{
+			"manifest"		"8626628294391504479"
+			"size"		"137749"
+			"dlcappid"		"2010120"
+		}
+		"2062461"
+		{
+			"manifest"		"6697955607018971050"
+			"size"		"893882"
+			"dlcappid"		"2062460"
+		}
+		"2066881"
+		{
+			"manifest"		"7851772004683349201"
+			"size"		"294155"
+			"dlcappid"		"2066880"
+		}
+		"2234341"
+		{
+			"manifest"		"7273496741462516128"
+			"size"		"3719652"
+			"dlcappid"		"2234340"
+		}
+		"2246911"
+		{
+			"manifest"		"8514002850183438603"
+			"size"		"221117"
+			"dlcappid"		"2246910"
+		}
+		"2301081"
+		{
+			"manifest"		"4376515346503733823"
+			"size"		"679981"
+			"dlcappid"		"2301080"
+		}
+		"2345801"
+		{
+			"manifest"		"6862684040900099336"
+			"size"		"205508433"
+			"dlcappid"		"2345800"
+		}
+		"2388331"
+		{
+			"manifest"		"2469952439104296100"
+			"size"		"11063274"
+			"dlcappid"		"2388330"
+		}
+		"2857801"
+		{
+			"manifest"		"862028975719462943"
+			"size"		"739043"
+			"dlcappid"		"2857800"
+		}
+		"2862101"
+		{
+			"manifest"		"638737485863296359"
+			"size"		"2857297"
+			"dlcappid"		"2862100"
+		}
+		"3005611"
+		{
+			"manifest"		"5197030849449921878"
+			"size"		"3004097"
+			"dlcappid"		"3005610"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

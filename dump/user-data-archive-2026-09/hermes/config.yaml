@@ -1,0 +1,22 @@
+model:
+  provider: nous
+  base_url: https://inference-api.nousresearch.com/v1
+  default: stealth/space-bunny-alpha
+_config_version: 46
+web:
+  backend: nous
+browser:
+  cloud_provider: nous
+stt:
+  provider: nous
+image_gen:
+  provider: nous
+agent:
+  max_turns: 150
+display:
+  tool_progress: all
+  skin: blood
+onboarding:
+  seen:
+    busy_input_prompt: true
+    tool_progress_prompt: true

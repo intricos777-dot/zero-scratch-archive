@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"892970"
+	"Universe"		"1"
+	"name"		"Valheim"
+	"StateFlags"		"4"
+	"installdir"		"Valheim"
+	"LastUpdated"		"1789769899"
+	"LastPlayed"		"1789673637"
+	"SizeOnDisk"		"4221716687"
+	"StagingSize"		"0"
+	"buildid"		"25390630"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"3"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"37511328"
+	"BytesDownloaded"		"37511328"
+	"BytesToStage"		"47364439"
+	"BytesStaged"		"47364439"
+	"TargetBuildID"		"0"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"892971"
+		{
+			"manifest"		"4125496845945961733"
+			"size"		"4221716687"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

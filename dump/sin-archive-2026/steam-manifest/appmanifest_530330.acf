@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"530330"
+	"Universe"		"1"
+	"name"		"Blameless"
+	"StateFlags"		"4"
+	"installdir"		"Blameless"
+	"LastUpdated"		"1789773196"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"1197398001"
+	"StagingSize"		"0"
+	"buildid"		"2190428"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"549909472"
+	"BytesDownloaded"		"549909472"
+	"BytesToStage"		"1197398001"
+	"BytesStaged"		"1197398001"
+	"TargetBuildID"		"2190428"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"530331"
+		{
+			"manifest"		"4790347359400399471"
+			"size"		"1197398001"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

@@ -1,0 +1,117 @@
+2026-09-26 12:11:32,113 INFO gateway.control_socket: Gateway control socket listening at /home/livings/.hermes/gateway.sock
+2026-09-26 12:11:32,362 INFO gateway.run: Starting Hermes Gateway...
+2026-09-26 12:11:32,363 INFO gateway.run: Session storage: /home/livings/.hermes/sessions
+2026-09-26 12:11:32,371 INFO gateway.run: Agent budget: max_iterations=150 (agent.max_turns from config.yaml, else the HERMES_MAX_ITERATIONS bridge)
+2026-09-26 12:11:32,371 INFO gateway.run: Secret redaction: ENABLED (tool output, logs, and chat responses are scrubbed before delivery)
+2026-09-26 12:11:32,399 WARNING gateway.run: No messaging platforms enabled.
+2026-09-26 12:11:32,399 INFO gateway.run: Gateway will continue running for cron job execution.
+2026-09-26 12:11:33,762 INFO gateway.run: Channel directory built: 0 target(s)
+2026-09-26 12:11:37,149 INFO gateway.run: Model context warmed: stealth/space-bunny-alpha -> 1000000 tokens (detected)
+2026-09-26 12:11:37,149 INFO gateway.run: Turn machinery warmed in 4.7s (24 tool schema(s) materialized)
+2026-09-26 12:11:37,151 INFO gateway.run: Press Ctrl+C to stop
+2026-09-26 12:11:37,155 INFO gateway.run: kanban dispatcher: holding singleton dispatcher lock (/home/livings/.hermes/kanban/.dispatcher.lock)
+2026-09-26 12:11:37,156 INFO gateway.run: kanban dispatcher: kanban.max_in_progress unset; using memory-derived default max_in_progress=8 (set kanban.max_in_progress in config.yaml to override)
+2026-09-26 12:11:37,165 INFO gateway.run: Cron scheduler will tick 1 profile(s): ['default']
+2026-09-26 12:11:37,170 INFO gateway.run: Gateway housekeeping started (interval=60s)
+2026-09-26 12:11:42,158 INFO gateway.run: kanban dispatcher: embedded in gateway (interval=60.0s)
+2026-09-26 15:41:22,914 INFO gateway.run: Received SIGTERM as a planned gateway stop — exiting cleanly
+2026-09-26 15:41:22,914 WARNING gateway.run: Shutdown context: signal=SIGTERM under_systemd=yes parent_pid=1185 parent_name=systemd loadavg_1m=0.54
+2026-09-26 15:41:22,915 INFO gateway.run: Stopping gateway...
+2026-09-26 15:41:22,916 INFO gateway.run: Shutdown phase: notify_active_sessions done at +0.00s
+2026-09-26 15:41:22,916 INFO gateway.run: Shutdown phase: drain done at +0.00s (drain took 0.00s, timed_out=False, active_at_start=0, active_now=0, cron_at_start=0, cron_now=0, api_at_start=0, api_now=0, deferred_at_start=0, deferred_now=0)
+2026-09-26 15:41:22,916 INFO gateway.run: Shutdown phase: all adapters disconnected at +0.00s
+2026-09-26 15:41:22,918 INFO gateway.run: Gateway housekeeping stopped
+2026-09-26 15:41:22,918 INFO gateway.run: Shutdown phase: final-cleanup tool kill done at +0.00s
+2026-09-26 15:41:22,919 INFO gateway.run: Shutdown phase: executor quiesced at +0.00s
+2026-09-26 15:41:22,940 INFO gateway.run: Shutdown phase: SessionDB close done at +0.02s
+2026-09-26 15:41:22,942 INFO gateway.run: Gateway stopped (total teardown 0.03s)
+2026-09-26 15:42:19,478 INFO gateway.control_socket: Gateway control socket listening at /home/livings/.hermes/gateway.sock
+2026-09-26 15:42:19,662 INFO gateway.run: Starting Hermes Gateway...
+2026-09-26 15:42:19,663 INFO gateway.run: Session storage: /home/livings/.hermes/sessions
+2026-09-26 15:42:19,670 INFO gateway.run: Agent budget: max_iterations=150 (agent.max_turns from config.yaml, else the HERMES_MAX_ITERATIONS bridge)
+2026-09-26 15:42:19,670 INFO gateway.run: Secret redaction: ENABLED (tool output, logs, and chat responses are scrubbed before delivery)
+2026-09-26 15:42:19,686 INFO gateway.run: Previous gateway exited cleanly — skipping session suspension
+2026-09-26 15:42:19,691 WARNING gateway.run: No messaging platforms enabled.
+2026-09-26 15:42:19,691 INFO gateway.run: Gateway will continue running for cron job execution.
+2026-09-26 15:42:20,540 INFO gateway.run: Channel directory built: 0 target(s)
+2026-09-26 15:42:22,325 INFO gateway.run: Model context warmed: stealth/space-bunny-alpha -> 1000000 tokens (detected)
+2026-09-26 15:42:22,326 INFO gateway.run: Turn machinery warmed in 2.6s (24 tool schema(s) materialized)
+2026-09-26 15:42:22,329 INFO gateway.run: Press Ctrl+C to stop
+2026-09-26 15:42:22,335 INFO gateway.run: kanban dispatcher: holding singleton dispatcher lock (/home/livings/.hermes/kanban/.dispatcher.lock)
+2026-09-26 15:42:22,336 INFO gateway.run: kanban dispatcher: kanban.max_in_progress unset; using memory-derived default max_in_progress=8 (set kanban.max_in_progress in config.yaml to override)
+2026-09-26 15:42:22,347 INFO gateway.run: Cron scheduler will tick 1 profile(s): ['default']
+2026-09-26 15:42:22,353 INFO gateway.run: Gateway housekeeping started (interval=60s)
+2026-09-26 15:42:27,337 INFO gateway.run: kanban dispatcher: embedded in gateway (interval=60.0s)
+2026-09-26 17:18:10,970 INFO gateway.run: Received SIGTERM as a planned gateway stop — exiting cleanly
+2026-09-26 17:18:10,970 WARNING gateway.run: Shutdown context: signal=SIGTERM under_systemd=yes parent_pid=1040 parent_name=systemd loadavg_1m=0.22
+2026-09-26 17:18:10,972 INFO gateway.run: Stopping gateway...
+2026-09-26 17:18:10,972 INFO gateway.run: Shutdown phase: notify_active_sessions done at +0.00s
+2026-09-26 17:18:10,973 INFO gateway.run: Shutdown phase: drain done at +0.00s (drain took 0.00s, timed_out=False, active_at_start=0, active_now=0, cron_at_start=0, cron_now=0, api_at_start=0, api_now=0, deferred_at_start=0, deferred_now=0)
+2026-09-26 17:18:10,973 INFO gateway.run: Shutdown phase: all adapters disconnected at +0.00s
+2026-09-26 17:18:10,974 INFO gateway.run: Gateway housekeeping stopped
+2026-09-26 17:18:10,975 INFO gateway.run: Shutdown phase: final-cleanup tool kill done at +0.00s
+2026-09-26 17:18:10,975 INFO gateway.run: Shutdown phase: executor quiesced at +0.00s
+2026-09-26 17:18:10,998 INFO gateway.run: Shutdown phase: SessionDB close done at +0.03s
+2026-09-26 17:18:11,003 INFO gateway.run: Gateway stopped (total teardown 0.03s)
+2026-09-27 16:30:45,574 INFO gateway.control_socket: Gateway control socket listening at /home/livings/.hermes/gateway.sock
+2026-09-27 16:30:45,856 INFO gateway.run: Starting Hermes Gateway...
+2026-09-27 16:30:45,858 INFO gateway.run: Session storage: /home/livings/.hermes/sessions
+2026-09-27 16:30:45,869 INFO gateway.run: Agent budget: max_iterations=150 (agent.max_turns from config.yaml, else the HERMES_MAX_ITERATIONS bridge)
+2026-09-27 16:30:45,870 INFO gateway.run: Secret redaction: ENABLED (tool output, logs, and chat responses are scrubbed before delivery)
+2026-09-27 16:30:45,910 INFO gateway.run: Previous gateway exited cleanly — skipping session suspension
+2026-09-27 16:30:45,920 WARNING gateway.run: No messaging platforms enabled.
+2026-09-27 16:30:45,921 INFO gateway.run: Gateway will continue running for cron job execution.
+2026-09-27 16:30:47,063 INFO gateway.run: Channel directory built: 0 target(s)
+2026-09-27 16:30:54,900 INFO gateway.run: Model context warmed: stealth/space-bunny-alpha -> 256000 tokens (default)
+2026-09-27 16:30:54,901 INFO gateway.run: Turn machinery warmed in 8.9s (23 tool schema(s) materialized)
+2026-09-27 16:30:54,903 INFO gateway.run: Press Ctrl+C to stop
+2026-09-27 16:30:54,907 INFO gateway.run: kanban dispatcher: holding singleton dispatcher lock (/home/livings/.hermes/kanban/.dispatcher.lock)
+2026-09-27 16:30:54,907 INFO gateway.run: kanban dispatcher: kanban.max_in_progress unset; using memory-derived default max_in_progress=8 (set kanban.max_in_progress in config.yaml to override)
+2026-09-27 16:30:54,917 INFO gateway.run: Cron scheduler will tick 1 profile(s): ['default']
+2026-09-27 16:30:54,923 INFO gateway.run: Gateway housekeeping started (interval=60s)
+2026-09-27 16:30:59,910 INFO gateway.run: kanban dispatcher: embedded in gateway (interval=60.0s)
+2026-09-28 12:32:10,323 INFO gateway.control_socket: Gateway control socket listening at /home/livings/.hermes/gateway.sock
+2026-09-28 12:32:10,556 WARNING gateway.lifecycle_ledger: Previous gateway life (pid=1078, started_at=2026-09-27T23:30:45.582176+00:00) exited UNCLEANLY (no exit path ran — SIGKILL / OOM / VM death, or a process kill issued by the agent or one of its descendants, e.g. a pkill/taskkill of the host interpreter image; see #113667). last_heartbeat_at=2026-09-28T00:04:17.634801+00:00 last_mem={'rss_kib': 219236, 'mem_total_kib': 7732100, 'mem_available_kib': 2894604, 'swap_used_kib': 605836} suspected_oom=False
+2026-09-28 12:32:10,738 INFO gateway.run: Starting Hermes Gateway...
+2026-09-28 12:32:10,738 INFO gateway.run: Session storage: /home/livings/.hermes/sessions
+2026-09-28 12:32:10,746 INFO gateway.run: Agent budget: max_iterations=150 (agent.max_turns from config.yaml, else the HERMES_MAX_ITERATIONS bridge)
+2026-09-28 12:32:10,746 INFO gateway.run: Secret redaction: ENABLED (tool output, logs, and chat responses are scrubbed before delivery)
+2026-09-28 12:32:10,776 WARNING gateway.run: No messaging platforms enabled.
+2026-09-28 12:32:10,776 INFO gateway.run: Gateway will continue running for cron job execution.
+2026-09-28 12:32:11,777 INFO gateway.run: Channel directory built: 0 target(s)
+2026-09-28 12:32:21,181 INFO gateway.run: Model context warmed: stealth/space-bunny-alpha -> 256000 tokens (default)
+2026-09-28 12:32:21,182 INFO gateway.run: Turn machinery warmed in 10.4s (23 tool schema(s) materialized)
+2026-09-28 12:32:21,189 INFO gateway.run: Press Ctrl+C to stop
+2026-09-28 12:32:21,198 INFO gateway.run: kanban dispatcher: holding singleton dispatcher lock (/home/livings/.hermes/kanban/.dispatcher.lock)
+2026-09-28 12:32:21,200 INFO gateway.run: kanban dispatcher: kanban.max_in_progress unset; using memory-derived default max_in_progress=8 (set kanban.max_in_progress in config.yaml to override)
+2026-09-28 12:32:21,218 INFO gateway.run: Cron scheduler will tick 1 profile(s): ['default']
+2026-09-28 12:32:21,231 INFO gateway.run: Gateway housekeeping started (interval=60s)
+2026-09-28 12:32:26,201 INFO gateway.run: kanban dispatcher: embedded in gateway (interval=60.0s)
+2026-09-28 12:34:38,572 INFO gateway.run: Received SIGTERM as a planned gateway stop — exiting cleanly
+2026-09-28 12:34:38,572 WARNING gateway.run: Shutdown context: signal=SIGTERM under_systemd=yes parent_pid=1020 parent_name=systemd loadavg_1m=5.01
+2026-09-28 12:34:38,577 INFO gateway.run: Stopping gateway...
+2026-09-28 12:34:38,579 INFO gateway.run: Shutdown phase: notify_active_sessions done at +0.00s
+2026-09-28 12:34:38,581 INFO gateway.run: Shutdown phase: drain done at +0.00s (drain took 0.00s, timed_out=False, active_at_start=0, active_now=0, cron_at_start=0, cron_now=0, api_at_start=0, api_now=0, deferred_at_start=0, deferred_now=0)
+2026-09-28 12:34:38,582 INFO gateway.run: Shutdown phase: all adapters disconnected at +0.00s
+2026-09-28 12:34:38,587 INFO gateway.run: Gateway housekeeping stopped
+2026-09-28 12:34:38,589 INFO gateway.run: Shutdown phase: final-cleanup tool kill done at +0.01s
+2026-09-28 12:34:38,590 INFO gateway.run: Shutdown phase: executor quiesced at +0.01s
+2026-09-28 12:34:38,630 INFO gateway.run: Shutdown phase: SessionDB close done at +0.05s
+2026-09-28 12:34:38,635 INFO gateway.run: Gateway stopped (total teardown 0.06s)
+2026-09-28 12:41:31,450 INFO gateway.control_socket: Gateway control socket listening at /home/livings/.hermes/gateway.sock
+2026-09-28 12:41:31,664 INFO gateway.run: Starting Hermes Gateway...
+2026-09-28 12:41:31,665 INFO gateway.run: Session storage: /home/livings/.hermes/sessions
+2026-09-28 12:41:31,672 INFO gateway.run: Agent budget: max_iterations=150 (agent.max_turns from config.yaml, else the HERMES_MAX_ITERATIONS bridge)
+2026-09-28 12:41:31,672 INFO gateway.run: Secret redaction: ENABLED (tool output, logs, and chat responses are scrubbed before delivery)
+2026-09-28 12:41:31,698 INFO gateway.run: Previous gateway exited cleanly — skipping session suspension
+2026-09-28 12:41:31,704 WARNING gateway.run: No messaging platforms enabled.
+2026-09-28 12:41:31,704 INFO gateway.run: Gateway will continue running for cron job execution.
+2026-09-28 12:41:32,923 INFO gateway.run: Channel directory built: 0 target(s)
+2026-09-28 12:41:38,426 INFO gateway.run: Model context warmed: stealth/space-bunny-alpha -> 1000000 tokens (detected)
+2026-09-28 12:41:38,427 INFO gateway.run: Turn machinery warmed in 6.7s (24 tool schema(s) materialized)
+2026-09-28 12:41:38,433 INFO gateway.run: Press Ctrl+C to stop
+2026-09-28 12:41:38,448 INFO gateway.run: kanban dispatcher: holding singleton dispatcher lock (/home/livings/.hermes/kanban/.dispatcher.lock)
+2026-09-28 12:41:38,449 INFO gateway.run: kanban dispatcher: kanban.max_in_progress unset; using memory-derived default max_in_progress=8 (set kanban.max_in_progress in config.yaml to override)
+2026-09-28 12:41:38,481 INFO gateway.run: Cron scheduler will tick 1 profile(s): ['default']
+2026-09-28 12:41:38,503 INFO gateway.run: Gateway housekeeping started (interval=60s)
+2026-09-28 12:41:43,450 INFO gateway.run: kanban dispatcher: embedded in gateway (interval=60.0s)

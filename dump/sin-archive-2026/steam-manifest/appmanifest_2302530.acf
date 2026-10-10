@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"2302530"
+	"Universe"		"1"
+	"name"		"MementoMori: AFKRPG"
+	"StateFlags"		"4"
+	"installdir"		"MementoMori"
+	"LastUpdated"		"1789775950"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"1441190712"
+	"StagingSize"		"0"
+	"buildid"		"25342984"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"1162205984"
+	"BytesDownloaded"		"1162205984"
+	"BytesToStage"		"1441190712"
+	"BytesStaged"		"1441190712"
+	"TargetBuildID"		"25342984"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2302531"
+		{
+			"manifest"		"3028390939568263157"
+			"size"		"1441190712"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

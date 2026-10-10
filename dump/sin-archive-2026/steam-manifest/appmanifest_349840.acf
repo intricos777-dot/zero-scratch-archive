@@ -1,0 +1,45 @@
+"AppState"
+{
+	"appid"		"349840"
+	"Universe"		"1"
+	"name"		"Ancestory"
+	"StateFlags"		"4"
+	"installdir"		"Ancestory"
+	"LastUpdated"		"1789773103"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"2673904107"
+	"StagingSize"		"0"
+	"buildid"		"901178"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"905558672"
+	"BytesDownloaded"		"905558672"
+	"BytesToStage"		"2673904107"
+	"BytesStaged"		"2673904107"
+	"TargetBuildID"		"901178"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"349841"
+		{
+			"manifest"		"6114863189505493170"
+			"size"		"2673904107"
+		}
+	}
+	"SharedDepots"
+	{
+		"228985"		"228980"
+		"228990"		"228980"
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

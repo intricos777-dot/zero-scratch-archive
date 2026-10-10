@@ -1,0 +1,15 @@
+{
+  "id": "proc_426c500e59e0",
+  "command": "cd /home/livings/Projects/bch-faucet && node scripts/live.mjs",
+  "cwd": "/home/livings/Projects/linux-zen-build",
+  "task_id": "default",
+  "owner_task_id": "sa-1-05859bcc",
+  "session_key": "20260926_163923_28b2e8",
+  "parent_session_id": "20260926_165318_cc6da1",
+  "started_at": 1790467647.5154812,
+  "exit_code": -15,
+  "completion_reason": "killed",
+  "termination_source": "process.kill",
+  "notify_on_complete": false,
+  "output": "READY  claim address: bitcoincash:qtf4herv74lqdrchnqs2jvd6gt948hryav3086ez4\n"
+}

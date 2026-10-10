@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"2742840"
+	"Universe"		"1"
+	"name"		"Saturn"
+	"StateFlags"		"4"
+	"installdir"		"Saturn"
+	"LastUpdated"		"1789776055"
+	"LastPlayed"		"1790201534"
+	"SizeOnDisk"		"2008510680"
+	"StagingSize"		"0"
+	"buildid"		"18248607"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"3"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"24412880"
+	"BytesDownloaded"		"24412880"
+	"BytesToStage"		"24534089"
+	"BytesStaged"		"24534089"
+	"TargetBuildID"		"0"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2742841"
+		{
+			"manifest"		"2047998805321114856"
+			"size"		"2008510680"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

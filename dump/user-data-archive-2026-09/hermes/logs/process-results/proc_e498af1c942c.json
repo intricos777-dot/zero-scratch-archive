@@ -1,0 +1,15 @@
+{
+  "id": "proc_e498af1c942c",
+  "command": "cd ~/Projects/_inventory && python3 clone_all.py 2>&1 | tail -40",
+  "cwd": "/home/livings/Projects",
+  "task_id": "default",
+  "owner_task_id": "20260926_121135_408774",
+  "session_key": "20260926_121135_408774",
+  "parent_session_id": "20260926_130813_326367",
+  "started_at": 1790453458.456555,
+  "exit_code": 0,
+  "completion_reason": "exited",
+  "termination_source": "",
+  "notify_on_complete": true,
+  "output": "  ...20/120\n  ...40/120\n  ...60/120\n  ...80/120\n  ...100/120\n  ...120/120\n\nDONE: 120/120 present, 0 problems\n"
+}

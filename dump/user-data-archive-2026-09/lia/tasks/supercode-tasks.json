@@ -1,0 +1,44 @@
+{
+  "allocated_to": "supercode",
+  "generated_by": "lia-cli",
+  "synced_from": "/home/sin/Projects/lia-cli/tasks/active-plan.json",
+  "generated_at": "2026-08-15T08:00:00Z",
+  "projects": [
+    {
+      "name": "void-supercode-local",
+      "repo": "/home/sin/.hermes/scripts/supercode",
+      "repo_hint": "wrapper delegates to /usr/bin/supercode via lin-antimalware policy bridge (tools.bridge 'supercode'/'integrity.read'). Config at /home/sin/.config/supercode/{cli-config.json,settings.json}. User said: 'use our version of supercode we created, implement changes needed to get it running correctly when i use supercode init'.",
+      "status": "completed",
+      "priority": 3,
+      "tasks": [
+        {"id":"vs-1","title":"Make the local (Void) supercode wrapper run our version so 'supercode init' works","status":"completed"},
+        {"id":"vs-2","title":"Fix lin-antimalware policy bridge authorization for supercode integrity.read","status":"completed"},
+        {"id":"vs-3","title":"Verify supercode init starts an interactive session end to end","status":"completed"}
+      ]
+    },
+    {
+      "name": "twilight-elysium",
+      "repo": "/home/sin/Projects/twilight-elysium",
+      "repo_hint": "engines/twilight-elysium lives UNTRACKED inside /home/sin/Projects/gaming-unified (github.com/intricos777-dot/gaming-unified). Standalone copy already exists at /home/sin/Projects/twilight-elysium. User: 'remove that from the gaming repo i have up and post it as its own private repository'.",
+      "status": "completed",
+      "priority": 2,
+      "tasks": [
+        {"id":"te-1","title":"Remove engines/twilight-elysium from gaming-unified (untracked; delete subtree, keep copy)","status":"completed"},
+        {"id":"te-2","title":"Publish /home/sin/Projects/twilight-elysium as its own PRIVATE GitHub repository","status":"completed"}
+      ]
+    },
+    {
+      "name": "spacecraft-blueprint-simulator",
+      "repo": "/home/sin/Projects/spacecraft-blueprint-simulator",
+      "repo_hint": "remote github.com/intricos777-dot/spacecraft-blueprint-simulator. Hermes background cron (2026-08-09 20:00) failed reading blueprints/best (dir missing) and was denied non-whitelisted tools — hand this stack to interactive supercode sessions.",
+      "status": "completed",
+      "priority": 1,
+      "tasks": [
+        {"id":"sbs-1","title":"Ingest real reference data instead of hardcoded lists","status":"completed"},
+        {"id":"sbs-2","title":"Add convergence detection so GA stops early","status":"completed"},
+        {"id":"sbs-3","title":"Generate Markdown design reports for best blueprints (blueprints/best)","status":"completed"},
+        {"id":"sbs-4","title":"Push best blueprints and reports to GitHub automatically","status":"completed"}
+      ]
+    }
+  ]
+}

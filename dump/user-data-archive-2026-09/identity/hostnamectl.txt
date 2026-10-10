@@ -1,0 +1,15 @@
+  Static hostname: zero
+        Icon name: computer-laptop
+          Chassis: laptop 💻
+Chassis Asset Tag:  No  Asset  Tag
+       Machine ID: 62bccda5420e4ef182cbfc4da3c9de06
+          Boot ID: b042f500b47f4ef6aed622e14e486347
+ Operating System: Garuda Linux
+           Kernel: Linux 7.2.7-zen1-1-zen
+     Architecture: x86-64
+  Hardware Vendor: ASUSTeK COMPUTER INC.
+   Hardware Model: ASUS TUF Dash F15 FX517ZC_FX517ZC
+ Hardware Version: 1.0
+ Firmware Version: FX517ZC.317
+    Firmware Date: Wed 2023-05-03
+     Firmware Age: 3y 4month 3w 6d

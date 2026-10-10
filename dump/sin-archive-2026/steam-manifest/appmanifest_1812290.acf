@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"1812290"
+	"Universe"		"1"
+	"name"		"The Elder Scrolls: Arena"
+	"StateFlags"		"4"
+	"installdir"		"The Elder Scrolls Arena"
+	"LastUpdated"		"1789772940"
+	"LastPlayed"		"1789781311"
+	"SizeOnDisk"		"110559769"
+	"StagingSize"		"0"
+	"buildid"		"8808298"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"3"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"102608"
+	"BytesDownloaded"		"102608"
+	"BytesToStage"		"125450"
+	"BytesStaged"		"125450"
+	"TargetBuildID"		"0"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"1812291"
+		{
+			"manifest"		"160812859324874607"
+			"size"		"110559769"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

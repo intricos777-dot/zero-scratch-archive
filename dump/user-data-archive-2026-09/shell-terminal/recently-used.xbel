@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0" xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks" xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info">
+  
+  
+  <bookmark href="https://github.com/settings/personal-access-tokens/new" added="2026-09-26T18:05:15.534000Z" modified="2026-09-26T18:35:41.286000Z" visited="2026-09-26T18:35:41.286000Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/octet-stream"/>
+        <bookmark:applications>
+          <bookmark:application name="org.garudalinux.firedragon" exec="firedragon %u" modified="2026-09-26T18:35:41.286000Z" count="3"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="https://github.com/settings/keys/new" added="2026-09-26T18:08:23.525000Z" modified="2026-09-26T18:08:23.525000Z" visited="2026-09-26T18:08:23.525000Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/octet-stream"/>
+        <bookmark:applications>
+          <bookmark:application name="org.garudalinux.firedragon" exec="firedragon %u" modified="2026-09-26T18:08:23.525000Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/livings/Desktop/token.txt" added="2026-09-26T18:38:29.450000Z" modified="2026-09-26T18:38:29.450000Z" visited="2026-09-26T18:38:29.450000Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="org.kde.kate" exec="kate -b %u" modified="2026-09-26T18:38:29.450000Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="https://portal.nousresearch.com/manage-subscription?user_code=5QAM-TETQ" added="2026-09-26T19:10:20.848000Z" modified="2026-09-26T19:10:20.848000Z" visited="2026-09-26T19:10:20.848000Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="application/octet-stream"/>
+        <bookmark:applications>
+          <bookmark:application name="org.garudalinux.firedragon" exec="firedragon %u" modified="2026-09-26T19:10:20.848000Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/livings/Desktop/POST-REBOOT-CHECKLIST.txt" added="2026-09-26T22:42:34.142000Z" modified="2026-09-26T22:42:34.142000Z" visited="2026-09-26T22:42:34.142000Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:applications>
+          <bookmark:application name="org.kde.kate" exec="kate -b %u" modified="2026-09-26T22:42:34.142000Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/livings/Pictures/Screenshots/Screenshot_20260927_164202.png" added="2026-09-27T23:42:07.641000Z" modified="2026-09-27T23:42:07.641000Z" visited="2026-09-27T23:42:07.641000Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="org.kde.spectacle" exec="/usr/bin/spectacle %f" modified="2026-09-27T23:42:07.641000Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/livings/Pictures/Screenshots/Screenshot_20260927_164309.png" added="2026-09-27T23:43:16.640000Z" modified="2026-09-27T23:43:16.640000Z" visited="2026-09-27T23:43:16.640000Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="org.kde.spectacle" exec="/usr/bin/spectacle %f" modified="2026-09-27T23:43:16.640000Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/livings/Pictures/Screenshots/Screenshot_20260927_164309-1.png" added="2026-09-27T23:43:17.863000Z" modified="2026-09-27T23:43:17.863000Z" visited="2026-09-27T23:43:17.863000Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="image/png"/>
+        <bookmark:groups>
+          <bookmark:group>Graphics</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="org.kde.spectacle" exec="/usr/bin/spectacle %f" modified="2026-09-27T23:43:17.863000Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

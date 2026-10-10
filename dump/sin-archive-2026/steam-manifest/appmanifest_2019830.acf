@@ -1,0 +1,45 @@
+"AppState"
+{
+	"appid"		"2019830"
+	"Universe"		"1"
+	"name"		"The Backroom - Lost and Found"
+	"StateFlags"		"4"
+	"installdir"		"The Backroom - Lost and Found"
+	"LastUpdated"		"1789773183"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"931959745"
+	"StagingSize"		"0"
+	"buildid"		"11614857"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"803759200"
+	"BytesDownloaded"		"803759200"
+	"BytesToStage"		"931959745"
+	"BytesStaged"		"931959745"
+	"TargetBuildID"		"11614857"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2019831"
+		{
+			"manifest"		"3158729073678628881"
+			"size"		"931959745"
+		}
+	}
+	"SharedDepots"
+	{
+		"228989"		"228980"
+		"228990"		"228980"
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

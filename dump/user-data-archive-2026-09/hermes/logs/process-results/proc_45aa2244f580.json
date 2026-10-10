@@ -1,0 +1,15 @@
+{
+  "id": "proc_45aa2244f580",
+  "command": "chmod +x ~/Projects/_inventory/wait-opencode.sh && bash ~/Projects/_inventory/wait-opencode.sh 150 2400",
+  "cwd": "/home/livings/Projects/zen-hardening",
+  "task_id": "default",
+  "owner_task_id": "20260926_121135_408774",
+  "session_key": "20260926_121135_408774",
+  "parent_session_id": "20260926_121135_408774",
+  "started_at": 1790455564.8168132,
+  "exit_code": 0,
+  "completion_reason": "exited",
+  "termination_source": "",
+  "notify_on_complete": true,
+  "output": "IDLE: opencode quiet for 150s (waited 1231s)\n"
+}

@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"2796550"
+	"Universe"		"1"
+	"name"		"Rental"
+	"StateFlags"		"4"
+	"installdir"		"Rental"
+	"LastUpdated"		"1789776008"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"239628450"
+	"StagingSize"		"0"
+	"buildid"		"20241635"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"70885200"
+	"BytesDownloaded"		"70885200"
+	"BytesToStage"		"239628450"
+	"BytesStaged"		"239628450"
+	"TargetBuildID"		"20241635"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2796551"
+		{
+			"manifest"		"7600571709716305420"
+			"size"		"239628450"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

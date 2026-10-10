@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"3478700"
+	"Universe"		"1"
+	"name"		"The Children of Clay"
+	"StateFlags"		"4"
+	"installdir"		"The Children of Clay"
+	"LastUpdated"		"1789772749"
+	"LastPlayed"		"1789775190"
+	"SizeOnDisk"		"245378744"
+	"StagingSize"		"0"
+	"buildid"		"20282165"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"103609824"
+	"BytesDownloaded"		"103609824"
+	"BytesToStage"		"245378744"
+	"BytesStaged"		"245378744"
+	"TargetBuildID"		"20282165"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"3478702"
+		{
+			"manifest"		"4645736145376585963"
+			"size"		"245378744"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

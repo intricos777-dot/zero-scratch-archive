@@ -1,0 +1,68 @@
+{
+  "supervisor": "lia-cli",
+  "updated_at": "2026-08-15T08:00:00Z",
+  "projects": [
+    {
+      "name": "ringworld-redux",
+      "repo": "/home/sin/Projects/ringworld-redux",
+      "status": "completed",
+      "tasks": [
+        {"id":"rr-1","title":"Replace stub renderer with real frame rendering / asset loading","status":"completed"},
+        {"id":"rr-2","title":"Implement actual weapon hit-scan / projectile logic","status":"completed"},
+        {"id":"rr-3","title":"Add input bridge so controller/keyboard moves the player","status":"completed"},
+        {"id":"rr-4","title":"Wire mission objectives to win/lose conditions","status":"completed"},
+        {"id":"rr-5","title":"Add more map variety / streaming","status":"completed"}
+      ]
+    },
+    {
+      "name": "kingdom-hearts-zero",
+      "repo": "/home/sin/Projects/kingdom-hearts-zero",
+      "status": "completed",
+      "tasks": [
+        {"id":"kh0-1","title":"Finish act one town traversal and collision","status":"completed"},
+        {"id":"kh0-2","title":"Implement save/load outside stub","status":"completed"},
+        {"id":"kh0-3","title":"Port command deck to real UI rendering","status":"completed"}
+      ]
+    },
+    {
+      "name": "spacecraft-blueprint-simulator",
+      "repo": "/home/sin/Projects/spacecraft-blueprint-simulator",
+      "status": "completed",
+      "tasks": [
+        {"id":"sbs-1","title":"Ingest real reference data instead of hardcoded lists","status":"completed"},
+        {"id":"sbs-2","title":"Add convergence detection so GA stops early","status":"completed"},
+        {"id":"sbs-3","title":"Generate Markdown design reports for best blueprints","status":"completed"},
+        {"id":"sbs-4","title":"Push best blueprints and reports to GitHub automatically","status":"completed"}
+      ]
+    },
+    {
+      "name": "firedragon",
+      "repo": "/home/sin/Projects/firedragon",
+      "status": "completed",
+      "tasks": [
+        {"id":"fd-1","title":"Finish module wiring in the sidebar","status":"completed"},
+        {"id":"fd-2","title":"Build and package an actual runnable Firefox-based binary","status":"completed"},
+        {"id":"fd-3","title":"Test module install/remove flow","status":"completed"}
+      ]
+    },
+    {
+      "name": "void-supercode-local",
+      "repo": "/home/sin/.hermes/scripts/supercode",
+      "status": "completed",
+      "tasks": [
+        {"id":"vs-1","title":"Make the local (Void) supercode wrapper run our version so 'supercode init' works","status":"completed"},
+        {"id":"vs-2","title":"Fix lin-antimalware policy bridge authorization for supercode integrity.read","status":"completed"},
+        {"id":"vs-3","title":"Verify supercode init starts an interactive session end to end","status":"completed"}
+      ]
+    },
+    {
+      "name": "twilight-elysium",
+      "repo": "/home/sin/Projects/twilight-elysium",
+      "status": "completed",
+      "tasks": [
+        {"id":"te-1","title":"Remove engines/twilight-elysium from the gaming repo","status":"completed"},
+        {"id":"te-2","title":"Publish twilight-elysium as its own private repository","status":"completed"}
+      ]
+    }
+  ]
+}

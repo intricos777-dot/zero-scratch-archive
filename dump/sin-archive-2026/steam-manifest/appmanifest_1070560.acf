@@ -1,0 +1,39 @@
+"AppState"
+{
+	"appid"		"1070560"
+	"Universe"		"1"
+	"name"		"Steam Linux Runtime 1.0 (scout)"
+	"StateFlags"		"4"
+	"installdir"		"SteamLinuxRuntime"
+	"LastUpdated"		"1787474804"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"222685392"
+	"StagingSize"		"0"
+	"buildid"		"23825428"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"0"
+	"BytesDownloaded"		"0"
+	"BytesToStage"		"0"
+	"BytesStaged"		"0"
+	"TargetBuildID"		"23825428"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"FullValidateAfterNextUpdate"		"1"
+	"InstalledDepots"
+	{
+		"1070561"
+		{
+			"manifest"		"4956520704156364317"
+			"size"		"222685392"
+		}
+	}
+	"UserConfig"
+	{
+	}
+	"MountedConfig"
+	{
+	}
+}

@@ -1,0 +1,45 @@
+"AppState"
+{
+	"appid"		"1623660"
+	"Universe"		"1"
+	"name"		"MIR4"
+	"StateFlags"		"4"
+	"installdir"		"MIR4"
+	"LastUpdated"		"1789772913"
+	"LastPlayed"		"1790199044"
+	"SizeOnDisk"		"595197476"
+	"StagingSize"		"0"
+	"buildid"		"25205070"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"4"
+	"BytesToDownload"		"290186256"
+	"BytesDownloaded"		"290186256"
+	"BytesToStage"		"595197476"
+	"BytesStaged"		"595197476"
+	"TargetBuildID"		"25205070"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"1623661"
+		{
+			"manifest"		"3158467029364196753"
+			"size"		"595197476"
+		}
+	}
+	"SharedDepots"
+	{
+		"228988"		"228980"
+		"228990"		"228980"
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

@@ -1,0 +1,15 @@
+{
+  "id": "proc_72fb4840837e",
+  "command": "cd ~/Projects/_inventory && python3 scan_secrets.py 2>&1 | tail -20",
+  "cwd": "/home/livings/Projects",
+  "task_id": "default",
+  "owner_task_id": "20260926_121135_408774",
+  "session_key": "20260926_121135_408774",
+  "parent_session_id": "20260926_130813_326367",
+  "started_at": 1790453538.1006215,
+  "exit_code": 0,
+  "completion_reason": "exited",
+  "termination_source": "",
+  "notify_on_complete": true,
+  "output": "        r\"(?i)(^|/)\\.env($|\\.)|(?i)(^|/)(id_rsa|id_ed25519|\\.pem|\\.key|\\.p12|\\.pfx|\"\n        r\"credentials|secrets?)\\.?(json|ya?ml|txt|env)?$|(?i)\\.netrc$|(?i)\\.pgpass$\")\n  File \"/usr/lib/python3.14/re/__init__.py\", line 289, in compile\n    return _compile(pattern, flags)\n  File \"/usr/lib/python3.14/re/__init__.py\", line 350, in _compile\n    p = _compiler.compile(pattern, flags)\n  File \"/usr/lib/python3.14/re/_compiler.py\", line 762, in compile\n    p = _parser.parse(p, flags)\n  File \"/usr/lib/python3.14/re/_parser.py\", line 973, in parse\n    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)\n  File \"/usr/lib/python3.14/re/_parser.py\", line 460, in _parse_sub\n    itemsappend(_parse(source, state, verbose, nested + 1,\n                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                       not nested and not items))\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/re/_parser.py\", line 834, in _parse\n    raise source.error('global flags not at the start '\n                       'of the expression',\n                       source.tell() - start)\nre.PatternError: global flags not at the start of the expression at position 21\n"
+}

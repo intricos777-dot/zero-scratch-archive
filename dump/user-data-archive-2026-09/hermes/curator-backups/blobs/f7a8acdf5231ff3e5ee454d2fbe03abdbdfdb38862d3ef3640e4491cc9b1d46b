@@ -1,0 +1,217 @@
+# Security tool pitfalls
+
+Rules for intrusion detectors, lockout controls, device admission, and
+tamper-evident logs. Each is a defect class that passes review and fails in
+production.
+
+## Alert noise is a security defect
+
+A rule that fires on ordinary activity trains the user to ignore the tool. The
+classic: alert on device attach. Plugging in a phone is not an intrusion, and
+controller root-hubs re-enumerate on every boot.
+
+- Alert only on a genuine boundary crossing by someone else: authentication
+  failure, privilege escalation attempt, unauthorized device admission.
+- Move policy for benign events from *alerting* to *enforcing*. Device policy
+  belongs in a blocking layer (udev/AD), not a notification.
+- Exempt the local admin's own activity explicitly, by actor name, not by
+  keyword. A rule matching the bare word `faillock` fires on the admin's own
+  `sudo cp /etc/security/faillock.conf`.
+
+## Debounce must not swallow sustained attacks
+
+A long debounce window means a password-spraying run produces exactly one
+alert — the case where repeat notification matters most. Shorten the window and
+shorten it further for critical severity, rather than dropping events.
+
+## A fullscreen takeover is the wrong default
+
+An alert that hijacks the display is indistinguishable from one triggered by
+the user's own activity, and it obstructs the response. Default to a desktop
+notification; make any fullscreen display an explicit opt-in flag.
+
+Notification delivery must degrade loudly, not silently:
+
+- A root-owned `notify-send` has no D-Bus connection and can exit 0 having
+  shown nothing. Drop to the desktop user and supply `DISPLAY` /
+  `XDG_RUNTIME_DIR`.
+- If every delivery route fails, log `ALERT DELIVERY FAILED` even though the
+  policy was applied. Silence here is the one failure mode that must never be
+  swallowed.
+
+## Never discard a subprocess return code on a security path
+
+`subprocess.run(...)` without checking `returncode` makes a failed evidence
+write indistinguishable from a successful one. The break stays invisible until
+the proof is needed — which is the worst possible time.
+
+## Exemptions must be as narrow as the threat
+
+Granting an exemption via a *group* exempts every current and future member.
+Choosing a widely-populated group for a "single admin" exemption silently
+converts it into "everyone with that privilege", including any account an
+attacker persuaded the owner to create.
+
+- Use a dedicated single-member group for a single-account exemption.
+- Guard enrollment so membership is a deliberate, visible act, not a side
+  effect of unrelated admin work.
+- Check the exemption **interface** class, not the device class, when deciding
+  what to spare — HID devices commonly report device class `00` rather than the
+  expected HID class, so a device-class check misses the very case it was meant
+  to spare.
+- Prefer lengthening an unlock timeout over exempting an account outright when
+  the goal is "don't lock me out"; the exemption is only needed when the
+  requirement is absolute.
+
+## Enforcement must be real, and must fail safe
+
+"Quarantine" that only writes a log entry is not quarantine. Unbinding the
+driver that grants disk or network access is.
+
+- Write an explicit never-block list for the things that would lock the owner
+  out (root hubs, input devices), and make the installer warn when a currently
+  attached device is missing from the allow list.
+- Ship the uninstall path in the same file as the install path.
+- Install a policy file root-owned and non-writable by the invoking user; a
+  writable allow list is a disabled allow list.
+
+### An error path must fail toward the machine, not away from it
+
+The single worst defect in this class is an `except` that returns the same
+value as the dangerous case:
+
+```python
+def is_input_device(dev):
+    try:
+        for iface in dev.glob("*:*"):
+            f = iface / "bInterfaceClass"
+            if f.exists() and f.read_text().strip()[:2] in HID_CLASSES:
+                return True
+    except Exception:
+        pass
+    return False          # <- same answer as "not a keyboard"
+```
+
+A transient sysfs read failure made a HID device look like ordinary storage,
+and the caller quarantined it. The mechanism is the tell: `except: pass`
+falls through to the same `return` as a genuine negative, so the error branch
+and the "safe to block" branch are indistinguishable.
+
+- On an unreadable device, **exempt it and log the reason**. Returning
+  `True` from the error branch is correct here, not sloppy.
+- Choose the branch by cost asymmetry, not by symmetry. A false negative
+  unbinds the keyboard and the machine is unusable; a false positive leaves
+  one USB stick un-banned, which the user can still deal with manually.
+- Test it directly: a fake device whose `glob()` raises must come back
+  exempt, and that case must fail against the pre-fix code.
+- Keep the explicit never-block list as the second backstop — the fail-safe
+  branch and the allow list are independent, and you want both.
+
+## Tamper-evident chains: an anchor is a snapshot
+
+The most dangerous bug in this class: verification compares the sealed anchor
+against the **live** head. Because records are legitimately appended after a
+seal, this reports tampering on every new event. A monitor that cries wolf about
+tampering is worse than no monitor — the operator concludes the evidence was
+altered when it was not.
+
+Validate only the prefix the anchor witnessed:
+
+- `sealed_count > len(chain)` → records were removed
+- `chain[sealed_count-1].h != sealed_head` → the sealed prefix was altered
+- records beyond `sealed_count` → normal, already covered by per-record MACs
+
+Then test **both** directions, or the fix is unverified:
+
+| Injected fault | Must be caught |
+|---|---|
+| Edit a sealed record's contents | per-record MAC mismatch |
+| Delete a record from the middle | sequence gap + prev-hash break |
+| Truncate the chain | anchor count exceeds chain length |
+| Nothing (clean chain, new record) | must report INTACT |
+
+A verification path that has only ever been exercised on a clean chain proves
+nothing.
+
+## A self-test that only prints its cases is not a self-test
+
+The most common shape of a decorative self-test: it echoes the case names it
+*would* exercise and exits 0.
+
+```
+  flip-flop (spoof)   -> should ALERT
+  new host (benign)   -> should log only
+  own IP (skip)       -> should be ignored
+no events fired. Run the installed service to exercise the real path.
+```
+
+It cannot fail, so it certifies nothing, and its green output reads as
+coverage. When inheriting or reviewing detection code, check this first: does
+the self-test *call* the decision function, or only describe it?
+
+Rewriting it to actually drive the path is where the real bug surfaced — see
+the empty-exclusion entry below. Two shell mechanics are required, and both
+bite:
+
+- **Decision logic must be a function, not bare top-level code.** Bare code
+  with `exit` terminates the test on the first case, so it cannot be called
+  repeatedly with different inputs. Wrap it (`handle_event`) and have the
+  entrypoint call it.
+- **Dispatch must come after the definitions it calls.** An early
+  `if [ "$1" = --selftest ]` guard placed above `handle_event` runs the test
+  against an undefined function. Every "it passed but nothing happened" here
+  traced back to that ordering.
+- **Stub the side effect, keep the logic.** Redefine `notify()` *after* the
+  real definition to record instead of deliver; shell uses the most recent
+  definition, so the stub wins and no real desktop popup fires per case.
+
+## An exclusion list sourced from env the unit never sets is silently empty
+
+The nastiest class, because the code is correct in isolation and wrong in
+production:
+
+```sh
+SELF_IPS="${BDE_SELF_IPS:-}"      # unit sets nothing -> always empty
+GW_IPS="${BDE_GATEWAYS:-}"        # ditto
+is_infrastructure() { for o in $SELF_IPS $GW_IPS; do [ "$1" = "$o" ] && return 0; done; return 1; }
+```
+
+With an empty list the guard is a no-op, so the host's own gateway — whose MAC
+randomises on reconnect — trips the spoof alert. A false alarm on the one
+address the tool is supposed to exempt, in a tool whose entire job is telling
+you when not to trust something.
+
+Two rules:
+
+- **Default a safety exclusion to detection, not to a caller-supplied env
+  var.** Compute own-addresses and the default route inline; let the env var
+  override. An unset var must never mean "exempt nothing".
+- **Audit the exclusion list against the live unit, not the source alone.**
+  `grep -n Environment <unit>.service` and confirm every variable the script
+  reads is actually exported there. Unset-in-practice is the same failure as
+  unset-in-code, and the source read will not show it.
+
+Related: a self-test fixture that hardcodes an address (`192.168.1.1`) tests
+nothing when the real gateway is `10.128.128.128` — the case passes or fails
+for reasons unrelated to the code. Read the live value into the fixture.
+
+## Confirm directives against the real man page
+
+Before writing a system config directive, check the installed documentation:
+
+```bash
+zcat /usr/share/man/man5/<name>.5.gz | col -b > /tmp/doc.txt
+grep -A4 '<directive>' /tmp/doc.txt
+```
+
+`strings` on the implementing shared object is a useful cross-check but is not
+authoritative — a valid directive may be absent from the string table, and a
+directive's *type* (group vs user, name vs path) is the thing that actually
+bites. Read the semantics, not just the existence.
+
+## State the tradeoff once
+
+Security exemptions carry real cost: an exempt account is not protected from
+online guessing by that mechanism. Say so concretely, with the mechanism and
+the remaining controls, then implement the requested behavior. Do not repeat
+the caveat in every subsequent message, and do not omit it.

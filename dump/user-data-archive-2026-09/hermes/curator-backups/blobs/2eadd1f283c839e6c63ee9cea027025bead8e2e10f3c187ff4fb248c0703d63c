@@ -1,0 +1,171 @@
+# Safe Removal of Desktop-Integrated Packages, and Retention Tools
+
+Two recurring classes of work on a personal workstation: taking something out
+that is woven into the desktop, and writing a tool whose job is to delete
+files. Both fail quietly rather than loudly, so both need a preflight.
+
+## Removing a package that the desktop shell references
+
+`pacman -Rns <pkg>` is safe against *package* dependencies and unsafe against
+*shell configuration* dependencies, and the second is invisible to every
+dependency tool.
+
+```bash
+pacman -Qi <pkg> | grep -E '^(Required By|Optional For)'
+pacman -Qo /usr/share/plasma/plasmoids/<applet>   # who owns this file
+```
+
+The preflight that matters is not "does anything depend on the package" but
+**"does any config file still name something the package provides"**. A Plasma
+panel, a status-notifier entry, a keybindings file, or a session autostart
+entry can all reference a component whose files are about to disappear. The
+symptom is a panel that errors on every login until the config is hand-fixed —
+not a broken package, and not something `pacman -Rns` warns about.
+
+Load-bearing configs on a KDE Plasma box, in the order worth checking:
+
+| File | Holds | Removal symptom |
+|---|---|---|
+| `~/.config/plasma-org.kde.plasma.desktop-appletsrc` | loaded panel applets | panel error every login |
+| `~/.config/kglobalshortcutsrc` | global shortcuts, incl. dead ones | shortcut silently invokes a missing action |
+| `~/.config/autostart/*.desktop` | session autostart | autostart failure each login |
+| `~/.local/share/plasma/plasmoids/` | third-party applets | applet vanishes or errors |
+
+Strip the applet stanza before removing the package, and confirm the stanza's
+*neighbour* survived the edit — a regex that eats one stanza reliably eats the
+blank line that separates it from the next one too:
+
+```bash
+grep -n -B2 -A4 'plugin=<applet>' <config>
+# after editing: the adjacent applet must still be present
+grep -c 'plugin=org.kde.plasma.systemtray' <config>
+```
+
+Catalogue lists inside the same file (`extraItems=`, `knownItems=`) name every
+*available* widget regardless of what is loaded. Leave them; they are not
+references and editing them achieves nothing.
+
+### When the user asks to remove "the whole application"
+
+Check what actually provides it before quoting a command:
+
+```bash
+pacman -Qo <path/to/component>     # "No package owns ..." = not a separate app
+pacman -Qq | grep -iE '<pattern>'
+```
+
+A built-in desktop component may be owned by the suite itself, in which case
+"remove the application" means removing the desktop. Say that once, with the
+package that owns it, and deliver the scoped reversible version — the applet
+removal, the feature toggle, the config cleanup — rather than the suite
+deletion. Do not run the suite deletion to be helpful.
+
+A feature that is merely *disabled* is a better target than the package: for a
+phone-pairing daemon, the clipboard-sync toggle is one setting, and removing
+the daemon also costs file transfer, notifications, and remote control. Offer
+the toggle first and name what full removal costs.
+
+## A destructive request whose referent does not exist
+
+Before deleting anything, confirm the thing named actually exists. A request
+phrased in terms the machine does not share — "the other user's checkouts",
+"the code from the old account" — needs a reality check, because the nearest
+real thing is almost always a *worse* deletion target than the one intended.
+
+```bash
+getent passwd | awk -F: '$3>=1000'          # do the named users exist at all?
+ls /home/                                  # whose home dirs exist
+find ~/Projects -maxdepth 2 ! -user "$(id -un)"   # anything not owned by you
+```
+
+If nothing matches, the request is ambiguous rather than wrong, and the
+correct move is to **enumerate what does exist and let the user choose** — not
+to substitute the nearest plausible candidate. Deletion is not reversible from
+the user's side; guessing wrong costs them data with no way back.
+
+Offer the candidates as concrete options with sizes and what each one is, so
+the choice is one word. The typical set: a scratch/audit area that is large
+but reproducible, live working checkouts that are not, and system directories
+that are neither. Note what is lost with each — e.g. deleting a scratch audit
+area loses the local ability to re-audit without re-cloning, though not the
+secrets it recorded, which live on the remote.
+
+The same check applies to a request to strip a third party's identifiers or
+code: see `commit-authorship-and-provenance.md`. Establish direction of
+copying first, and note that the only place the name legitimately appears may
+be your own evidence file.
+
+## Retention tools: unverified is not worthless
+
+Any tool that prunes, rotates, or "cleans" needs an explicit answer to *what
+happens when the authority is unavailable*. The dangerous default is
+`unverified → treat as junk → delete`, which destroys exactly the evidence the
+tool exists to protect.
+
+Decide the three states separately and give each its own outcome:
+
+| State | Correct action |
+|---|---|
+| Confirmed by the authority | archive permanently, with a manifest recording what proved it |
+| Authority reachable, hash unknown | hold for a defined window, then release to the pruner |
+| Authority unreachable | **preserve**; exit non-zero so a scheduler can report it, delete nothing |
+
+Two rules that make this hold:
+
+- **Preserve on ambiguity, always.** A file that cannot be checked is not the
+  same as a file known to be worthless. With no authority configured at all,
+  the correct behaviour is to touch nothing.
+- **Protect the archive from the pruner.** Pass the archive directory as an
+  explicit keep-path, and additionally protect any file carrying a
+  block/hash-shaped token from the age-based pruner, so the two passes cannot
+  delete what the first pass preserved.
+
+Make the age window long enough that a daemon restart or a chain reorg cannot
+race the cleanup (a week is a reasonable floor), and short enough that real
+junk is still reclaimed.
+
+Test this by standing up a **stub authority** that knows one identifier and not
+another, then assert the split directly: the known one is archived with its
+manifest, the unknown one is held, and a run with the stub down deletes
+nothing. Run the suite twice to prove the archive is not duplicated.
+
+## Hand-rolled binary formats: the writer is the dangerous half
+
+Writing a serializer against an undocumented binary layout fails in ways that
+still produce a file:
+
+- **`buf += chunk` on a `bytes` local only rebinds that local.** A writer
+  helper taking `bytes` silently discards every chunk it is handed, so the
+  output contains only the writes made inline in the loop body. Accumulate on
+  a `list` and `b"".join()` at the end.
+- **Every nested object needs its own terminator.** Omitting the per-entry
+  close makes a reader run off the end of entry N into entry N+1's header and
+  invent a phantom entry — the count comes back one too high.
+- **A string value is prefixed by its own NUL.** A reader that starts scanning
+  at that NUL finds the terminator immediately and reads `""` for every value.
+- **Round-trip proves self-consistency, not correctness.** A reader and writer
+  written from the same wrong assumption agree perfectly. Say so in the report
+  and name the external check that would confirm it.
+
+Test the pair against byte-level assertions (header bytes, terminator count,
+`uint32` immediately followed by NUL) *and* semantic ones (empty strings,
+multi-byte UTF-8, N entries in → N out for several N), plus a rejection case
+for garbage input. Where a reference file written by the real producer exists,
+diff against it; where none does, say the format remains unconfirmed against
+the real consumer.
+
+## Grepping user config trees
+
+`~/.config` contains minified vendor bundles (`swagger-ui.css`, bundled
+`opencode` SDKs) that turn a one-line question into a 180 KB dump and bury the
+real matches. Scope the search to the file types that can hold config, and
+exclude vendored trees:
+
+```bash
+grep -rniE '<pattern>' ~/.config --include='*.conf' --include='*.rc' \
+  --include='*.desktop' --include='*.json' 2>/dev/null \
+  | grep -vE 'node_modules|\.min\.|/vendor/'
+```
+
+If a broad search is genuinely needed, write it to a file and read the file —
+never let a 180 KB capture reach the context window.

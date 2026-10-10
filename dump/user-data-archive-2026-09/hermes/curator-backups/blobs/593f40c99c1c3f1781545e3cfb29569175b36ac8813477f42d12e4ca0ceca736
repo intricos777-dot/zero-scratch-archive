@@ -1,0 +1,212 @@
+# Fleet-wide clone, structural verify, and secret purge
+
+For auditing an entire GitHub account's worth of repos — dozens or hundreds,
+only some of which are real services. The class-level lesson: **scale changes
+what you can prove, so bound the scope explicitly and say what was not run.**
+
+## 1. Bound the scope before cloning
+
+A full account inventory is usually mostly game mods, experiments, and
+abandoned prototypes. Cloning all of it is cheap (a few GB, minutes) but
+reviewing it is not. Ask which repos count and *how deep* to go — structure
+only, or install and run. "Rebuild everything" is not a scope.
+
+Distinguish inventory from work. Keep a scratch clone area (`~/Projects/_inventory/`)
+separate from the real working checkouts, or a read-only audit silently becomes
+a live working tree.
+
+## 2. Clone with full history if you will scan history
+
+`--depth 1` makes a history scan impossible. Full clone is fine at this scale:
+
+```python
+ThreadPoolExecutor(max_workers=8)  # over subprocess.run(["git","clone",...])
+GIT_TERMINAL_PROMPT=0              # fail fast, never block on a credential
+GIT_SSH_COMMAND="ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new"
+```
+
+Record a machine-readable result per repo. A clone loop that prints nothing on
+success and nothing on failure leaves you unable to distinguish "all present"
+from "half silently skipped" — count the successes explicitly against the
+inventory size.
+
+## 3. Classify before judging
+
+Group by manifest-derived kind (node / python / c++ / static-web /
+empty-or-docs). Syntax-checking a C++ mod tree as if it were Python, or
+scanning `venv/`, buries real findings. Skip `.git`, `node_modules`, `venv`,
+`__pycache__`, `dist`, `build` in every walk.
+
+Empty repos are a finding, not noise: report "0 source files, N commits" so
+the user sees the repo exists and is a stub.
+
+## 4. A repo's own upstream is evidence
+
+When a clone shows a parse error you already fixed in your working copy, diff
+the two. It proves the fix was real **and** that it was never pushed — worth
+stating explicitly, because "locally fixed" and "fixed everywhere" are
+different states and the user may believe the second.
+
+## 5. Secret scan: working tree AND history
+
+Two different questions. The tree answers "what leaks if I push today"; history
+answers "what already leaked and is still recoverable by anyone who ever
+cloned". A secret deleted in a later commit is **not gone** — it stays in every
+clone and in GitHub's fork/cache long after the file is deleted.
+
+Report and change nothing by default. Rank by severity, and separate
+*likely-live* from placeholder.
+
+Placeholder filtering must not eat real findings. Self-test the scanner
+against known-positive and known-negative strings before you believe its
+report. Documented vendor examples (`AKIA...EXAMPLE`) are correctly filtered;
+a live-shaped key must not be. A file named `keygen key.txt` may hold
+`ssh-keygen` *console output* and no key material at all — read before
+reporting.
+
+## 6. Python regex trap when writing a scanner
+
+`re` rejects `(?i)` anywhere but the start of the whole pattern, so a
+multi-alternation filename pattern with a per-branch inline flag fails to
+compile. Split into separate compiled patterns and pass `re.I` instead of
+inlining the flag.
+
+Verify with a compile-all loop plus positive/negative self-tests before
+launching a long run — a crash 20 seconds in wastes the whole pass.
+
+**Build the self-test from documented real formats, and count characters.**
+A fixture that is one or two characters short of a pattern's minimum length
+will not match, and it is tempting to blame the pattern. It proves nothing:
+check the sample against the real format first. A bot token needs its full
+post-colon length; a short sample "fails" a perfectly correct regex. Getting
+this backwards means patching working detection logic to satisfy a broken
+fixture — and shipping a regression to fix a non-bug.
+
+A vendor's own documented example key (`[REDACTED-SECRET-2026-09-28]`) is correctly
+suppressed as a placeholder. Keep both cases in the self-test so a change to
+the placeholder filter cannot silently start eating live keys.
+
+## 7. Purging a secret from history
+
+Irreversible and SHA-changing. **Confirm before touching history, and confirm
+the push separately** — a local rewrite purges nothing until force-pushed.
+Bundle first so the rewrite is locally reversible:
+
+```bash
+git bundle create /tmp/pre-rewrite.bundle --all
+uv tool install git-filter-repo   # or pipx; NOT pip on PEP 668 systems
+git-filter-repo --replace-text <(echo 'LITERAL==>***REMOVED-TOKEN***') --force
+```
+
+`--force` is required outside a fresh clone, and it **removes the `origin`
+remote** — note that, do not be surprised by it.
+
+Then verify properly, because "it printed success" is not proof:
+
+```bash
+git log --all --oneline -S'<literal>' | wc -l          # expect 0
+# and in EVERY blob, not just commit diffs:
+git rev-list --all --objects | awk '{print $1}' | while read o; do
+  [ "$(git cat-file -t $o)" = blob ] && git cat-file -p "$o" | grep -q '<literal>' && echo "FOUND $o"
+done | wc -l
+git rev-list --all --count                            # commits preserved?
+```
+
+Warn explicitly while the purge is un-pushed: **the old value is still
+retrievable from the remote until you force-push.** A rotated server-side
+token that the old value no longer authorizes is defence-in-depth, not
+erasure.
+
+## 8. History rewrite discards uncommitted work
+
+`git-filter-repo` resets the working tree to the rewritten HEAD, silently
+discarding uncommitted edits. Re-apply them afterward and re-verify — the
+rewrite is not the last step.
+
+## 9. Corrupted-but-committed files
+
+A file that has never parsed in any commit is not a regression to fix, it is a
+finding to report. Prove it per-commit (`git show <rev>:<file> | py_compile -`)
+before deleting, and check the project's real entrypoint — a stub `main.py`
+superseded by a TypeScript CLI in `src/` is dead weight, not the tool.
+
+## 10. Publishing the audit: pushing a fleet back
+
+"Push the work" is a distinct gate from "the work is committed." Local commit
+and remote state are different things, and conflating them is how a user
+believes a purge happened when it did not.
+
+**Survey before the first push** — for every repo, which of these is it?
+
+```bash
+for n in <repos>; do
+  u=$(git -C "$n" rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+  if [ -z "$u" ]; then
+    printf '  %-26s NO-UPSTREAM commits=%s dirty=%s\n' "$n" \
+      "$(git -C "$n" rev-list --count HEAD)" "$(git -C "$n" status --porcelain | wc -l)"
+  else
+    printf '  %-26s +%s unpushed\n' "$n" "$(git -C "$n" rev-list --count @{u}..HEAD)"
+  fi
+done
+```
+
+`NO-UPSTREAM` splits two ways, and they need different actions:
+
+- **Repo exists on the remote, local has no upstream** — usually because a
+  history rewrite stripped the remote (`filter-repo` removes `origin`). Re-add
+  it and force-push.
+- **Repo has never existed on the remote** — today's work lives on this disk
+  only. Check the remote for the name before assuming; creating a repo is a
+  different, more consequential act than pushing to one, and the user may not
+  have intended it. Ask.
+
+`ls-remote --heads origin` returning empty means the branch does not exist
+there yet — that is not an auth failure, do not retry it as one.
+
+**Creating a repository is a different capability from pushing.** Git-over-SSH
+authenticates fine and still cannot create a repo; that needs an API token with
+repo scope. When the token is unavailable, stop and hand the user the two
+options (restore a scoped token, or create the empty private repos in the UI),
+rather than silently pushing only the subset that happened to work.
+
+**Back up everything before any network write**, especially before a
+force-push:
+
+```bash
+tar czf /tmp/pre-push-$(date +%Y%m%d_%H%M%S).tar.gz <repos>
+ssh -o BatchMode=yes -T git@github.com    # confirm auth before writing
+```
+
+**Force-push is a separate confirmation from the rewrite.** The rewrite is
+local and reversible; the push is neither. Confirm them as two decisions.
+
+Verify the purge landed on the *remote*, not just locally — re-fetch first, or
+you are inspecting cached refs:
+
+```bash
+git push --force origin <branch>
+git fetch origin --prune
+git rev-list origin/<branch> --objects | awk '{print $1}' | while read o; do
+  [ "$(git cat-file -t "$o" 2>/dev/null)" = blob ] && \
+    git cat-file -p "$o" 2>/dev/null | grep -q '<literal>' && echo "STILL PRESENT $o"
+done
+```
+
+Before overwriting a remote branch, confirm the remote's current tip actually
+contains what you are purging — otherwise the force-push discards history for
+no reason. `git log <remote-sha> --oneline -S'<literal>'` answers it.
+
+**Do not commit another agent's in-flight work.** A parallel session's
+untracked files are not yours to sweep into a push; see the concurrent-agent
+rules in SKILL.md.
+
+## 11. Committed dependency trees
+
+`node_modules/` in git is both a size problem and a *security* one: it is how
+a third-party library's placeholder example keys end up in your history, where
+a history scanner will flag them forever. Untrack it, add `.gitignore`, and
+expect the already-pushed blobs to need the history-purge path above.
+
+A tracked `.env` is the same smell even when today's contents are harmless —
+two `localhost` URLs in a committed file is a pattern that eventually receives
+a real key. Report it as a finding regardless of current contents.

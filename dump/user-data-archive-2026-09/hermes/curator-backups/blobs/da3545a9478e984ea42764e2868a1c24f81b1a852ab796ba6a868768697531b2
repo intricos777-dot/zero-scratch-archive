@@ -1,0 +1,119 @@
+# Fleet-wide clone, structural verify, and secret purge
+
+For auditing an entire GitHub account's worth of repos — dozens or hundreds,
+only some of which are real services. The class-level lesson: **scale changes
+what you can prove, so bound the scope explicitly and say what was not run.**
+
+## 1. Bound the scope before cloning
+
+A full account inventory is usually mostly game mods, experiments, and
+abandoned prototypes. Cloning all of it is cheap (a few GB, minutes) but
+reviewing it is not. Ask which repos count and *how deep* to go — structure
+only, or install and run. "Rebuild everything" is not a scope.
+
+Distinguish inventory from work. Keep a scratch clone area (`~/Projects/_inventory/`)
+separate from the real working checkouts, or a read-only audit silently becomes
+a live working tree.
+
+## 2. Clone with full history if you will scan history
+
+`--depth 1` makes a history scan impossible. Full clone is fine at this scale:
+
+```python
+ThreadPoolExecutor(max_workers=8)  # over subprocess.run(["git","clone",...])
+GIT_TERMINAL_PROMPT=0              # fail fast, never block on a credential
+GIT_SSH_COMMAND="ssh -o BatchMode=yes -o StrictHostKeyChecking=accept-new"
+```
+
+Record a machine-readable result per repo. A clone loop that prints nothing on
+success and nothing on failure leaves you unable to distinguish "all present"
+from "half silently skipped" — count the successes explicitly against the
+inventory size.
+
+## 3. Classify before judging
+
+Group by manifest-derived kind (node / python / c++ / static-web /
+empty-or-docs). Syntax-checking a C++ mod tree as if it were Python, or
+scanning `venv/`, buries real findings. Skip `.git`, `node_modules`, `venv`,
+`__pycache__`, `dist`, `build` in every walk.
+
+Empty repos are a finding, not noise: report "0 source files, N commits" so
+the user sees the repo exists and is a stub.
+
+## 4. A repo's own upstream is evidence
+
+When a clone shows a parse error you already fixed in your working copy, diff
+the two. It proves the fix was real **and** that it was never pushed — worth
+stating explicitly, because "locally fixed" and "fixed everywhere" are
+different states and the user may believe the second.
+
+## 5. Secret scan: working tree AND history
+
+Two different questions. The tree answers "what leaks if I push today"; history
+answers "what already leaked and is still recoverable by anyone who ever
+cloned". A secret deleted in a later commit is **not gone** — it stays in every
+clone and in GitHub's fork/cache long after the file is deleted.
+
+Report and change nothing by default. Rank by severity, and separate
+*likely-live* from placeholder.
+
+Placeholder filtering must not eat real findings. Self-test the scanner
+against known-positive and known-negative strings before you believe its
+report. Documented vendor examples (`AKIA...EXAMPLE`) are correctly filtered;
+a live-shaped key must not be. A file named `keygen key.txt` may hold
+`ssh-keygen` *console output* and no key material at all — read before
+reporting.
+
+## 6. Python regex trap when writing a scanner
+
+`re` rejects `(?i)` anywhere but the start of the whole pattern, so a
+multi-alternation filename pattern with a per-branch inline flag fails to
+compile. Split into separate compiled patterns and pass `re.I` instead of
+inlining the flag.
+
+Verify with a compile-all loop plus positive/negative self-tests before
+launching a long run — a crash 20 seconds in wastes the whole pass.
+
+## 7. Purging a secret from history
+
+Irreversible and SHA-changing. **Confirm before touching history, and confirm
+the push separately** — a local rewrite purges nothing until force-pushed.
+Bundle first so the rewrite is locally reversible:
+
+```bash
+git bundle create /tmp/pre-rewrite.bundle --all
+uv tool install git-filter-repo   # or pipx; NOT pip on PEP 668 systems
+git-filter-repo --replace-text <(echo 'LITERAL==>***REMOVED-TOKEN***') --force
+```
+
+`--force` is required outside a fresh clone, and it **removes the `origin`
+remote** — note that, do not be surprised by it.
+
+Then verify properly, because "it printed success" is not proof:
+
+```bash
+git log --all --oneline -S'<literal>' | wc -l          # expect 0
+# and in EVERY blob, not just commit diffs:
+git rev-list --all --objects | awk '{print $1}' | while read o; do
+  [ "$(git cat-file -t $o)" = blob ] && git cat-file -p "$o" | grep -q '<literal>' && echo "FOUND $o"
+done | wc -l
+git rev-list --all --count                            # commits preserved?
+```
+
+Warn explicitly while the purge is un-pushed: **the old value is still
+retrievable from the remote until you force-push.** A rotated server-side
+token that the old value no longer authorizes is defence-in-depth, not
+erasure.
+
+## 8. History rewrite discards uncommitted work
+
+`git-filter-repo` resets the working tree to the rewritten HEAD, silently
+discarding uncommitted edits. Re-apply them afterward and re-verify — the
+rewrite is not the last step.
+
+## 9. Corrupted-but-committed files
+
+A file that has never parsed in any commit is not a regression to fix, it is a
+finding to report. Prove it per-commit (`git show <rev>:<file> | py_compile -`)
+before deleting, and check the project's real entrypoint — a stub `main.py`
+superseded by a TypeScript CLI in `src/` is dead weight, not the tool.

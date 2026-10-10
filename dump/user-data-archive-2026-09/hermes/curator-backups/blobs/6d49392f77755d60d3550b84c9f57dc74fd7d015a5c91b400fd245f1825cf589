@@ -1,0 +1,92 @@
+# Commit authorship and third-party provenance
+
+For two related questions that look alike and have opposite answers:
+
+1. **Who actually wrote this code?** (attribution across a fleet)
+2. **Is third-party code in my repos, and whose?** (provenance before removal)
+
+The second question arrives as a destructive request — "strip and remove his
+code from mine" — so establishing direction is a gate, not a nicety.
+
+## The sweep
+
+One pass over every repo, author *and* committer, all refs. Run it as a
+**script file**, not a loop of per-repo tool calls: a 130-repo fan-out issued
+as individual tool calls exhausts the per-call budget partway through and
+returns a truncated result that reads as complete.
+
+```bash
+for p in "$HOME"/Projects/*/.git "$HOME"/Projects/_inventory/*/.git; do
+  [ -d "$p" ] || continue
+  git -C "$(dirname "$p")" log --all --format='%an|%ae|%cn|%ce' 2>/dev/null
+done | sort | uniq -c | sort -rn
+```
+
+`--all` matters: a person whose commits live only on another branch or a
+detached ref is invisible without it. `%cn|%ce` as well as author, because a
+rebased or cherry-picked commit has a committer distinct from its author, and
+that asymmetry is itself a finding.
+
+Then classify every identity into exactly one bucket:
+
+| Bucket | Looks like | Meaning |
+|---|---|---|
+| Operator | one human, several aliases/emails | yours |
+| Local tooling | `opencode@localhost`, `Hermes Agent`, `deploy@…local`, `Simulator` | agent-written, commits under your git config |
+| Upstream OSS | distro/flattening maintainers, `flathubbot`, `noreply@github.com` | provenance from `git clone` |
+| Third party | anyone else | investigate |
+
+## Reading the result
+
+**Upstream maintainer commits are not intrusion.** When you fork or clone a
+project its history arrives with it. A flatpak packager's name in a
+dependency's history is a `git clone`, not an intrusion, and rewriting it
+falsifies your own lineage while breaking upstream tracking. Before treating
+any identity as contamination, check its origin:
+
+```bash
+git -C <repo> remote -v          # is a third party the origin at all?
+```
+
+**Absence of a stranger's name is NOT evidence you are clean.** This is the
+trap. An agent writing into your repos commits as *your* identity, because
+`user.name`/`user.email` in the git config decides the author, not the agent.
+So a compromise or a rogue write shows up wearing your own name. Report the
+attribution sweep as attribution only, and say explicitly that it cannot
+clear the tree.
+
+## Direction of copying — the gate before any removal
+
+"His code is in mine, strip it" presumes one direction. Establish the actual
+direction from the evidence *before* removing anything:
+
+```bash
+# 1. does any remote point at them?
+for p in "$HOME"/Projects/*/.git; do
+  git -C "$(dirname "$p")" remote -v 2>/dev/null
+done | grep -iE '<their-handle>|<their-org>'
+
+# 2. do their distinctive artifacts appear in your working trees?
+grep -rIl -iE '<their-handle>|<their-org>|<their-proprietary-term>' \
+  "$HOME"/Projects --exclude-dir=.git 2>/dev/null
+```
+
+A repo whose `origin` is your own namespace and which merely *mentions* them
+in a comment, a task description, or a monitoring config is yours, not a
+fork. Report the direction, then the absence of anything to remove.
+
+**The identifiers you will find are usually your evidence, not their code.**
+When you have compiled a DMCA/takedown/investigation file, that file names
+the other party *by definition* — it is the only place in your repos where
+their name legitimately appears. A naive "strip every occurrence of their
+handle" sweep therefore destroys the record that protects you and removes
+nothing of theirs. Flag this before acting, once, and let the user decide.
+
+## Unverifiable without a credential
+
+Two things this sweep cannot answer locally, and guessing at either is worse
+than saying so: whether an account is **blocked** on the hosting side (a
+server-side setting, recorded nowhere on disk), and whether a repo is a fork
+carrying **upstream attribution** recorded in the web UI rather than in a
+local remote. Both need a token; name the token as the unblock rather than
+guessing at the answer.

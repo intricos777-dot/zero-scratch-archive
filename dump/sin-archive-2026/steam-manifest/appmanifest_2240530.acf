@@ -1,0 +1,40 @@
+"AppState"
+{
+	"appid"		"2240530"
+	"Universe"		"1"
+	"name"		"BABBDI"
+	"StateFlags"		"4"
+	"installdir"		"BABBDI"
+	"LastUpdated"		"1789773159"
+	"LastPlayed"		"0"
+	"SizeOnDisk"		"1275174958"
+	"StagingSize"		"0"
+	"buildid"		"10342245"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"547702592"
+	"BytesDownloaded"		"547702592"
+	"BytesToStage"		"1275174958"
+	"BytesStaged"		"1275174958"
+	"TargetBuildID"		"10342245"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2240533"
+		{
+			"manifest"		"3552781975811305382"
+			"size"		"1275174958"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

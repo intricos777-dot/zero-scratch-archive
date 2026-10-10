@@ -1,0 +1,45 @@
+"AppState"
+{
+	"appid"		"2901550"
+	"Universe"		"1"
+	"name"		"Arcanists"
+	"StateFlags"		"4"
+	"installdir"		"Arcanists"
+	"LastUpdated"		"1789772934"
+	"LastPlayed"		"1789774918"
+	"SizeOnDisk"		"1003228077"
+	"StagingSize"		"0"
+	"buildid"		"24732281"
+	"LastOwner"		"76561198883966185"
+	"DownloadType"		"1"
+	"UpdateResult"		"0"
+	"BytesToDownload"		"224333344"
+	"BytesDownloaded"		"224333344"
+	"BytesToStage"		"1003228077"
+	"BytesStaged"		"1003228077"
+	"TargetBuildID"		"24732281"
+	"AutoUpdateBehavior"		"0"
+	"AllowOtherDownloadsWhileRunning"		"0"
+	"ScheduledAutoUpdate"		"0"
+	"InstalledDepots"
+	{
+		"2901551"
+		{
+			"manifest"		"7080032565670245409"
+			"size"		"909376176"
+		}
+		"2901553"
+		{
+			"manifest"		"7511214155229984347"
+			"size"		"864121387"
+		}
+	}
+	"UserConfig"
+	{
+		"language"		"english"
+	}
+	"MountedConfig"
+	{
+		"language"		"english"
+	}
+}

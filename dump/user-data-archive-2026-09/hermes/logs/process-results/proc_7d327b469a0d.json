@@ -1,0 +1,15 @@
+{
+  "id": "proc_7d327b469a0d",
+  "command": "sleep 90; echo done",
+  "cwd": "/home/livings/Projects/shield-kitty",
+  "task_id": "default",
+  "owner_task_id": "20260926_121135_408774",
+  "session_key": "20260926_121135_408774",
+  "parent_session_id": "20260926_121322_a971eb",
+  "started_at": 1790450794.9244418,
+  "exit_code": 0,
+  "completion_reason": "exited",
+  "termination_source": "",
+  "notify_on_complete": true,
+  "output": "done\n\n__HERMES_CWD_840a76504c3a__/home/livings/Projects/shield-kitty__HERMES_CWD_840a76504c3a__\n"
+}

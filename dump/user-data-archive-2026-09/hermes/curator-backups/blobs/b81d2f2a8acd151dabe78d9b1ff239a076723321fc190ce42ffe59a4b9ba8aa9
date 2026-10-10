@@ -1,0 +1,174 @@
+# Linux static check battery
+
+Run from the parent directory of the repos under audit. Adjust `~/Projects` to
+wherever the fleet lives. Every command is read-only.
+
+## Syntax: does it parse at all
+
+```bash
+# bash
+find . -name '*.sh' -not -path '*/.git/*' -not -path '*/venv/*' \
+  -exec bash -n {} \; -print
+
+# python
+find . -name '*.py' -not -path '*/.git/*' -not -path '*/venv/*' \
+  -not -path '*__pycache__*' -exec python3 -m py_compile {} \; -print
+
+# systemd units
+find . -name '*.service' -not -path '*/.git/*' \
+  -exec systemd-analyze verify {} \;
+
+# node
+find . -name '*.js' -not -path '*/.git/*' -not -path '*/node_modules/*' \
+  -exec node --check {} \; -print
+```
+
+`bash -n` is the highest-yield check in the set. A duplicated keyword or an
+unclosed construct reads as plausible to a human reviewer and has never
+executed; the script is dead code that looks alive.
+
+`systemd-analyze verify` reports `Command ... is not executable: No such file
+or directory` for every unit whose `ExecStart` points at a stale path. That one
+message is a whole-repo path-drift audit in a single pass.
+
+## Stale machine-specific paths
+
+```bash
+# the previous home directory — substitute the real old username
+grep -rn '/home/<olduser>' ~/Projects --include='*' \
+  2>/dev/null | grep -v '/.git/' | grep -v '/venv/'
+
+# any absolute home path, to catch variants
+grep -rnE '/home/[a-z0-9_-]+/' ~/Projects --include='*.sh' --include='*.service' \
+  --include='*.py' --include='*.js' 2>/dev/null \
+  | grep -v '/.git/' | grep -v '/venv/'
+```
+
+Distinguish config from data: a `reports/*.json` containing an old path is a
+historical record, not a bug. A script constant is a bug.
+
+## Tracked-vs-ignored
+
+```bash
+git -C <repo> status --porcelain
+git -C <repo> ls-files | grep -c '^venv/'   # a committed venv is a finding
+git -C <repo> ls-files | grep -c '\.pyc$'   # committed bytecode is a finding
+git -C <repo> ls-files | grep -c '^node_modules/'
+git -C <repo> ls-files | grep -E '\.env$'
+ls -a <repo> | grep gitignore
+du -sh <repo>/.git                          # vs working tree
+```
+
+Untracked files mean the tool was built but never saved. Read them before
+committing: they may be the only copy of working code, and they have never
+been through a review or a test run.
+
+**Generated artifacts are findings, and they cluster.** One audit found 1,370
+tracked `.pyc` files in a single repo — the same defect it had already fixed
+in a sibling repo earlier that session. Fixing one instance proves nothing
+about the others, so sweep every repo for the pattern rather than the repo
+you happened to be in. Concretely, a tracked `.pyc` is dangerous rather than
+merely untidy: it is interpreter-specific and can be imported in preference
+to the adjacent source, so the code that runs may not be the code you edited.
+
+Untrack without deleting the working tree copy:
+
+```bash
+git rm -r --cached <paths>          # --cached: stop tracking, keep the file
+printf '__pycache__/\n*.pyc\n' > .gitignore
+```
+
+Distinguish a genuinely committed venv (`git ls-files | grep '^venv/'`) from a
+build artifact that merely exists on disk — only the former is a repo-hygiene
+finding. A live-refreshed intel/threat cache showing as modified in
+`git status` is expected churn, not drift worth committing or reverting.
+
+## Repo vs live system
+
+```bash
+# config files with a repo copy
+diff -q ~/Projects/x/theme.conf ~/.config/x/theme.conf && echo IN SYNC
+
+# live security config, comments stripped
+grep -vE '^\s*#|^\s*$' /etc/security/faillock.conf
+
+# enabled units and their timers
+systemctl --user list-unit-files | grep -vE '^UNIT|not-found'
+systemctl --user list-timers --all
+systemctl --user is-active <unit>
+```
+
+## Unit path resolution
+
+`%h` is the home of the user the unit runs **as**:
+
+- user unit (`~/.config/systemd/user/`) → the user
+- system unit (`/etc/systemd/system/`) → `/root` unless `User=` is set
+
+A system unit using `%h` without `User=` resolves to `/root/...`, which is a
+dead path for every real account. Verify the pairing exists:
+
+```bash
+grep -E '^(User=|ExecStart=)' <unit>
+```
+
+## Dependency sanity
+
+```bash
+# test deps must be declared, or the suite cannot even be collected
+cat requirements.txt
+grep -l '^import pytest\|^import pytest' tests/*.py
+<venv>/bin/python -m pytest tests/ -q
+```
+
+A suite whose test modules import a package absent from `requirements.txt`
+fails at import time and reports nothing about the code under test.
+
+## GUI app preflight: hybrid GPU + Wayland
+
+Before handing over an install command for anything with a window, check the
+three things whose absence produces a silent software-rendering fallback or a
+window that never appears. Each reads as "the install is broken" rather than as
+the missing dependency it is.
+
+```bash
+echo "$XDG_SESSION_TYPE $XDG_CURRENT_DESKTOP"    # wayland + KDE?
+lspci -k | grep -A2 -iE 'vga|3d|display'        # hybrid? which driver in use
+glxinfo -B | grep -E 'OpenGL renderer|direct rendering'
+vulkaninfo --summary 2>/dev/null | grep -A4 'GPU id'
+```
+
+- **The 32-bit driver stack, not just 64-bit.** Multilib enabled in
+  `pacman.conf` is necessary and not sufficient — what 32-bit titles dlopen is
+  `/usr/lib32/libGLX_nvidia.so*` plus `lib32-nvidia-utils`. When those are
+  missing the app installs cleanly and every title falls back to software
+  rendering. Check the files exist, not just the repo section:
+
+  ```bash
+  ls /usr/lib32/libGLX_nvidia.so* /usr/lib32/libnvidia-glcore.so* 2>&1
+  ```
+
+- **`vulkaninfo` naming `llvmpipe`/lavapipe** means no hardware ICD was
+  selected. Each `library_path` in `/usr/share/vulkan/icd.d/*.json` must resolve
+  to a real file. A 32-bit Vulkan ICD has no separate package here — it is the
+  same `nvidia_icd.json` resolving against the 32-bit `libGLX_nvidia`.
+- **`vulkaninfo` loader warnings** (`does not export
+  vkGetPhysicalDeviceDisplayPropertiesKHR`) are a known NVIDIA-driver/loader
+  mismatch in some builds. Harmless — do not chase it, do not let it delay a
+  hand-over.
+- **A missing bootstrap/updater popup under Wayland is normal.** The updater
+  may run as a detached child that never maps a window, writing progress to a
+  log instead. Triage the process table before the display layer.
+
+## Exec, don't infer
+
+```bash
+<cli> --help
+<daemon>.sh --once            # every daemon should support single-run
+systemctl --user start <unit> && systemctl --user is-active <unit>
+curl -s -o /dev/null -w 'HTTP %{http_code}\n' http://127.0.0.1:<port>/
+```
+
+Use the invocation from the project's own README or `start.sh`. A file run
+directly puts its own directory on `sys.path`, not the repo root, so sibling
+package imports fail while the file compiles cleanly.

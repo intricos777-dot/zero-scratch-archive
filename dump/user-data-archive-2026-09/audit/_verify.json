@@ -1,0 +1,4565 @@
+[
+ {
+  "name": "A.I.-bridge-skills",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:40:04-07:00",
+  "commits": "1",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "aeronautical-programming",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-08-04T23:29:03-04:00",
+  "commits": "3",
+  "files": 3,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 2,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "aerospace-simulation-foundation",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:40:24-07:00",
+  "commits": "4",
+  "files": 11,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 9,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "aerovora",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-08-03T22:38:22-04:00",
+  "commits": "7",
+  "files": 4,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "aerovora-industries",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:38:33-07:00",
+  "commits": "12",
+  "files": 34,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "AEROVORA_BASE_URL",
+   "AEROVORA_SITE_URL",
+   "BRANCH",
+   "DIR",
+   "MARKETING_DIR",
+   "P10",
+   "P11",
+   "P12",
+   "P13",
+   "P14",
+   "P15",
+   "REPO_NAME",
+   "SCHEDULE_FILE",
+   "SOURCE_DIR",
+   "STRIPE",
+   "STRIPE_API_KEY"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 8,
+    "fail": []
+   },
+   "sh": {
+    "ok": 5,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "ai-autonomy-framework",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:38:34-07:00",
+  "commits": "4",
+  "files": 4,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "LOG",
+   "REPO",
+   "REPO_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "ai-teacher-robot-pairing",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "pyproject.toml"
+  ],
+  "last_commit": "2026-09-21T12:40:24-07:00",
+  "commits": "3",
+  "files": 14,
+  "deps": [
+   {
+    "name": "setuptools",
+    "source": "pyproject.toml",
+    "raw": "\"setuptools>=68"
+   }
+  ],
+  "dep_count": 1,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 13,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "bch-faucet-backup",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T14:24:20-07:00",
+  "commits": "1",
+  "files": 1,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "bch-faucet-web",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-09-21T14:48:14-07:00",
+  "commits": "7",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "bde-security-biometrics",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:37:59-07:00",
+  "commits": "12",
+  "files": 20,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "API",
+   "ARCHIVE_DIR",
+   "BASH_SOURCE",
+   "BDE_DIR",
+   "BDE_SOCK",
+   "BDE_SYNC_PORT",
+   "COMPETITOR_DOMAINS",
+   "HOME",
+   "JSON",
+   "PACKAGE_DIR",
+   "PATROL_INTERVAL_MS",
+   "PORT",
+   "PROJECT_ROOT",
+   "REPO",
+   "SCRIPT_DIR",
+   "SERVICE_FILE",
+   "SOCKET",
+   "SYNC",
+   "SYNC_PORT",
+   "TITLE",
+   "VENV_PYTHON",
+   "WEBPATROL_JS"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 5,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "beverage-company",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-10T21:22:10-04:00",
+  "commits": "6",
+  "files": 11,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "LOG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 6,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "black-ops-2-elysium",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T15:18:29-07:00",
+  "commits": "10",
+  "files": 81,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 9,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "business-debug-wrappers",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-26T12:20:21-07:00",
+  "commits": "2",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BASH_SOURCE",
+   "HOME",
+   "INSTALL_DIR",
+   "SCRIPT_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "business-health-monitor",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-26T12:20:21-07:00",
+  "commits": "5",
+  "files": 9,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BASH_SOURCE",
+   "CHECK_INTERVAL",
+   "CONFIG_DIR",
+   "ENV_FILE",
+   "FILES",
+   "HEALTH_URL",
+   "HOME",
+   "INSTALL_DIR",
+   "LOG_DIR",
+   "LOG_FILE",
+   "MASTER_LOG",
+   "ONCE",
+   "PORT",
+   "PROJECT_DIR",
+   "REPORT_FILE",
+   "REPORT_ONLY",
+   "SCRIPT_DIR",
+   "SELF_DIR",
+   "SERVICE",
+   "UNIT_DIR",
+   "WATCHDOGS",
+   "WATCHDOG_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 6,
+    "fail": [
+     {
+      "file": "self_heal_wrappers/crypto_watchdog.sh",
+      "err": "/home/livings/Projects/_inventory/business-health-monitor/self_heal_wrappers/crypto_watchdog.sh: line 39: `  if [[ \"$usage\" -gt 95 ]]; then then'"
+     }
+    ]
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "clean-plastics-sim",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "pyproject.toml"
+  ],
+  "last_commit": "2026-09-21T12:40:25-07:00",
+  "commits": "2",
+  "files": 11,
+  "deps": [
+   {
+    "name": "setuptools",
+    "source": "pyproject.toml",
+    "raw": "\"setuptools>=68"
+   }
+  ],
+  "dep_count": 1,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 10,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "code-theft-evidence",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-15T18:15:24-04:00",
+  "commits": "19",
+  "files": 77,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "EVIDENCE_DIR",
+   "INFRINGEMENT_URL",
+   "REPORT",
+   "TIMESTAMP"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "coinbase-agent-tools",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json"
+  ],
+  "last_commit": "2026-08-09T03:00:06-04:00",
+  "commits": "3",
+  "files": 7,
+  "deps": [
+   {
+    "name": "@coinbase/coinbase-cli",
+    "source": "package.json:dependencies",
+    "raw": "^1.1.12"
+   },
+   {
+    "name": "commander",
+    "source": "package.json:dependencies",
+    "raw": "^12.0.0"
+   },
+   {
+    "name": "@types/node",
+    "source": "package.json:devDependencies",
+    "raw": "^22.0.0"
+   },
+   {
+    "name": "tsx",
+    "source": "package.json:devDependencies",
+    "raw": "^4.19.0"
+   },
+   {
+    "name": "typescript",
+    "source": "package.json:devDependencies",
+    "raw": "^5.6.0"
+   }
+  ],
+  "dep_count": 5,
+  "env_vars": [
+   "HOME",
+   "LOG",
+   "REPO"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 3,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "cold-fusion-mini",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-08-03T23:01:50-04:00",
+  "commits": "4",
+  "files": 7,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 5,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "coordination-server",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json",
+   "Dockerfile"
+  ],
+  "last_commit": "2026-09-21T12:38:35-07:00",
+  "commits": "3",
+  "files": 8,
+  "deps": [
+   {
+    "name": "express",
+    "source": "package.json:dependencies",
+    "raw": "^4.19.2"
+   },
+   {
+    "name": "ws",
+    "source": "package.json:dependencies",
+    "raw": "^8.17.0"
+   },
+   {
+    "name": "uuid",
+    "source": "package.json:dependencies",
+    "raw": "^9.0.1"
+   },
+   {
+    "name": "dotenv",
+    "source": "package.json:dependencies",
+    "raw": "^16.4.5"
+   },
+   {
+    "name": "helmet",
+    "source": "package.json:dependencies",
+    "raw": "^7.1.0"
+   },
+   {
+    "name": "cors",
+    "source": "package.json:dependencies",
+    "raw": "^2.8.5"
+   },
+   {
+    "name": "express-rate-limit",
+    "source": "package.json:dependencies",
+    "raw": "^7.2.0"
+   },
+   {
+    "name": "jsonwebtoken",
+    "source": "package.json:dependencies",
+    "raw": "^9.0.2"
+   },
+   {
+    "name": "bcryptjs",
+    "source": "package.json:dependencies",
+    "raw": "^2.4.3"
+   },
+   {
+    "name": "winston",
+    "source": "package.json:dependencies",
+    "raw": "^3.13.0"
+   },
+   {
+    "name": "@types/node",
+    "source": "package.json:devDependencies",
+    "raw": "^20.12.0"
+   },
+   {
+    "name": "@types/ws",
+    "source": "package.json:devDependencies",
+    "raw": "^8.5.10"
+   },
+   {
+    "name": "@types/jsonwebtoken",
+    "source": "package.json:devDependencies",
+    "raw": "^9.0.6"
+   },
+   {
+    "name": "@types/bcryptjs",
+    "source": "package.json:devDependencies",
+    "raw": "^2.4.6"
+   }
+  ],
+  "dep_count": 14,
+  "env_vars": [
+   "COORD_ADMIN_TOKEN",
+   "COORD_ALLOWED_ORIGINS",
+   "COORD_DATA_DIR",
+   "COORD_JWT_EXPIRY",
+   "COORD_JWT_SECRET",
+   "COORD_LISTEN_URL",
+   "COORD_LOG_DIR",
+   "COORD_NODE_ID",
+   "COORD_PORT",
+   "COORD_ROOT_KEY",
+   "COORD_TLS_CERT",
+   "COORD_TLS_KEY",
+   "GRAFANA_PASSWORD",
+   "JSON",
+   "LOG_LEVEL",
+   "MAX_CAVEATS",
+   "MAX_DELEGATION_DEPTH",
+   "PORT"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "crypto-bot",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json"
+  ],
+  "last_commit": "2026-09-21T10:36:20-07:00",
+  "commits": "12",
+  "files": 47,
+  "deps": [
+   {
+    "name": "@coinbase/cdp-sdk",
+    "source": "package.json:dependencies",
+    "raw": "^1.56.0"
+   },
+   {
+    "name": "@opensea/sdk",
+    "source": "package.json:dependencies",
+    "raw": "^11.2.0"
+   },
+   {
+    "name": "coinbase-api",
+    "source": "package.json:dependencies",
+    "raw": "^1.2.6"
+   },
+   {
+    "name": "dotenv",
+    "source": "package.json:dependencies",
+    "raw": "^16.4.0"
+   },
+   {
+    "name": "express",
+    "source": "package.json:dependencies",
+    "raw": "^5.1.0"
+   },
+   {
+    "name": "express-rate-limit",
+    "source": "package.json:dependencies",
+    "raw": "^7.5.1"
+   },
+   {
+    "name": "node-cron",
+    "source": "package.json:dependencies",
+    "raw": "^3.0.0"
+   },
+   {
+    "name": "opensea-js",
+    "source": "package.json:dependencies",
+    "raw": "^8.1.1"
+   },
+   {
+    "name": "playwright",
+    "source": "package.json:dependencies",
+    "raw": "^1.48.0"
+   },
+   {
+    "name": "winston",
+    "source": "package.json:dependencies",
+    "raw": "^3.17.0"
+   },
+   {
+    "name": "@types/express",
+    "source": "package.json:devDependencies",
+    "raw": "^5.0.0"
+   },
+   {
+    "name": "@types/node",
+    "source": "package.json:devDependencies",
+    "raw": "^22.0.0"
+   },
+   {
+    "name": "@types/node-cron",
+    "source": "package.json:devDependencies",
+    "raw": "^3.0.0"
+   },
+   {
+    "name": "@types/ws",
+    "source": "package.json:devDependencies",
+    "raw": "^8.18.1"
+   },
+   {
+    "name": "tsx",
+    "source": "package.json:devDependencies",
+    "raw": "^4.19.0"
+   },
+   {
+    "name": "typescript",
+    "source": "package.json:devDependencies",
+    "raw": "^5.6.0"
+   }
+  ],
+  "dep_count": 16,
+  "env_vars": [
+   "BOT_API_KEY",
+   "FAUCET_CANDIDATES",
+   "FAUCET_MASTER_PASSWORD",
+   "FAUCET_PW",
+   "HOME",
+   "JSON",
+   "LIA_API_PORT",
+   "LOG",
+   "LOG_LEVEL",
+   "PATH",
+   "PORT",
+   "REPO",
+   "SCRIPT_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 5,
+    "fail": []
+   },
+   "sh": {
+    "ok": 6,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "crypto-dashboard",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json"
+  ],
+  "last_commit": "2026-09-21T13:24:51-07:00",
+  "commits": "7",
+  "files": 17,
+  "deps": [
+   {
+    "name": "@tanstack/react-query",
+    "source": "package.json:dependencies",
+    "raw": "^5.101.1"
+   },
+   {
+    "name": "axios",
+    "source": "package.json:dependencies",
+    "raw": "^1.18.1"
+   },
+   {
+    "name": "clsx",
+    "source": "package.json:dependencies",
+    "raw": "^2.1.1"
+   },
+   {
+    "name": "lucide-react",
+    "source": "package.json:dependencies",
+    "raw": "^1.21.0"
+   },
+   {
+    "name": "react",
+    "source": "package.json:dependencies",
+    "raw": "^19.2.7"
+   },
+   {
+    "name": "react-dom",
+    "source": "package.json:dependencies",
+    "raw": "^19.2.7"
+   },
+   {
+    "name": "react-router-dom",
+    "source": "package.json:dependencies",
+    "raw": "^7.18.0"
+   },
+   {
+    "name": "recharts",
+    "source": "package.json:dependencies",
+    "raw": "^3.9.0"
+   },
+   {
+    "name": "tailwind-merge",
+    "source": "package.json:dependencies",
+    "raw": "^3.6.0"
+   },
+   {
+    "name": "@tailwindcss/postcss",
+    "source": "package.json:devDependencies",
+    "raw": "^4.3.1"
+   },
+   {
+    "name": "@types/node",
+    "source": "package.json:devDependencies",
+    "raw": "^24.13.2"
+   },
+   {
+    "name": "@types/react",
+    "source": "package.json:devDependencies",
+    "raw": "^19.2.17"
+   },
+   {
+    "name": "@types/react-dom",
+    "source": "package.json:devDependencies",
+    "raw": "^19.2.3"
+   },
+   {
+    "name": "@types/react-router-dom",
+    "source": "package.json:devDependencies",
+    "raw": "^5.3.3"
+   },
+   {
+    "name": "@vitejs/plugin-react",
+    "source": "package.json:devDependencies",
+    "raw": "^6.0.2"
+   },
+   {
+    "name": "autoprefixer",
+    "source": "package.json:devDependencies",
+    "raw": "^10.5.2"
+   },
+   {
+    "name": "oxlint",
+    "source": "package.json:devDependencies",
+    "raw": "^1.69.0"
+   },
+   {
+    "name": "postcss",
+    "source": "package.json:devDependencies",
+    "raw": "^8.5.15"
+   },
+   {
+    "name": "tailwindcss",
+    "source": "package.json:devDependencies",
+    "raw": "^4.3.1"
+   },
+   {
+    "name": "typescript",
+    "source": "package.json:devDependencies",
+    "raw": "~6.0.2"
+   },
+   {
+    "name": "vite",
+    "source": "package.json:devDependencies",
+    "raw": "^8.1.0"
+   }
+  ],
+  "dep_count": 21,
+  "env_vars": [
+   "HOME",
+   "LOG",
+   "REPO"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 3,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "dental-ai-agent",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "pyproject.toml"
+  ],
+  "last_commit": "2026-09-19T15:13:28-07:00",
+  "commits": "1",
+  "files": 9,
+  "deps": [
+   {
+    "name": "setuptools",
+    "source": "pyproject.toml",
+    "raw": "\"setuptools>=68.0"
+   },
+   {
+    "name": "fastapi",
+    "source": "pyproject.toml",
+    "raw": "\"fastapi>=0.104.0"
+   },
+   {
+    "name": "pydantic",
+    "source": "pyproject.toml",
+    "raw": "\"pydantic>=2.5.0"
+   },
+   {
+    "name": "pyyaml",
+    "source": "pyproject.toml",
+    "raw": "\"pyyaml>=6.0.1"
+   },
+   {
+    "name": "httpx",
+    "source": "pyproject.toml",
+    "raw": "\"httpx>=0.25.0"
+   },
+   {
+    "name": "python-multipart",
+    "source": "pyproject.toml",
+    "raw": "\"python-multipart>=0.0.6"
+   },
+   {
+    "name": "ollama",
+    "source": "pyproject.toml",
+    "raw": "\"ollama>=0.1.0"
+   },
+   {
+    "name": "pytest",
+    "source": "pyproject.toml",
+    "raw": "\"pytest>=7.4.0"
+   },
+   {
+    "name": "pytest-asyncio",
+    "source": "pyproject.toml",
+    "raw": "\"pytest-asyncio>=0.23.0"
+   }
+  ],
+  "dep_count": 9,
+  "env_vars": [
+   "DENTAL_AI_CONFIG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 8,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "design-miner",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-05T22:51:58-04:00",
+  "commits": "2",
+  "files": 5,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 4,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "DivineDirector",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-07-20T21:18:29-04:00",
+  "commits": "1",
+  "files": 6,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "dot-hack-remake",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T15:18:48-07:00",
+  "commits": "2",
+  "files": 51,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "LIA_CLI",
+   "MINE_OS_PLAYERS"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 5,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "fate-engine",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-10T22:01:46-04:00",
+  "commits": "1",
+  "files": 4,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "faucet-logins",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json"
+  ],
+  "last_commit": "2026-09-21T13:24:59-07:00",
+  "commits": "6",
+  "files": 7,
+  "deps": [
+   {
+    "name": "@types/node",
+    "source": "package.json:devDependencies",
+    "raw": "^22.0.0"
+   },
+   {
+    "name": "playwright",
+    "source": "package.json:devDependencies",
+    "raw": "^1.48.0"
+   },
+   {
+    "name": "tsx",
+    "source": "package.json:devDependencies",
+    "raw": "^4.19.0"
+   },
+   {
+    "name": "typescript",
+    "source": "package.json:devDependencies",
+    "raw": "^5.6.0"
+   }
+  ],
+  "dep_count": 4,
+  "env_vars": [
+   "CAPSOLVER_API_KEY",
+   "FAUCET_MASTER_PASSWORD",
+   "TWOCAPTCHA_API_KEY"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "firedragon",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:38:00-07:00",
+  "commits": "11",
+  "files": 25,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BASH_SOURCE",
+   "FIREDRAGON_CTRL_PORT",
+   "PORT",
+   "PROJECT_ROOT",
+   "SCRIPT_DIR",
+   "SERVER"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 6,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "firedragon-flatpak-fresh",
+  "status": "ok",
+  "kind": "empty-or-docs",
+  "manifests": [],
+  "last_commit": "2026-09-18T11:26:37-07:00",
+  "commits": "280",
+  "files": 0,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "gaming-engineer-kb",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T13:07:29-07:00",
+  "commits": "1",
+  "files": 12,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "gaming-portfolio",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-09-21T15:07:39-07:00",
+  "commits": "2",
+  "files": 3,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "gaming-unified",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [],
+  "last_commit": "2026-08-15T03:56:42-04:00",
+  "commits": "5",
+  "files": 768,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "API_PID",
+   "ARGS",
+   "AUTOMATED",
+   "BASE",
+   "BASH_SOURCE",
+   "BINARY",
+   "BUILD_ROOT",
+   "CONTEXT",
+   "ENC_DIR",
+   "ENGINES",
+   "EXE",
+   "HOME",
+   "HOME_TMP",
+   "KEYS_DIR",
+   "LAUNCH_MODE",
+   "LAWLIB_BIN",
+   "LAW_LIB_API",
+   "LAW_LIB_DATA",
+   "LAYER_NAMES",
+   "LIA_BRIDGE_DIR",
+   "LIA_CLI_DIR",
+   "LOG",
+   "LOG_DIR",
+   "LOG_ENABLED",
+   "LOG_FILE",
+   "ORIG_HOME",
+   "PROJECT_DIR",
+   "PWD",
+   "QE_TEST_SECRET",
+   "REMAKES",
+   "REPO",
+   "RESPONSE",
+   "ROOT",
+   "SCRIPT_DIR",
+   "SECRET",
+   "TARGET",
+   "TMP",
+   "TOTAL",
+   "USERPROFILE"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 15,
+    "fail": [
+     {
+      "file": "mods/oblivion/modorganizer/massage_messages.py",
+      "err": "SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?"
+     }
+    ]
+   },
+   "sh": {
+    "ok": 18,
+    "fail": [
+     {
+      "file": "mods/launchers/linux-steam-nonsteam-launcher/templates/wrapper-launcher.sh",
+      "err": "/home/livings/Projects/_inventory/gaming-unified/mods/launchers/linux-steam-nonsteam-launcher/templates/wrapper-launcher.sh: line 45: `        steamtinkerlaunch play <REPLACE> 2>&1"
+     }
+    ]
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "garuda-tools-fresh",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [
+   "Makefile"
+  ],
+  "last_commit": "2026-09-18T11:26:32-07:00",
+  "commits": "257",
+  "files": 18,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ALL_",
+   "ALL_OFF",
+   "BLUE",
+   "BOLD",
+   "CHROOT_ACTIVE_MOUNTS",
+   "CHROOT_ACTIVE_PART_MOUNTS",
+   "DATADIR",
+   "DISTRIB_CODENAME",
+   "DISTRIB_ID",
+   "DISTRIB_RELEASE",
+   "FS_ACTIVE_MOUNTS",
+   "FUNCNAME",
+   "GENERATOR_DIR",
+   "GREEN",
+   "HOME",
+   "HOME_URL",
+   "IGNORE_INTERNAL",
+   "IMG_ACTIVE_MOUNTS",
+   "LIBDIR",
+   "LOGDEST",
+   "NAME",
+   "OLDPWD",
+   "OWNER",
+   "PKGDEST",
+   "PWD",
+   "RED",
+   "SRCDEST",
+   "SUDO_USER",
+   "SYSCONFDIR",
+   "TELEGRAM",
+   "USER",
+   "USERCONFDIR",
+   "USER_HOME",
+   "YELLOW"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 17,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "half-life-2-elysium",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T15:17:57-07:00",
+  "commits": "4",
+  "files": 81,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 10,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "half-life-elysium",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T15:17:33-07:00",
+  "commits": "4",
+  "files": 81,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 10,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "helldivers2-bugfixes",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-18T15:43:25-07:00",
+  "commits": "1",
+  "files": 6,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "helldivers2-patched",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-16T15:53:40-07:00",
+  "commits": "1",
+  "files": 1,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "hermes-blood",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-26T12:13:16-07:00",
+  "commits": "8",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BACKUP_DIR",
+   "HOME",
+   "OC_CONFIG",
+   "REPO_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "hermes-cli",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:38:02-07:00",
+  "commits": "2",
+  "files": 9,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "HERMES_REPO_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 9,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "hermes-security-scripts",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-26T13:00:42-07:00",
+  "commits": "5",
+  "files": 21,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "APPLY",
+   "BACKUP_DIR",
+   "BASH_SOURCE",
+   "CHANGED",
+   "CONF",
+   "CONFIG_DIR",
+   "CONFIG_FILE",
+   "COUNT",
+   "DEST",
+   "GROUP",
+   "HOME",
+   "ID_MODEL_ID",
+   "ID_SERIAL_SHORT",
+   "ID_VENDOR_ID",
+   "LOCKDIR",
+   "LOCKFILE",
+   "LOG",
+   "MEMBERS",
+   "MEMBERS_AFTER",
+   "MISSING",
+   "OPENAI_API_KEY",
+   "OPENCODE_BIN",
+   "PRIMARY_ADMIN",
+   "REPO",
+   "REPO_DIR",
+   "RULE",
+   "SCRIPT",
+   "SHIELD_KITTY_DISPLAY",
+   "SHIELD_KITTY_KEY",
+   "SHIELD_KITTY_RUNTIME",
+   "SHIELD_KITTY_STATE",
+   "SHIELD_KITTY_STORE",
+   "SHIELD_KITTY_USER",
+   "SRC",
+   "SSID",
+   "STATE",
+   "SUDOERS_D",
+   "SUPERCODE_BIN",
+   "TARGET",
+   "UNEXPECTED"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 6,
+    "fail": []
+   },
+   "sh": {
+    "ok": 14,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "hermes-self-evolve",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:38:03-07:00",
+  "commits": "3",
+  "files": 9,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "HOME",
+   "LOG",
+   "REPO",
+   "REPO_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 3,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "himalaya-bot",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T15:49:52-07:00",
+  "commits": "2",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "PATH"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "himalaya-exchange",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json"
+  ],
+  "last_commit": "2026-08-29T18:23:03-07:00",
+  "commits": "4",
+  "files": 8,
+  "deps": [
+   {
+    "name": "express",
+    "source": "package.json:dependencies",
+    "raw": "^5.1.0"
+   },
+   {
+    "name": "ws",
+    "source": "package.json:dependencies",
+    "raw": "^8.18.0"
+   },
+   {
+    "name": "uuid",
+    "source": "package.json:dependencies",
+    "raw": "^10.0.0"
+   },
+   {
+    "name": "dotenv",
+    "source": "package.json:dependencies",
+    "raw": "^16.4.0"
+   },
+   {
+    "name": "winston",
+    "source": "package.json:dependencies",
+    "raw": "^3.17.0"
+   },
+   {
+    "name": "@types/express",
+    "source": "package.json:devDependencies",
+    "raw": "^5.0.0"
+   },
+   {
+    "name": "@types/node",
+    "source": "package.json:devDependencies",
+    "raw": "^22.0.0"
+   },
+   {
+    "name": "@types/ws",
+    "source": "package.json:devDependencies",
+    "raw": "^8.5.0"
+   },
+   {
+    "name": "@types/uuid",
+    "source": "package.json:devDependencies",
+    "raw": "^10.0.0"
+   },
+   {
+    "name": "tsx",
+    "source": "package.json:devDependencies",
+    "raw": "^4.19.0"
+   },
+   {
+    "name": "typescript",
+    "source": "package.json:devDependencies",
+    "raw": "^5.6.0"
+   }
+  ],
+  "dep_count": 11,
+  "env_vars": [
+   "LOG",
+   "LOG_DIR",
+   "PORT",
+   "SYMBOLS"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "japanese-imports-llc",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-08T21:20:34-04:00",
+  "commits": "15",
+  "files": 18,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "LOG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 11,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "kali-zen-suite",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-05T05:03:41-04:00",
+  "commits": "5",
+  "files": 8,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "HOME",
+   "LAST",
+   "PWD",
+   "REPORT",
+   "REPORT_DIR",
+   "TARGET"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "kingdom-hearts-zero",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T14:56:56-07:00",
+  "commits": "21",
+  "files": 44,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 2,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "landbridge",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "requirements.txt"
+  ],
+  "last_commit": "2026-08-11T05:06:39-04:00",
+  "commits": "1",
+  "files": 9,
+  "deps": [
+   {
+    "name": "fastapi",
+    "source": "requirements.txt",
+    "raw": "fastapi"
+   },
+   {
+    "name": "uvicorn",
+    "source": "requirements.txt",
+    "raw": "uvicorn"
+   },
+   {
+    "name": "pydantic",
+    "source": "requirements.txt",
+    "raw": "pydantic"
+   }
+  ],
+  "dep_count": 3,
+  "env_vars": [
+   "HOST",
+   "PROJECT_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "later-work",
+  "status": "ok",
+  "kind": "empty-or-docs",
+  "manifests": [],
+  "last_commit": "",
+  "commits": "",
+  "files": 0,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "lead-gen-system",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-09-19T15:12:26-07:00",
+  "commits": "1",
+  "files": 6,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "CRON_CMD",
+   "CRON_COMMENT",
+   "CRON_SCHEDULE",
+   "PYTHON_BIN",
+   "SCRIPT_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "lia-cli",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json"
+  ],
+  "last_commit": "2026-09-21T15:49:52-07:00",
+  "commits": "10",
+  "files": 27,
+  "deps": [
+   {
+    "name": "dotenv",
+    "source": "package.json:dependencies",
+    "raw": "^16.4.0"
+   },
+   {
+    "name": "@types/node",
+    "source": "package.json:devDependencies",
+    "raw": "^22.20.2"
+   },
+   {
+    "name": "@types/ws",
+    "source": "package.json:devDependencies",
+    "raw": "^8.18.1"
+   },
+   {
+    "name": "tsx",
+    "source": "package.json:devDependencies",
+    "raw": "^4.19.0"
+   },
+   {
+    "name": "typescript",
+    "source": "package.json:devDependencies",
+    "raw": "^5.9.3"
+   }
+  ],
+  "dep_count": 5,
+  "env_vars": [
+   "BTC_WALLET_ADDRESS",
+   "COINBASE_API_KEY",
+   "COINBASE_API_SECRET",
+   "COINBASE_BUSINESS_ADDRESS",
+   "COINBASE_BUSINESS_CITY",
+   "COINBASE_BUSINESS_EMAIL",
+   "COINBASE_BUSINESS_PHONE",
+   "COINBASE_BUSINESS_STATE",
+   "COINBASE_BUSINESS_TAX_ID",
+   "COINBASE_BUSINESS_VOLUME",
+   "COINBASE_BUSINESS_WEBSITE",
+   "COINBASE_EXCHANGE_API_KEY",
+   "COINBASE_EXCHANGE_API_SECRET",
+   "CRYPTO_BOT",
+   "ETH_WALLET_ADDRESS",
+   "HOME",
+   "LIA_API_BASE",
+   "LIA_COORD_SECRET",
+   "LIA_DATA_DIR",
+   "LIA_HARNESS_STATE_DIR",
+   "LIA_HISTORY",
+   "LIA_IMAGE_PORT",
+   "LIA_IMAGE_PROVIDER",
+   "LIA_LOG",
+   "LIA_MODEL",
+   "LIA_PERSONALITY",
+   "MAX_CONTENT_LENGTH",
+   "MAX_TAGS",
+   "MAX_TAG_LENGTH",
+   "OLLAMA_ENDPOINT",
+   "OLLAMA_MODEL",
+   "OPENAI_API_KEY",
+   "OPENAI_MODEL",
+   "PROFIT_DESTINATION_EMAIL",
+   "RATE_LIMIT_MAX",
+   "VAULT_FILE"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 4,
+    "fail": [
+     {
+      "file": "kg_schema.py",
+      "err": "SyntaxError: unterminated string literal (detected at line 8)"
+     },
+     {
+      "file": "main.py",
+      "err": "SyntaxError: invalid syntax"
+     }
+    ]
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "lia-groq-bridge",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json"
+  ],
+  "last_commit": "2026-09-19T15:10:21-07:00",
+  "commits": "8",
+  "files": 8,
+  "deps": [
+   {
+    "name": "express",
+    "source": "package.json:dependencies",
+    "raw": "^4.19.2"
+   },
+   {
+    "name": "ws",
+    "source": "package.json:dependencies",
+    "raw": "^8.17.0"
+   },
+   {
+    "name": "uuid",
+    "source": "package.json:dependencies",
+    "raw": "^9.0.1"
+   },
+   {
+    "name": "dotenv",
+    "source": "package.json:dependencies",
+    "raw": "^16.4.5"
+   },
+   {
+    "name": "helmet",
+    "source": "package.json:dependencies",
+    "raw": "^7.1.0"
+   },
+   {
+    "name": "cors",
+    "source": "package.json:dependencies",
+    "raw": "^2.8.5"
+   },
+   {
+    "name": "express-rate-limit",
+    "source": "package.json:dependencies",
+    "raw": "^7.2.0"
+   },
+   {
+    "name": "@types/node",
+    "source": "package.json:devDependencies",
+    "raw": "^20.12.0"
+   }
+  ],
+  "dep_count": 8,
+  "env_vars": [
+   "ADMIN_TOKEN",
+   "ALLOWED_ORIGINS",
+   "COORD_AGENT_ID",
+   "COORD_SECRET",
+   "COORD_SERVER_URL",
+   "JSON",
+   "LIA_API",
+   "LIA_API_ALLOWED_HOSTS",
+   "LIA_API_ALLOW_ANY_HOST",
+   "LIA_API_URL",
+   "LOG",
+   "LOG_DIR",
+   "PORT",
+   "TLS_CERT_PATH",
+   "TLS_KEY_PATH"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "lin-antimalware",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "requirements.txt"
+  ],
+  "last_commit": "2026-09-26T12:20:21-07:00",
+  "commits": "8",
+  "files": 21,
+  "deps": [
+   {
+    "name": "click",
+    "source": "requirements.txt",
+    "raw": "click>=8.1"
+   },
+   {
+    "name": "requests",
+    "source": "requirements.txt",
+    "raw": "requests>=2.31"
+   },
+   {
+    "name": "pyyaml",
+    "source": "requirements.txt",
+    "raw": "pyyaml>=6.0.1"
+   }
+  ],
+  "dep_count": 3,
+  "env_vars": [
+   "BASH_SOURCE",
+   "LOG",
+   "PORT",
+   "REPO"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 17,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "lin-antimalware-tools",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:39:16-07:00",
+  "commits": "13",
+  "files": 28,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ADB",
+   "HOME",
+   "KEYS_DIR",
+   "LOG",
+   "MINDS_FILE",
+   "USER"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 17,
+    "fail": []
+   },
+   "sh": {
+    "ok": 5,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "linkedin-cli",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-19T15:12:56-07:00",
+  "commits": "1",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BASH_SOURCE",
+   "HOME",
+   "INSTALL_DIR",
+   "PATH"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "linkedin-outreach",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-19T15:13:14-07:00",
+  "commits": "1",
+  "files": 11,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 10,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "linux-zen-build",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T13:24:36-07:00",
+  "commits": "3",
+  "files": 49,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ALLOWLIST_DIR",
+   "API",
+   "ARCHIVE_DIR",
+   "AUDIT_SRC",
+   "BASH_SOURCE",
+   "BDE_DIR",
+   "BDE_SOCK",
+   "BDE_SRC",
+   "BDE_SYNC_PORT",
+   "BIN_DIR",
+   "COMPETITOR_DOMAINS",
+   "CONTEXT",
+   "CPUMINER",
+   "DEFAULT_ALLOWLIST",
+   "ENC_DIR",
+   "HERE",
+   "HOME",
+   "HOME_TMP",
+   "JSON",
+   "KEYS_DIR",
+   "LAYER_NAMES",
+   "LOG_DIR",
+   "MINER_SRC",
+   "ORIG_HOME",
+   "PACKAGE_DIR",
+   "PATH",
+   "PATROL_INTERVAL_MS",
+   "PORT",
+   "PROJECTS",
+   "PROJECT_ROOT",
+   "QE_TEST_SECRET",
+   "REPO",
+   "SCRIPT_DIR",
+   "SECRET",
+   "SERVICE_FILE",
+   "SNAP_BASE",
+   "SOCKET",
+   "STAMP",
+   "STATE_DIR",
+   "SYNC"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 19,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "linux-zen-suite",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:36:10-07:00",
+  "commits": "5",
+  "files": 5,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "CACHE_DIR",
+   "DBUS_SESSION_BUS_ADDRESS",
+   "HOME",
+   "HOST",
+   "LISTEN_ADDR",
+   "LISTEN_PORT",
+   "LOG_DIR",
+   "MODULE_DIR",
+   "PIPELINE_CACHE_FILE",
+   "PORT",
+   "SERVICE_FILE",
+   "TOKEN_FILE",
+   "VK_ICD_PATH",
+   "VK_LAYERS_PATH",
+   "ZEN_AI_TOKEN",
+   "ZEN_CORE_DIR",
+   "ZEN_VK_CACHE_DIR",
+   "ZEN_VK_CACHE_MAX_MB"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "living-sin-assets",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-08-07T03:33:42-04:00",
+  "commits": "4",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "DISPLAY"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "living-sin-merch",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-08-06T05:06:56-04:00",
+  "commits": "5",
+  "files": 13,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "living-sin-models",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-05T18:25:38-04:00",
+  "commits": "2",
+  "files": 4,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BLOB",
+   "HOME",
+   "LIA_BRIDGE_HOST",
+   "LIA_BRIDGE_PORT",
+   "MANIFEST_JSON",
+   "MODEL",
+   "MODEL_STORE",
+   "STORE"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "living-sin-search",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-17T01:35:03-04:00",
+  "commits": "8",
+  "files": 25,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ARGS",
+   "HOME",
+   "LOG",
+   "LSS_INDEX_ROOT",
+   "LSS_MODEL",
+   "LSS_QUERY_FILE",
+   "LSS_STT_DEVICE",
+   "LSS_STT_MODEL",
+   "LSS_TTS_DIR",
+   "LSS_TTS_VOICE",
+   "LSS_TTS_VOICE_PATH",
+   "LSS_WEB_ENGINE",
+   "OLLAMA_HOST",
+   "QUERY",
+   "QUERY_FILE",
+   "SCAN",
+   "TMPDIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 16,
+    "fail": []
+   },
+   "sh": {
+    "ok": 3,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "living-sin-ui",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-08-05T19:07:46-04:00",
+  "commits": "5",
+  "files": 3,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "DISPLAY",
+   "EMB",
+   "FISH_DIR",
+   "HOME",
+   "HOME_DIR",
+   "KON_DIR",
+   "OC_DIR",
+   "SRC",
+   "VOID_THEMES"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "local-emergency-patrol",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:38:01-07:00",
+  "commits": "5",
+  "files": 20,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "LOG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 15,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "loz-majoras-mask",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T14:46:41-07:00",
+  "commits": "19",
+  "files": 55,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BIN",
+   "BUILD_DIR",
+   "DIR",
+   "GENERATOR",
+   "JOBS",
+   "ROM",
+   "ROOT",
+   "TAG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "loz-ocarina-mq",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T12:40:25-07:00",
+  "commits": "10",
+  "files": 10,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "LOG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "market-library",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "requirements.txt"
+  ],
+  "last_commit": "2026-08-08T04:34:59-04:00",
+  "commits": "7",
+  "files": 11,
+  "deps": [
+   {
+    "name": "click",
+    "source": "requirements.txt",
+    "raw": "click"
+   },
+   {
+    "name": "requests",
+    "source": "requirements.txt",
+    "raw": "requests"
+   },
+   {
+    "name": "rich",
+    "source": "requirements.txt",
+    "raw": "rich"
+   }
+  ],
+  "dep_count": 3,
+  "env_vars": [
+   "LOG",
+   "PIPESTATUS",
+   "RESULT"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 7,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "metals-alloy-engineering",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-07T03:33:43-04:00",
+  "commits": "4",
+  "files": 4,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "money-automation",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "requirements.txt"
+  ],
+  "last_commit": "2026-09-21T12:38:02-07:00",
+  "commits": "2",
+  "files": 4,
+  "deps": [
+   {
+    "name": "requests",
+    "source": "requirements.txt",
+    "raw": "requests>=2.31.0"
+   },
+   {
+    "name": "beautifulsoup4",
+    "source": "requirements.txt",
+    "raw": "beautifulsoup4>=4.12.0"
+   },
+   {
+    "name": "feedparser",
+    "source": "requirements.txt",
+    "raw": "feedparser>=6.0.10"
+   },
+   {
+    "name": "rich",
+    "source": "requirements.txt",
+    "raw": "rich>=13.7.0"
+   }
+  ],
+  "dep_count": 4,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "mp3-video-virtualizer",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-15T18:14:38-04:00",
+  "commits": "7",
+  "files": 20,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 18,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "nanite-systems",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-17T00:30:35-04:00",
+  "commits": "9",
+  "files": 4,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "neuromorphic-handoff",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:39:13-07:00",
+  "commits": "3",
+  "files": 6,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "HOME",
+   "PROJECT",
+   "PROMPT",
+   "REPO_PATH",
+   "TORCH_DIR",
+   "TORCH_PATH"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 4,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "non-steam-games",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T15:29:18-07:00",
+  "commits": "1",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BINARY",
+   "GAME",
+   "GAMES_DIR",
+   "GAME_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "offline-agents",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-09-18T15:30:56-07:00",
+  "commits": "2",
+  "files": 366,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "CRF",
+   "DIR",
+   "DURATION",
+   "FFMPEG_VER",
+   "FILE_SIZE",
+   "FPS",
+   "FRAMES_ONLY",
+   "FRAME_DIR",
+   "GH_AUTH_METHOD",
+   "GH_OWNER_REPO",
+   "GH_USER",
+   "GITHUB_TOKEN",
+   "GREEN",
+   "HEIGHT",
+   "HERMES_CITATION_LEDGER",
+   "HERMES_HOME",
+   "HOME",
+   "INPUT",
+   "JINA_API_KEY",
+   "NODE_VER",
+   "NPM_VER",
+   "OAUTHLIB_RELAX_TOKEN_SCOPE",
+   "OPENCODE_HOME",
+   "OUTPUT",
+   "PORT",
+   "PY_VER",
+   "RED",
+   "REPO",
+   "SCRIPT_DIR",
+   "TOTAL_FRAMES",
+   "WIDTH",
+   "YELLOW"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 50,
+    "fail": []
+   },
+   "sh": {
+    "ok": 6,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "once-human-linux-fixes",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-04T17:59:47-07:00",
+  "commits": "1",
+  "files": 1,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "phone-computers",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:40:25-07:00",
+  "commits": "3",
+  "files": 9,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ADB",
+   "LOG",
+   "PHONE_MODEL",
+   "SYNC_HEARTBEAT",
+   "SYNC_MAX_TASKS",
+   "SYNC_PORT"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 5,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "polsia",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "requirements.txt"
+  ],
+  "last_commit": "2026-09-21T12:38:36-07:00",
+  "commits": "3",
+  "files": 16,
+  "deps": [
+   {
+    "name": "click",
+    "source": "requirements.txt",
+    "raw": "click>=8.1.0"
+   },
+   {
+    "name": "rich",
+    "source": "requirements.txt",
+    "raw": "rich>=13.7.0"
+   },
+   {
+    "name": "PyYAML",
+    "source": "requirements.txt",
+    "raw": "PyYAML>=6.0"
+   },
+   {
+    "name": "requests",
+    "source": "requirements.txt",
+    "raw": "requests>=2.31.0"
+   },
+   {
+    "name": "feedparser",
+    "source": "requirements.txt",
+    "raw": "feedparser>=6.0.10"
+   }
+  ],
+  "dep_count": 5,
+  "env_vars": [
+   "PAYPAL_CLIENT_ID",
+   "PAYPAL_CLIENT_SECRET",
+   "PAYPAL_MODE",
+   "PAYPAL_RECIPIENT"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 6,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "polsia-cli",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "pyproject.toml",
+   "Makefile"
+  ],
+  "last_commit": "2026-09-21T12:38:36-07:00",
+  "commits": "17",
+  "files": 55,
+  "deps": [
+   {
+    "name": "click",
+    "source": "pyproject.toml",
+    "raw": "\"click>=8.1.0"
+   },
+   {
+    "name": "rich",
+    "source": "pyproject.toml",
+    "raw": "\"rich>=13.0.0"
+   },
+   {
+    "name": "pyyaml",
+    "source": "pyproject.toml",
+    "raw": "\"pyyaml>=6.0"
+   },
+   {
+    "name": "httpx",
+    "source": "pyproject.toml",
+    "raw": "\"httpx>=0.27.0"
+   },
+   {
+    "name": "pydantic",
+    "source": "pyproject.toml",
+    "raw": "\"pydantic>=2.7.0"
+   },
+   {
+    "name": "jinja2",
+    "source": "pyproject.toml",
+    "raw": "\"jinja2>=3.1.0"
+   },
+   {
+    "name": "pyperclip",
+    "source": "pyproject.toml",
+    "raw": "\"pyperclip>=1.8.0"
+   },
+   {
+    "name": "python-dateutil",
+    "source": "pyproject.toml",
+    "raw": "\"python-dateutil>=2.9.0"
+   },
+   {
+    "name": "stripe",
+    "source": "pyproject.toml",
+    "raw": "\"stripe>=9.0.0"
+   },
+   {
+    "name": "cryptography",
+    "source": "pyproject.toml",
+    "raw": "\"cryptography>=42.0.0"
+   },
+   {
+    "name": "setuptools",
+    "source": "pyproject.toml",
+    "raw": "\"setuptools>=68.0"
+   }
+  ],
+  "dep_count": 11,
+  "env_vars": [
+   "LOG",
+   "POLSIA_DATA_SECRET",
+   "POLSIA_OWNER_PRINCIPAL"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 47,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "polsia-global-trade",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "requirements.txt",
+   "setup.py"
+  ],
+  "last_commit": "2026-09-21T13:26:14-07:00",
+  "commits": "4",
+  "files": 23,
+  "deps": [
+   {
+    "name": "fastapi",
+    "source": "requirements.txt",
+    "raw": "fastapi>=0.111"
+   },
+   {
+    "name": "uvicorn",
+    "source": "requirements.txt",
+    "raw": "uvicorn>=0.30"
+   },
+   {
+    "name": "sqlalchemy",
+    "source": "requirements.txt",
+    "raw": "sqlalchemy>=2.0"
+   },
+   {
+    "name": "alembic",
+    "source": "requirements.txt",
+    "raw": "alembic>=1.13"
+   },
+   {
+    "name": "pydantic",
+    "source": "requirements.txt",
+    "raw": "pydantic>=2.7"
+   },
+   {
+    "name": "python-dotenv",
+    "source": "requirements.txt",
+    "raw": "python-dotenv>=1.0"
+   },
+   {
+    "name": "requests",
+    "source": "requirements.txt",
+    "raw": "requests>=2.32"
+   },
+   {
+    "name": "httpx",
+    "source": "requirements.txt",
+    "raw": "httpx>=0.27"
+   },
+   {
+    "name": "python-jose",
+    "source": "requirements.txt",
+    "raw": "python-jose[cryptography]>=3.3"
+   },
+   {
+    "name": "passlib",
+    "source": "requirements.txt",
+    "raw": "passlib[bcrypt]>=1.7"
+   },
+   {
+    "name": "python-multipart",
+    "source": "requirements.txt",
+    "raw": "python-multipart>=0.0.9"
+   },
+   {
+    "name": "stripe",
+    "source": "requirements.txt",
+    "raw": "stripe>=8.0"
+   },
+   {
+    "name": "shopify_python_api",
+    "source": "requirements.txt",
+    "raw": "shopify_python_api>=0.4"
+   },
+   {
+    "name": "websockets",
+    "source": "requirements.txt",
+    "raw": "websockets>=12.0"
+   },
+   {
+    "name": "python-dateutil",
+    "source": "requirements.txt",
+    "raw": "python-dateutil>=2.9"
+   },
+   {
+    "name": "numpy",
+    "source": "requirements.txt",
+    "raw": "numpy>=1.26"
+   },
+   {
+    "name": "pandas",
+    "source": "requirements.txt",
+    "raw": "pandas>=2.2"
+   },
+   {
+    "name": "scikit-learn",
+    "source": "requirements.txt",
+    "raw": "scikit-learn>=1.5"
+   },
+   {
+    "name": "schedule",
+    "source": "requirements.txt",
+    "raw": "schedule>=1.2"
+   },
+   {
+    "name": "croniter",
+    "source": "requirements.txt",
+    "raw": "croniter>=2.0"
+   },
+   {
+    "name": "beautifulsoup4",
+    "source": "requirements.txt",
+    "raw": "beautifulsoup4>=4.12"
+   },
+   {
+    "name": "lxml",
+    "source": "requirements.txt",
+    "raw": "lxml>=5.2"
+   },
+   {
+    "name": "feedparser",
+    "source": "requirements.txt",
+    "raw": "feedparser>=6.0"
+   },
+   {
+    "name": "tenacity",
+    "source": "requirements.txt",
+    "raw": "tenacity>=8.2"
+   },
+   {
+    "name": "aiofiles",
+    "source": "requirements.txt",
+    "raw": "aiofiles>=24.1"
+   }
+  ],
+  "dep_count": 25,
+  "env_vars": [
+   "DIR",
+   "POLSIA_GLOBAL_TRADE_CONFIG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 19,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "polsia-lawsuit",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T13:13:51-07:00",
+  "commits": "2",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "profit-widget",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-08T21:20:43-04:00",
+  "commits": "4",
+  "files": 7,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "LOG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "q-debug-vm",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-08-11T06:42:41-04:00",
+  "commits": "4",
+  "files": 7,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "CLOUD_IMG",
+   "DATA_DIR",
+   "HOME",
+   "IMG",
+   "QDEBUG_IMG",
+   "QDEBUG_SEED",
+   "REPO_DIR",
+   "SEED",
+   "URL",
+   "VM_DIR"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 3,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "quantum-loop",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-12T03:47:02-04:00",
+  "commits": "8",
+  "files": 34,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "CUDA_VISIBLE_DEVICES",
+   "LOG"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 26,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "ringworld-redux",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T14:13:26-07:00",
+  "commits": "54",
+  "files": 92,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 2,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "rocket-build-system",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-17T00:30:35-04:00",
+  "commits": "12",
+  "files": 10,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 7,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "secure-tactical-systems",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-11T04:55:48-04:00",
+  "commits": "1",
+  "files": 1,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "security-audit-2026",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-26T12:46:10-07:00",
+  "commits": "7",
+  "files": 22,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "sen-isp-business",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-18T22:05:08-07:00",
+  "commits": "15",
+  "files": 39,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "HF_BASE_URL",
+   "HF_TOKEN",
+   "LOG",
+   "MINING_CONFIG",
+   "OLLAMA_BASE_URL",
+   "OLLAMA_MODELS_DIR",
+   "OLLAMA_REGISTRY_URL",
+   "OPENROUTER_API_KEY",
+   "OPENROUTER_BASE_URL",
+   "PAYPAL_CLIENT_ID",
+   "PAYPAL_CLIENT_SECRET",
+   "PAYPAL_SUBSCRIPTION_URL",
+   "SEN_BILLING_PROVIDER",
+   "SEN_EDGE_CONFIG",
+   "SEN_ISP_HOTSPOT_PASSWORD",
+   "SEN_LLM_ALLOWED_MODELS",
+   "SEN_LLM_API_KEY",
+   "SEN_LLM_BACKEND_PRIORITY",
+   "SEN_LLM_DEBUG_LOG",
+   "SEN_LLM_DEFAULT_MODEL",
+   "SEN_LLM_TIMEOUT_SECONDS",
+   "SEN_PROVISION_DIR",
+   "SEN_RECONCILIATION_DIR",
+   "STRIPE_CHECKOUT_URL",
+   "STRIPE_SECRET_KEY",
+   "XAI_API_KEY",
+   "XAI_BASE_URL"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 24,
+    "fail": []
+   },
+   "sh": {
+    "ok": 2,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "sen-isp-pygeofetch",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "pyproject.toml"
+  ],
+  "last_commit": "2026-08-19T16:13:51-07:00",
+  "commits": "1",
+  "files": 21,
+  "deps": [
+   {
+    "name": "setuptools",
+    "source": "pyproject.toml",
+    "raw": "\"setuptools>=68"
+   },
+   {
+    "name": "httpx",
+    "source": "pyproject.toml",
+    "raw": "\"httpx>=0.27"
+   },
+   {
+    "name": "pydantic",
+    "source": "pyproject.toml",
+    "raw": "\"pydantic>=2.6"
+   },
+   {
+    "name": "pydantic-settings",
+    "source": "pyproject.toml",
+    "raw": "\"pydantic-settings>=2.2"
+   },
+   {
+    "name": "pyyaml",
+    "source": "pyproject.toml",
+    "raw": "\"pyyaml>=6.0"
+   },
+   {
+    "name": "rich",
+    "source": "pyproject.toml",
+    "raw": "\"rich>=13.7"
+   },
+   {
+    "name": "tenacity",
+    "source": "pyproject.toml",
+    "raw": "\"tenacity>=8.2"
+   },
+   {
+    "name": "pytest",
+    "source": "pyproject.toml",
+    "raw": "\"pytest>=8.0"
+   },
+   {
+    "name": "pytest-asyncio",
+    "source": "pyproject.toml",
+    "raw": "\"pytest-asyncio>=0.23"
+   },
+   {
+    "name": "pytest-cov",
+    "source": "pyproject.toml",
+    "raw": "\"pytest-cov>=5.0"
+   },
+   {
+    "name": "ruff",
+    "source": "pyproject.toml",
+    "raw": "\"ruff>=0.5"
+   },
+   {
+    "name": "mypy",
+    "source": "pyproject.toml",
+    "raw": "\"mypy>=1.10"
+   },
+   {
+    "name": "eodag",
+    "source": "pyproject.toml",
+    "raw": "\"eodag>=3.0"
+   },
+   {
+    "name": "planetary-computer",
+    "source": "pyproject.toml",
+    "raw": "\"planetary-computer>=1.0"
+   },
+   {
+    "name": "pystac-client",
+    "source": "pyproject.toml",
+    "raw": "\"pystac-client>=0.8"
+   },
+   {
+    "name": "stackstac",
+    "source": "pyproject.toml",
+    "raw": "\"stackstac>=0.5"
+   },
+   {
+    "name": "leafmap",
+    "source": "pyproject.toml",
+    "raw": "\"leafmap>=0.31"
+   },
+   {
+    "name": "rasterio",
+    "source": "pyproject.toml",
+    "raw": "\"rasterio>=1.3"
+   },
+   {
+    "name": "xarray",
+    "source": "pyproject.toml",
+    "raw": "\"xarray>=2024.1"
+   },
+   {
+    "name": "rioxarray",
+    "source": "pyproject.toml",
+    "raw": "\"rioxarray>=0.15"
+   },
+   {
+    "name": "matplotlib",
+    "source": "pyproject.toml",
+    "raw": "\"matplotlib>=3.8"
+   },
+   {
+    "name": "folium",
+    "source": "pyproject.toml",
+    "raw": "\"folium>=0.16"
+   },
+   {
+    "name": "jupyterlab",
+    "source": "pyproject.toml",
+    "raw": "\"jupyterlab>=4.1"
+   },
+   {
+    "name": "ipywidgets",
+    "source": "pyproject.toml",
+    "raw": "\"ipywidgets>=8.1"
+   },
+   {
+    "name": "line-length",
+    "source": "pyproject.toml",
+    "raw": "line-length = 100"
+   }
+  ],
+  "dep_count": 25,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 20,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "simulation-policy-sandbox",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "pyproject.toml",
+   "setup.py"
+  ],
+  "last_commit": "2026-09-21T12:40:25-07:00",
+  "commits": "5",
+  "files": 10,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 10,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "sin-archive-2026",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-24T14:16:09-07:00",
+  "commits": "2",
+  "files": 1,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "skyrim-ai-overhaul",
+  "status": "ok",
+  "kind": "node",
+  "manifests": [
+   "package.json"
+  ],
+  "last_commit": "2026-07-20T21:18:36-04:00",
+  "commits": "1",
+  "files": 10,
+  "deps": [
+   {
+    "name": "path",
+    "source": "package.json:dependencies",
+    "raw": "^0.12.2"
+   }
+  ],
+  "dep_count": 1,
+  "env_vars": [
+   "PAPYRUS_BIN",
+   "PEX_DIR",
+   "PSC_DIR",
+   "SKSE_PATCHES",
+   "SKYRIM_SCRIPTS"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "skyrim-mod-packages",
+  "status": "ok",
+  "kind": "empty-or-docs",
+  "manifests": [],
+  "last_commit": "2026-07-20T22:09:19-04:00",
+  "commits": "3",
+  "files": 0,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "soh-masterquest-build",
+  "status": "ok",
+  "kind": "empty-or-docs",
+  "manifests": [],
+  "last_commit": "2026-07-19T23:48:33-04:00",
+  "commits": "1",
+  "files": 0,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "solar-well-infrastructure",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:40:25-07:00",
+  "commits": "7",
+  "files": 33,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 32,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "space-edge-network",
+  "status": "ok",
+  "kind": "static-web",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:39:23-07:00",
+  "commits": "31",
+  "files": 115,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ACTIVE",
+   "CONFIG",
+   "EDGE_CLIENT",
+   "GITHUB_TOKEN",
+   "INTERFACE",
+   "LOG",
+   "SEN_ADB_STORE",
+   "SEN_AUDIT_DIR",
+   "SEN_BACKUP_DIR",
+   "SEN_CEREBELLUM_ARCHIVE",
+   "SEN_EDGE_CONFIG",
+   "SEN_IDS_ROOT",
+   "SEN_INTEGRITY_STORE",
+   "SEN_PATROL_STORE",
+   "SEN_SECURITY_ROOT",
+   "STATUS"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 97,
+    "fail": []
+   },
+   "sh": {
+    "ok": 3,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "spacecraft-blueprint-simulator",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-07T08:36:47-04:00",
+  "commits": "5",
+  "files": 6,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BASH_SOURCE"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 4,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "steam-linux-optimizations",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-15T21:45:04-04:00",
+  "commits": "2",
+  "files": 10,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "COMPAT_DIR",
+   "CONFIG_DIR",
+   "GAMEGUARD_PORTS_TCP",
+   "GAME_APPID",
+   "GAME_EXE",
+   "GAME_NAME",
+   "GAME_PATH",
+   "GG_APP_PASS",
+   "GG_EMAIL",
+   "GPU_MODE",
+   "HOME",
+   "INTEL_VK_NAME",
+   "LAST_XID",
+   "LAUNCH_OPTS",
+   "LOCK_FILE",
+   "LOG_FILE",
+   "PID_FILE",
+   "POLL_SECS",
+   "PREFIX_DIR",
+   "PROTON_PATH",
+   "PROTON_VERSION",
+   "PWR_CAP",
+   "STEAM_DIR",
+   "STEAM_LAUNCH_FILE",
+   "STEAM_LAUNCH_OPTIONS",
+   "STEAM_PORTS_TCP",
+   "TEMP",
+   "TEMP_CRITICAL",
+   "TEMP_HIGH",
+   "TEMP_RECOVER",
+   "THROTTLED",
+   "USER",
+   "WINEPREFIX",
+   "WRAPPER_DIR",
+   "XID"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 2,
+    "fail": []
+   },
+   "sh": {
+    "ok": 7,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "sword-tale-bugfix",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T16:57:49-07:00",
+  "commits": "7",
+  "files": 12,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ATTEMPTS",
+   "AUX_SERVICES",
+   "BASH_SOURCE",
+   "CFG_DIR",
+   "CHECK_INTERVAL",
+   "DEV",
+   "DXVK_CONFIG",
+   "DXVK_FILTER_DEVICE_NAME",
+   "GAME_APPID",
+   "GAME_ARGS",
+   "GAME_DIR",
+   "HOME",
+   "LAST_STATE",
+   "LOGDIR",
+   "LOG_FILE",
+   "MINER_SERVICES",
+   "NEEDED_START",
+   "OUT",
+   "PREFIX_DIR",
+   "PROTON",
+   "RECOMMENDED",
+   "RUNNER",
+   "SCRIPT_DIR",
+   "SHADER_DIR",
+   "STAY",
+   "STEAM_COMMON",
+   "STEAM_LIBRARIES",
+   "STEAM_ROOT",
+   "TEMPLATES",
+   "TIMEOUT"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 7,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "sword-tale-controller",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T17:08:13-07:00",
+  "commits": "2",
+  "files": 1,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "sword-tale-crash-report",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T17:10:01-07:00",
+  "commits": "2",
+  "files": 4,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "system-resource-optimizer",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-17T00:30:35-04:00",
+  "commits": "4",
+  "files": 3,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BASH_SOURCE",
+   "REPO_DIR",
+   "SERVICE_NAME"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 2,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "te-bonfire",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T14:46:36-07:00",
+  "commits": "3",
+  "files": 25,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "te-halo-inspired",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T15:18:56-07:00",
+  "commits": "15",
+  "files": 51,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 1,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "tf2-elysium",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T15:18:11-07:00",
+  "commits": "5",
+  "files": 79,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 10,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "The-Elder-Scrolls-Elsewhyr",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-07-11T20:13:56-04:00",
+  "commits": "1",
+  "files": 7,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 6,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "The-Elder-Scrolls-Elsweyr",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-07T02:47:59-04:00",
+  "commits": "2",
+  "files": 1,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "twilight-elysium",
+  "status": "ok",
+  "kind": "c++",
+  "manifests": [
+   "CMakeLists.txt"
+  ],
+  "last_commit": "2026-09-21T15:19:08-07:00",
+  "commits": "14",
+  "files": 102,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 10,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "vessel-logistics",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-17T00:30:35-04:00",
+  "commits": "5",
+  "files": 11,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 8,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "vm-bootstrap",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-08T18:09:15-04:00",
+  "commits": "2",
+  "files": 4,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BASE_IMAGE",
+   "BRIDGE",
+   "CLOUD_ISO",
+   "CLOUD_ISO_DIR",
+   "CPUS",
+   "DISK_DIR",
+   "DISK_PATH",
+   "DISK_SIZE",
+   "ISO_PATH",
+   "MEMORY",
+   "NAME",
+   "PROJECT_DIR",
+   "SPEC",
+   "VM_BASE_IMAGE",
+   "VM_BRIDGE",
+   "VM_CLOUD_ISO_DIR",
+   "VM_CPUS",
+   "VM_DISK_DIR",
+   "VM_DISK_SIZE",
+   "VM_MEMORY",
+   "WINDOWS_ISO"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 3,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "void-bridge",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "requirements.txt"
+  ],
+  "last_commit": "2026-09-21T12:37:58-07:00",
+  "commits": "3",
+  "files": 5,
+  "deps": [
+   {
+    "name": "mcp",
+    "source": "requirements.txt",
+    "raw": "mcp>=1.2.0"
+   }
+  ],
+  "dep_count": 1,
+  "env_vars": [
+   "HOME",
+   "VOID_BRIDGE_HOST",
+   "VOID_BRIDGE_MASTER_PASSWORD",
+   "VOID_BRIDGE_PORT",
+   "VOID_BRIDGE_ROOT",
+   "VOID_BRIDGE_TOKEN"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 3,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "voynich-occult-corpus",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T17:25:56-07:00",
+  "commits": "26",
+  "files": 12,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 9,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "waydroid-issues",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:38:32-07:00",
+  "commits": "6",
+  "files": 12,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ALL_GAMES",
+   "BASH_SOURCE",
+   "BLUE",
+   "CYAN",
+   "GAMES_DIR",
+   "GAME_BINARIES",
+   "GAME_BUILD_DIRS",
+   "GAME_SHADERS",
+   "GREEN",
+   "LOG_FILE",
+   "RED",
+   "SCRIPT_DIR",
+   "STATE_FILE",
+   "YELLOW"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 2,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "web-bug-reports",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T09:54:32-07:00",
+  "commits": "1",
+  "files": 2,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "wildhearts-linux-fixes",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-18T18:53:40-07:00",
+  "commits": "1",
+  "files": 8,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "BASH_SOURCE",
+   "BOLD",
+   "COMPAT_DATA",
+   "CPU_CORES",
+   "CPU_MODEL",
+   "CYAN",
+   "EUID",
+   "FAIL",
+   "GAME_APPID",
+   "GAME_DIR",
+   "GAME_EXE",
+   "GPU_NAME",
+   "GPU_VENDOR",
+   "GPU_VRAM",
+   "GREEN",
+   "HOME",
+   "PASS",
+   "PFX",
+   "PRETTY_NAME",
+   "PROFILE",
+   "RAM_GB",
+   "RED",
+   "SCRIPT_DIR",
+   "STEAM_DIR",
+   "WARN",
+   "YELLOW"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 5,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "work-automation",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T15:49:54-07:00",
+  "commits": "2",
+  "files": 20,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "GMAIL_IMAP_PWD",
+   "GMAIL_SMTP_PWD"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 19,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "zeigiest-economy-sim",
+  "status": "ok",
+  "kind": "python",
+  "manifests": [
+   "pyproject.toml"
+  ],
+  "last_commit": "2026-09-21T12:40:25-07:00",
+  "commits": "2",
+  "files": 17,
+  "deps": [
+   {
+    "name": "setuptools",
+    "source": "pyproject.toml",
+    "raw": "\"setuptools>=68"
+   }
+  ],
+  "dep_count": 1,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 16,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "zen-healer",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:39:31-07:00",
+  "commits": "74",
+  "files": 3,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 2,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ },
+ {
+  "name": "zen-suite",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-09-21T12:36:10-07:00",
+  "commits": "8",
+  "files": 17,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [
+   "ARCH_DIR",
+   "ARCH_ISO",
+   "BASH_SOURCE",
+   "CACHE_DIR",
+   "CCACHE",
+   "CHROOT",
+   "CURRENT",
+   "DBUS_SESSION_BUS_ADDRESS",
+   "GITHUB_OUTPUT",
+   "HERE",
+   "HOME",
+   "HOST",
+   "HOSTNAME",
+   "ISO_DIR",
+   "ISO_NAME",
+   "KALI_DIR",
+   "KALI_DIST",
+   "KALI_ISO",
+   "KALI_MIRROR",
+   "KERNEL_BRANCH",
+   "KERNEL_VERSION",
+   "LATEST",
+   "LISTEN_ADDR",
+   "LISTEN_PORT",
+   "LOG_DIR",
+   "MIRROR",
+   "MODULE_DIR",
+   "MOUNT",
+   "OUTDIR",
+   "PIPELINE_CACHE_FILE",
+   "PORT",
+   "SCRIPT_DIR",
+   "SERVICE_FILE",
+   "SIZE",
+   "TOKEN_FILE",
+   "USERNAME",
+   "VK_ICD_PATH",
+   "VK_LAYERS_PATH",
+   "WORKDIR",
+   "ZEN_AI_TOKEN"
+  ],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 7,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "zen-suite-iso",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-05T06:49:05-04:00",
+  "commits": "1",
+  "files": 1,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 0,
+    "fail": []
+   }
+  },
+  "has_service_unit": false
+ },
+ {
+  "name": "zen-suite-release",
+  "status": "ok",
+  "kind": "unknown",
+  "manifests": [],
+  "last_commit": "2026-08-05T02:23:06-04:00",
+  "commits": "1",
+  "files": 3,
+  "deps": [],
+  "dep_count": 0,
+  "env_vars": [],
+  "syntax": {
+   "py": {
+    "ok": 0,
+    "fail": []
+   },
+   "sh": {
+    "ok": 1,
+    "fail": []
+   }
+  },
+  "has_service_unit": true
+ }
+]
