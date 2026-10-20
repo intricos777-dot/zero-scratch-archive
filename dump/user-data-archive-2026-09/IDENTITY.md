@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Identity map — usernames, UIDs, hosts (window 2026-05-28 → 2026-09-28)
 
 ## This machine (host `zero`)

@@ -1,3 +1,4 @@
+# Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work
 from owlready2 import
 onto = get_ontology("http://example.com/myOnto.owl")
 with onto:

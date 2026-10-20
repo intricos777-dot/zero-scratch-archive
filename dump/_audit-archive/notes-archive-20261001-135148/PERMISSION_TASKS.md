@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Permission-Gated Task List
 
 Save this file. Each task is blocked until the corresponding permission/credential is granted.

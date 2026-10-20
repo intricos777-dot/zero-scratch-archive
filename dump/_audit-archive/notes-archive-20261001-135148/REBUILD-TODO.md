@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Reconstruction To-Do — what was lost or never ported in the machine rebuild
 
 Compiled 2026-09-26 by mining every session store and Git repository on this

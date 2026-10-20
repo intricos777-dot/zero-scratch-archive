@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Session notes and work-task archive
 
 Archived from Desktop/ and Projects/ on 2026-10-01 before clearing the originals.

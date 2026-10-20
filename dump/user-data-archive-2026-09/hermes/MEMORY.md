@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 GitHub account is intricos777-dot (120 repos, mostly private). As of 2026-09-26: no `gh` CLI, no token on disk (~/.config/gh is empty), and the ~/.ssh/id_ed25519 key is offered to github.com but REJECTED — so neither push nor repo creation works until the user registers a key or supplies a token. lifsea-security-suite has an SSH remote but cannot currently be pushed.
 §
 Root installs need a sudo password (passwordless sudo unavailable) — hand PAM/udev/systemd/firewalld changes to the user as an exact `sudo <script>` command rather than trying to run them or asking for the password.

@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Brief: Xbox controller + PS1 emulation + lia bridge
 Date: 2026-09-29
 Status: controller working, Diablo playable, lia bridge blocked

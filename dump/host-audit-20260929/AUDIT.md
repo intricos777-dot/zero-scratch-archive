@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Host Breach Audit — `zero`
 
 **Date:** 2026-09-29T12:48:27-07:00

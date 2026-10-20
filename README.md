@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # zero-scratch-archive
 
 Archive of excess / leftover material from machine **zero** (Garuda Linux, user `livings`),

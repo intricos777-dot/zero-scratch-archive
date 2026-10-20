@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # SESSION NOTES — 2026-09-28/29
 
 Fleet restore, diagnostics, resource caps, and the autoguard deployment.

@@ -1,3 +1,4 @@
+# Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work
 from .keymaster import AutonomyKeyMaster
 from .levels import AutonomyLevel, AutonomyLevels
 from .constitution import Constitution

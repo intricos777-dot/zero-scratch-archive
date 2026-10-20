@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Status note — 2026-09-28 ~13:45 MST
 
 Written so you can walk away and resume cold. Nothing is mid-edit; no partial

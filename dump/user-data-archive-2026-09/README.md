@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # user-data-archive-2026-09
 
 Private archive of the operator's own user data, pulled **2026-09-28** for the

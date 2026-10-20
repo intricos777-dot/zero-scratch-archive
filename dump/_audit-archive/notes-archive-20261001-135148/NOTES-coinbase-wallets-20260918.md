@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # HAULT NOTE — Coinbase wallet-address quest (2026-09-18, paused)
 
 ## The quest

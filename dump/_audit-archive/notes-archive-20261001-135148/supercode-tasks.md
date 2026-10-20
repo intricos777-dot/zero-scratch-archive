@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Supercode Task List (handoff from Lia.CLI sync, 2026-08-09)
 
 Supervisor: lia-cli · Master plan: `~/Projects/lia-cli/tasks/active-plan.json` · Machine-readable: `supercode-tasks.json`

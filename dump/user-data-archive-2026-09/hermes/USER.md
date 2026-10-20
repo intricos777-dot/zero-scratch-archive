@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 Wants an exact scope choice before bulk work: when offered options he answers with his own broader instruction rather than picking a listed one (e.g. 'rebuild everything that needs rebuilding and get my services back online'). He is comfortable with wide scope but expects unrun/partial work stated plainly at the end, not assumed done.
 §
 Chooses conservatively on destructive/irreversible actions: given the option to force-push a rewritten history, he chose 'rewrite locally only, show me the result, do not push'. Default to preparing and staging irreversible work, then stopping for explicit confirmation before it goes live.

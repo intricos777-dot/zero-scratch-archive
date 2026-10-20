@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Lia.CLI — older corrupted versions: findings
 
 ## What was found (2026-09-26, hermes session 20260926_121135_408774)

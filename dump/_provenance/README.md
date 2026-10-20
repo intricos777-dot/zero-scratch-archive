@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Provenance records
 
 Local, not committed to any repository. These exist to answer "who wrote this

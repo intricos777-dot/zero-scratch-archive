@@ -1,3 +1,4 @@
+-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 CREATE TABLE tasks (

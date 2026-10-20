@@ -1,3 +1,4 @@
+<!-- Watermark: Living_Sin (intricos777-dot) + AI agents (Hermes, Lia, opencode) - collaborative work -->
 # Current To-Do — updated 2026-09-28 17:10 MST
 
 Supersedes `REBUILD-TODO-20260928.md`. That file's GitHub-push blocker and its
